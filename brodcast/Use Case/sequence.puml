@@ -1,0 +1,66 @@
+@startuml sequence_subtitles_v2
+title Subtitles v2 - Comedia javni API (gore) + PDF sablon Platforme/HAL ispod Comedije (demonstration)
+' Sabloni: Module 3 (DVB subtitle = bitmap, PTS sync), Module 6 Fig.2/3 (platform/HAL),
+' Module 7 Fig.3 (Comedia interna arhitektura - "TTX & Sub", TDAL_GFX, TDAL_PTSM)
+' Precondition: Zapping use case je vec zavrsen (service started, PAT/PMT vec parsirani),
+' liveRoute je validan i subtitle PID je vec poznat iz PMT-a.
+
+actor User
+box "Android app" #EBF5FF
+  participant "Live TV App" as App
+  participant "Broadcast TvInputService" as TIS
+end box
+box "Comedia - iWedia liba4tv" #E8F5E9
+  participant "SubtitleControl" as SUB
+  participant "StreamComponentControl" as SC
+  participant "DisplayControl" as DISP
+  participant "Comedia CHAL - TDAL" as CHAL
+end box
+box "Ispod Comedije - Platform i HAL - demonstration" #FFF3E0
+  participant "Tuner SDK / Demux Filter" as TSDK
+  participant "GPU / Display" as GPU
+end box
+
+TIS -> SUB : registerListener(subtitleListener)
+TIS -> SC : registerListener(streamComponentListener)
+
+SC --> TIS : StreamComponentListener.componentChanged(routeID, StreamComponentType.SUBTITLE)
+note over SC,CHAL : Comedia interno: PMT subtitle deskriptor (PID, composition/ancillary page ID) -> CHAL (TDAL)
+
+CHAL -> TSDK : otvori subtitle PID filter
+note over TSDK : demonstration: demux PID filter za subtitle PES\nkomunicira sa HAL (DEMUX) (ref. Module 6 Fig.4/5)
+TSDK --> CHAL : subtitle PES segmenti
+
+SUB --> TIS : SubtitleListener.updateTrackCount(SubtitleType.DVB, cnt)
+TIS -> SUB : getSubtitleTrackCount(routeID)
+SUB --> TIS : int cnt
+loop za svaku raspoloživu traku
+  TIS -> SUB : getSubtitleTrack(routeID, trackIndex)
+  SUB --> TIS : SubtitleTrack
+end
+
+TIS -> SUB : setSubtitleType(SubtitleType.DVB)
+TIS -> SUB : setCurrentSubtitleTrack(routeID, trackIndex)
+SUB --> TIS : A4TVStatus
+note over SUB : Opciono: setSubtitleMode(SubtitleMode.HEARING_IMPAIRED)\nako PMT nudi varijantu za slušno oštećene/prevod
+
+TIS -> SUB : enableAutomaticSubtitleDisplay(true)
+note over SUB : Automatski prikaz je enabled by default.\nEkvivalentan poziv za superimpose track: enableSuperimpose().
+
+TIS -> DISP : setGraficSurface(surfaceBundle)
+DISP --> TIS : A4TVStatus
+DISP -> CHAL : graphics plane spreman za subtitle bitmap
+CHAL -> GPU : dekoduj bitmap segment + PCR/PTS sync; renderuj na graphics plane
+note over GPU : demonstration: TDAL_GFX (bitmap render) + TDAL_PTSM (PTS sync)\nkomunicira sa HAL (GPU/Display) (ref. Module 6 Fig.5; Module 3 PCR/PTS)
+GPU --> CHAL : bitmap composed preko video plane-a
+CHAL --> DISP : subtitle prikazan
+
+TIS -> SUB : getCurrentSubtitleTrackIndex(routeID)
+SUB --> TIS : int trackIndex
+
+TIS -> SUB : deselectCurrentSubtitleTrack(routeID)
+SUB --> TIS : A4TVStatus
+
+TIS -> SUB : unregisterListener(subtitleListener)
+TIS -> SC : unregisterListener(streamComponentListener)
+@enduml
