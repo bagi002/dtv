@@ -1,0 +1,110 @@
+@startuml sequence_service_installation_liba4tv_v3
+title Service Installation - broadcast (liba4tv) - v3
+
+' Sabloni: Module 6 Fig.4/6 (tune + table parsing), Module 7 Fig.3/4 (Comedia struktura, scan sequence)
+' v3 razlike u odnosu na v2:
+'  - ScanControl/ServiceControl/Listeneri su Android-facing wrapper (liba4tv Java API) -> izdvojeni u svoj blok
+'  - Comedia Core (MW) + CHAL (TDAL) su odvojen native blok: SAV PAT/PMT/SDT processing ostaje unutra (ne izlazi do TV Inputa)
+'  - TV Input samo: pokrene scan preko ScanControl, ceka scanFinished preko ScanListener, zatim cita rezultate preko ServiceControl
+'  - Service & Mux DB je nativna baza middleware-a (nezavisna od Androida); TV Input nju ne dodiruje direktno, vec preko ServiceControl
+
+actor User
+box "Android app" #EBF5FF
+  participant "Live TV App" as App
+  participant "Broadcast TvInputService" as TIS
+end box
+
+box "liba4tv Java API (Android-facing wrapper)" #E8F5E9
+  participant "ComediaRouteManagerControl" as ROUTE
+  participant "ScanControl" as SCAN
+  participant "ScanListener\n(callback na TIS)" as SCANL
+  participant "ServiceControl" as SVC
+end box
+
+box "Comedia native middleware" #FFF8E1
+  participant "Comedia Core (MW)\nInstall logic + Table parser (PAT/PMT/SDT)\nService & Mux DB (SList+PIDB)" as CORE
+  participant "Comedia CHAL (TDAL)\nTDAL_DMD / TDAL_DMX" as CHAL
+end box
+
+box "Platform / HAL - demonstration" #FFF3E0
+  participant "Tuner SDK / Tuner HAL\n(Cuttlefish: .ts fajl kao izvor)" as TSDK
+end box
+
+participant "Android TV Provider\n(TvContract.Channels)" as TVP
+
+User -> App : Initiate scan (first-time install)
+App -> TIS : start scan
+
+TIS -> ROUTE : getInstallRoute(RouteManagerMediumType.MEDIUM_IP)
+ROUTE --> TIS : routeID
+note over ROUTE : MEDIUM_IP = file/URL scan (Cuttlefish);\nMEDIUM_TER bi bio pravi terrestrial scan
+
+TIS -> SCAN : registerListener(scanListener)
+TIS -> SCAN : appendList(false)
+note right of SCAN : append=false -> obrisi staru listu, kreni od cista
+TIS -> SCAN : autoScan(routeID, "file:///data/clear_0002.ts")
+SCAN --> TIS : A4TVStatus (poziv prihvacen, scan pokrenut)
+
+== Sve dalje ostaje unutar Comedia native middleware-a ==
+
+SCAN -> CORE : pokreni instalaciju na ruti (routeID)
+CORE -> CHAL : TDAL_DMD - otvori izvor (file/tuner) na ruti
+
+CHAL -> TSDK : otvori protokol ('file') + otvori section filtere (PAT/PMT/SDT)
+note over TSDK : demonstration-level: file_open / section filter setup\n(ispod: HAL TUNER+DEMUX -> Nexus/Magnum, ref. Module 6 Fig.4/6)
+TSDK --> CHAL : izvor zakljucan (locked) + sekcije dostupne
+
+CHAL --> CORE : TDAL_DMX - section data (PAT, PMT, SDT)
+
+group Comedia Core - interna obrada tabela (ne izlazi iz middleware-a)
+  CORE -> CORE : parsiraj PAT (PID 0) -> lista servisa + PMT PID-ovi
+  CORE -> CORE : parsiraj PMT (po servisu) -> A/V/subtitle PID-ovi, PCR PID, stream type
+  CORE -> CORE : parsiraj SDT -> citljiva imena servisa
+  CORE -> CORE : upisi/azuriraj Service & Mux DB (SList + PIDB)\n(ONID, TSID, SID, ime, PID-ovi)
+  note right of CORE
+    Petlja PAT->PMT->SDT se ponavlja za svaki
+    pronadjeni servis/multipleks i zavrsava se
+    OVDJE, u nativnoj bazi middleware-a.
+    TV Input ne dobija sirove tabele,
+    vec samo agregovane evente niже.
+  end note
+end
+
+CORE --> SCAN : interno: progres instalacije (po servisu/multipleksu)
+SCAN --> SCANL : tunerLocked(routeId, true)
+SCANL --> TIS : tunerLocked(routeId, true)
+SCAN --> SCANL : scanProgressChanged(routeId, value)
+SCANL --> TIS : scanProgressChanged(routeId, value)
+SCAN --> SCANL : installStatus(ScanInstallStatus)
+SCANL --> TIS : installStatus(ScanInstallStatus)
+
+note over CORE, CHAL : kada nema vise multipleksa/servisa za obradu na ovoj ruti
+
+CHAL -> TSDK : zatvori section filtere + zatvori izvor (file_close/teardown)
+TSDK --> CHAL : interfejs unlocked
+CHAL --> CORE : izvor i demux path zatvoreni, route oslobodjen
+CORE -> CORE : routeManager - oslobodi install route (routeID)
+
+CORE --> SCAN : instalacija zavrsena (interno)
+SCAN --> SCANL : scanFinished(routeId)
+SCANL --> TIS : scanFinished(routeId)
+
+== TV Input cita rezultate iz Service & Mux DB preko ServiceControl ==
+
+TIS -> SVC : getServiceListCount(listIndex)
+SVC -> CORE : upit nad Service & Mux DB
+CORE --> SVC : broj servisa u listi
+SVC --> TIS : count
+
+loop za svaki serviceIndex u [0, count)
+  TIS -> SVC : getServiceDescriptor(listIndex, serviceIndex)
+  SVC -> CORE : upit nad Service & Mux DB
+  CORE --> SVC : ServiceDescriptor podaci
+  SVC --> TIS : ServiceDescriptor\n(getName, getONID, getTSID, getServiceId, getLCN, isScrambled...)
+  TIS -> TVP : insert/update channel (TvContract.Channels)\nmapiranje: ONID/TSID/SID -> Android channel/internal_provider_data
+end
+
+TIS -> SCAN : unregisterListener(scanListener)
+TIS --> App : Scan complete
+
+@enduml
