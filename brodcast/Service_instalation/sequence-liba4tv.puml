@@ -1,0 +1,40 @@
+@startuml sequence_service_installation_liba4tv
+title Service Installation - mapirano na konkretan iWedia liba4tv API
+' * akcesori getXxxControl() su na IDTVManager (interfejs nije zaseban u ovom javadoc subset-u) - potvrditi.
+' TIS implementira ScanListener; callback-ovi su isprekidane strelice ka TIS.
+
+actor User
+participant "Live TV App" as App
+participant "Broadcast TvInputService" as TIS
+participant "IDTVManager" as MGR
+participant "BroadcastRouteControl" as ROUTE
+participant "ScanControl" as SCAN
+participant "ServiceControl" as SVC
+participant "Android TV Provider" as TVP
+
+User -> App : Initiate scan (first-time install)
+App -> TIS : start scan
+TIS -> MGR : DtvControl.context().dtvManager()
+note over TIS,MGR : kontrole iz IDTVManager*:\ngetBroadcastRouteControl(), getScanControl(), getServiceControl()
+TIS -> ROUTE : getInstallRoute(frontendID, demuxID)
+ROUTE --> TIS : routeID : int
+TIS -> SCAN : registerListener(scanListener)
+TIS -> SCAN : appendList(false)
+TIS -> SCAN : autoScan(routeID, "file:///data/clear_0002.ts")
+
+SCAN --> TIS : ScanListener.tunerLocked(id, true)
+SCAN --> TIS : ScanListener.scanProgressChanged(routeId, value)
+SCAN --> TIS : ScanListener.installStatus(ScanInstallStatus)
+loop za svaki nadjeni servis
+  SCAN --> TIS : ScanListener.installServiceTVName(routeId, name)
+  SCAN --> TIS : ScanListener.installServiceTVNumber(routeId, number)
+end
+SCAN --> TIS : ScanListener.scanFinished(routeId)
+
+TIS -> SVC : getServiceListCount(listIndex)
+TIS -> SVC : getServiceDescriptor(listIndex, serviceIndex)
+SVC --> TIS : ServiceDescriptor (getName, getONID, getTSID, getServiceId)
+TIS -> TVP : insert/update channels (TvContract.Channels)
+TIS -> SCAN : unregisterListener(scanListener)
+TIS --> App : Scan complete
+@enduml
