@@ -1,5 +1,5 @@
 @startuml sequence_service_installation_liba4tv_v2
-title Service Installation v2 - Comedia javni API (gore) + PDF sablon Platforme/HAL ispod Comedije (demonstration)
+title Service Installation - brodcast
 ' Sabloni: Module 5 Fig.3, Module 6 Fig.2/3 (platform/HAL), Fig.4 (tune), Fig.6 (table parsing), Module 7 Fig.4 (scan)
 
 actor User

@@ -1,5 +1,5 @@
 @startuml block_service_installation
-title Broadcast - Service Installation (Scan) - Architecture block diagram (HAL/PAL/AL)
+title Service Installation - brodcast
 
 skinparam shadowing false
 skinparam rectangle {

@@ -1,5 +1,5 @@
 @startuml sequence_zapping_liba4tv
-title Zapping - mapirano na konkretan iWedia liba4tv API
+title Zapping - brodcast
 ' * akcesori getXxxControl() su na IDTVManager (interfejs nije zaseban u ovom javadoc subset-u) - potvrditi.
 ' TIS implementira ServiceListener i StreamComponentListener; callback-ovi = isprekidane strelice ka TIS.
 

@@ -1,0 +1,49 @@
+@startuml sequence_ott_service_installation_v2
+title Service Installation - ott
+' Open-source pristup (nema Comedia, nema tunera). Sabloni: Module 5 Fig.3 (host stack), Module 7 (OTT preko HTTP/TCP, metadata JSON/XML)
+' OTT lista se NE skenira (nema PAT/PMT/SDT) - povlaci se sa servera kao JSON/XML i upisuje u TV Provider.
+' --- Android open source dokumentacija (verifikovano) ---
+' TV Input Framework:  https://developer.android.com/training/tv/tif/tvinput
+' TvContractCompat:    https://developer.android.com/reference/androidx/tvprovider/media/tv/TvContractCompat
+' Channel data (TIF):  https://developer.android.com/training/tv/tif/channel  (getChannels / InternalProviderData.setVideoUrl)
+' EpgSyncJobService:   com.google.android.media.tv.companionlibrary.sync (Apache-2.0) https://github.com/googlesamples/androidtv-sample-inputs
+' Media3 DataSource:   https://developer.android.com/media/media3/exoplayer/media-sources
+
+actor User
+box "Android app" #EBF5FF
+  participant "Live TV App" as App
+  participant "OTT TvInputService" as TIS
+end box
+box "Open-source - OTT client (HTTP + JSON/XML, Media3 DataSource)" #E8F5E9
+  participant "OTT client" as OTT
+  participant "Metadata parser (JSON/XML)" as PARSE
+end box
+box "Ispod - Platform i HAL - demonstration" #FFF3E0
+  participant "HTTP/TCP + TLS -> Network HAL" as NET
+end box
+participant "Android TV Provider" as TVP
+
+User -> App : Initiate install / refresh OTT list
+App -> TIS : start install (npr. EpgSyncJobService.requestImmediateSync)
+TIS -> OTT : fetchServiceCatalog(catalogUrl)
+OTT -> NET : HTTP GET https://.../services.json (TLS)
+note over NET : demonstration: TCP/TLS preko Network HAL (Wi-Fi/Ethernet)\nnema tunera/demuksa - OTT je IP izvor (ref. Module 7: OTT preko HTTP/TCP)
+NET --> OTT : HTTP 200 + body (JSON/XML)
+OTT -> PARSE : parsiraj body
+PARSE --> OTT : List<OttService> (id, name, streamUrl, logo, opis)
+OTT --> TIS : lista servisa
+
+loop za svaki OTT servis
+  TIS -> TVP : insert/update Channel (TvContractCompat.Channels)\n InternalProviderData.setVideoUrl(streamUrl) -> COLUMN_INTERNAL_PROVIDER_DATA
+end
+opt EPG (opciono)
+  TIS -> OTT : fetchEpg(epgUrl)
+  OTT -> NET : HTTP GET .../epg.json (TLS)
+  NET --> OTT : programi (JSON/XML)
+  OTT -> PARSE : parsiraj EPG
+  PARSE --> TIS : List<OttProgram>
+  TIS -> TVP : insert Programs (TvContractCompat.Programs)
+end
+
+TIS --> App : Install complete (lista servisa spremna)
+@enduml

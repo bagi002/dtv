@@ -1,5 +1,5 @@
 @startuml sequence_service_installation_liba4tv
-title Service Installation - mapirano na konkretan iWedia liba4tv API
+title Service Installation - brodcast
 ' * akcesori getXxxControl() su na IDTVManager (interfejs nije zaseban u ovom javadoc subset-u) - potvrditi.
 ' TIS implementira ScanListener; callback-ovi su isprekidane strelice ka TIS.
 

@@ -1,5 +1,5 @@
 @startuml sequence_zapping_liba4tv_v2
-title Zapping v2 - Comedia javni API (gore) + PDF sablon Platforme/HAL ispod Comedije (demonstration)
+title Zapping - brodcast
 ' Sabloni: Module 5 Fig.3, Module 6 Fig.2/3 (platform/HAL), Fig.4 (tune) i Fig.5 (A/V playback), Module 3 (PCR/PTS), Module 7 Fig.5
 
 actor User

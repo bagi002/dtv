@@ -1,0 +1,62 @@
+sequenceDiagram
+%% OTT Zapping v2 (open source)
+%%   GORE (ExoPlayer/Media3 javni API) = implementation-level, konkretni pozivi, hronoloski timeline
+%%   DOLE (ispod plejera)               = PDF sablon Platforme/HAL (demonstration, BEZ konkretnih poziva)
+%% Open-source plejer = ExoPlayer (androidx.media3). Nema Comedia, nema tunera - IP izvor (HLS/DASH).
+%% Sabloni: Module 5 Fig.3, Module 6 Fig.5 (A/V playback), Module 3 (PTS), Module 7 (OTT preko HTTP/TCP)
+%% --- Android open source dokumentacija (verifikovano) ---
+%% ExoPlayer (start):  https://developer.android.com/media/media3/exoplayer/hello-world
+%% Player.Listener:    https://developer.android.com/media/media3/exoplayer/listening-to-player-events
+%% HLS:                https://developer.android.com/media/media3/exoplayer/hls
+%% DASH:               https://developer.android.com/media/media3/exoplayer/dash
+%% Media sources/ABR:  https://developer.android.com/media/media3/exoplayer/media-sources
+%% TV Input Framework: https://developer.android.com/training/tv/tif/ui
+%% Media3 izvor (Apache-2.0): https://github.com/androidx/media
+  autonumber
+  actor User
+  box rgb(235,245,255) Android app
+    participant App as Live TV App
+    participant TIS as OTT TvInputService
+  end
+  box rgb(232,245,233) Open-source player - ExoPlayer / AndroidX Media3
+    participant PLAYER as ExoPlayer
+    participant SRC as HLS/DASH MediaSource
+  end
+  box rgb(255,243,224) Ispod plejera - Platform i HAL - demonstration
+    participant NET as HTTP/TCP + TLS -> Network HAL
+    participant AVDEC as MediaCodec / AudioTrack
+  end
+
+  User->>App: Play OTT channel
+  App->>TIS: onSetSurface(surface)
+  App->>TIS: onSetStreamVolume(0.0)
+  App->>TIS: onTune(channelUri)
+  Note over TIS: channelUri -> stream URL iz TV Provider-a<br/>(internalProviderData, npr. https://.../stream.m3u8)
+  TIS->>App: notifyVideoUnavailable(VIDEO_UNAVAILABLE_REASON_TUNING)
+  TIS->>PLAYER: new ExoPlayer.Builder(context).build()
+  TIS->>PLAYER: setVideoSurface(surface)
+  TIS->>PLAYER: setVolume(0.0f)
+  Note over PLAYER: Media3 javni API: onSetSurface->setVideoSurface(Surface),<br/>onSetStreamVolume(0.0)->setVolume(0.0f) (mute); TIF doc prikazuje stari createMessage(renderer) obrazac
+  TIS->>PLAYER: addListener(playerListener)
+  TIS->>PLAYER: setMediaItem(MediaItem.fromUri(streamUrl))
+  Note over PLAYER,SRC: DefaultMediaSourceFactory bira HLS (.m3u8) / DASH (.mpd) / Progressive po URL/MIME
+  TIS->>PLAYER: prepare()
+  Note over PLAYER,SRC: prepare() je ASINHRON; manifest + segmenti se ucitavaju (STATE_BUFFERING -> STATE_READY)
+
+  PLAYER->>SRC: ucitaj manifest (HLS/DASH) + segmente
+  SRC->>NET: HTTP GET manifest + media segmenti (TLS); ABR bira bitrate
+  Note over NET: demonstration: TCP/TLS preko Network HAL (Wi-Fi/Ethernet)<br/>nema tunera/demuksa - OTT je IP izvor
+  NET-->>SRC: segmenti (fMP4 / TS)
+  SRC-->>PLAYER: track-ovi (video/audio/text) + PTS timeline
+  PLAYER->>AVDEC: dekoduj video (MediaCodec) + audio (AudioTrack); A/V sync po PTS
+  Note over AVDEC: demonstration: video+audio dekoder + display<br/>komunicira sa HAL (VDEC/ADEC/GPU) (ref. Module 6 Fig.5)
+  AVDEC-->>PLAYER: A/V tece, sinhronizovano
+
+  TIS->>PLAYER: play() (setPlayWhenReady(true))
+  PLAYER-->>TIS: Player.Listener.onPlaybackStateChanged(STATE_READY)
+  PLAYER-->>TIS: Player.Listener.onRenderedFirstFrame()
+  TIS->>PLAYER: setVolume(volume) (unmute - restore)
+  TIS->>App: notifyVideoAvailable()
+  TIS->>PLAYER: getCurrentTracks() -> notifyTracksChanged(List<TvTrackInfo>)
+  PLAYER-->>TIS: Tracks (video/audio/text)
+  TIS-->>App: Service started -> Playback active

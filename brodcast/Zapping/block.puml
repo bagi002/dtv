@@ -1,5 +1,5 @@
 @startuml block_zapping
-title Broadcast - Zapping - Architecture block diagram (HAL/PAL/AL)
+title Zapping - brodcast
 
 skinparam shadowing false
 skinparam rectangle {
