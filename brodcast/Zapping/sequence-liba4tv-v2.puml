@@ -1,0 +1,46 @@
+@startuml sequence_zapping_liba4tv_v2
+title Zapping v2 - Comedia javni API (gore) + PDF sablon Platforme/HAL ispod Comedije (demonstration)
+' Sabloni: Module 5 Fig.3, Module 6 Fig.2/3 (platform/HAL), Fig.4 (tune) i Fig.5 (A/V playback), Module 3 (PCR/PTS), Module 7 Fig.5
+
+actor User
+box "Android app" #EBF5FF
+  participant "Live TV App" as App
+  participant "Broadcast TvInputService" as TIS
+end box
+box "Comedia - iWedia liba4tv" #E8F5E9
+  participant "ComediaRouteManagerControl" as ROUTE
+  participant "DisplayControl" as DISP
+  participant "ServiceControl" as SVC
+  participant "Comedia CHAL - TDAL" as CHAL
+end box
+box "Ispod Comedije - Platform i HAL - demonstration" #FFF3E0
+  participant "Tuner SDK / Tuner HAL" as TSDK
+  participant "MediaCodec / AudioTrack" as AVDEC
+end box
+
+User -> App : Play channel 1
+App -> TIS : onSetSurface(surface)
+App -> TIS : onSetStreamVolume(0.0)
+App -> TIS : onTune(channelUri)
+TIS -> ROUTE : getLiveRoute(listIndex, serviceIndex, prevRouteId)
+ROUTE --> TIS : liveRoute
+TIS -> DISP : setVideoSurface(layer, SurfaceBundle)
+TIS -> SVC : registerListener(serviceListener)
+TIS -> SVC : startServiceByTriplet(liveRoute, listIndex, serviceIndex, onid, tsid, sid)
+note over SVC,CHAL : startServiceByTriplet je ASINHRON; Comedia interno: live route -> CHAL (TDAL)
+
+SVC -> CHAL : pokreni playback na ruti
+CHAL -> TSDK : tune izvor + otvori A/V + PCR PID filtere
+note over TSDK : demonstration: frontend tune + demux PID filteri\nkomunicira sa HAL (TUNER/DEMUX) -> Nexus/Magnum (ref. Module 6 Fig.4 i Fig.5)
+CHAL -> AVDEC : dekoduj video + audio; PCR/STC sync (lipsync)
+note over AVDEC : demonstration: video+audio dekoder + display\nkomunicira sa HAL (VDEC/ADEC/GPU) (ref. Module 6 Fig.5; Module 3 PCR/PTS)
+AVDEC --> CHAL : A/V tece, sinhronizovano
+CHAL --> SVC : komponente spremne (PCR PID)
+
+SVC --> TIS : ServiceListener.channelChangeStatus(liveRoute, true, ServiceStateChangeError.OK)
+SVC --> TIS : ServiceListener.safeToUnblank(liveRoute)
+TIS -> App : unmute (restore volume) + video vidljiv
+TIS -> SVC : getServiceDescriptor(listIndex, serviceIndex)
+SVC --> TIS : ServiceDescriptor (getName, getONID, getTSID, getServiceId)
+TIS --> App : Service started -> Playback active
+@enduml

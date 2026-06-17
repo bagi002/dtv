@@ -7,7 +7,7 @@ actor User
 participant "Live TV App" as App
 participant "Broadcast TvInputService" as TIS
 participant "IDTVManager" as MGR
-participant "BroadcastRouteControl" as ROUTE
+participant "ComediaRouteManagerControl" as ROUTE
 participant "DisplayControl" as DISP
 participant "ServiceControl" as SVC
 participant "StreamComponentControl" as SC
@@ -17,17 +17,16 @@ App -> TIS : onSetSurface(surface)
 App -> TIS : onSetStreamVolume(0.0)
 App -> TIS : onTune(channelUri)
 TIS -> MGR : DtvControl.context().dtvManager()
-note over TIS,MGR : kontrole iz IDTVManager*:\ngetBroadcastRouteControl(), getServiceControl(),\ngetStreamComponentControl(), getDisplayControl()
-TIS -> ROUTE : getLiveRoute(frontendID, demuxID, decoderID)
+note over TIS,MGR : kontrole iz IDTVManager*:\ngetComediaRouteManagerControl(), getServiceControl(),\ngetStreamComponentControl(), getDisplayControl()
+TIS -> ROUTE : getLiveRoute(listIndex, serviceIndex, prevRouteId)
 ROUTE --> TIS : liveRoute : int
-TIS -> ROUTE : configureLiveRoute(liveRoute, RouteLiveSettings)
-TIS -> DISP : setVideoSurface(displayId, SurfaceBundle)
+TIS -> DISP : setVideoSurface(layer, SurfaceBundle)
 TIS -> SC : registerListener(streamComponentListener)
 TIS -> SVC : registerListener(serviceListener)
 TIS -> SVC : startServiceByTriplet(liveRoute, listIndex, serviceIndex, onid, tsid, sid)
 note over TIS,SVC : alternativa (file/IP izvor): zapURL(liveRoute, url)\npoziv je ASINHRON - rezultat stize preko listenera (~2-3 s)
 
-SVC --> TIS : ServiceListener.channelChangeStatus(liveRoute, true, NO_ERROR)
+SVC --> TIS : ServiceListener.channelChangeStatus(liveRoute, true, ServiceStateChangeError.OK)
 SC --> TIS : StreamComponentListener.componentChanged(liveRoute, StreamComponentType)
 SVC --> TIS : ServiceListener.safeToUnblank(liveRoute)
 TIS -> App : video vidljiv + onSetStreamVolume(restore) (unmute)

@@ -7,7 +7,7 @@ actor User
 participant "Live TV App" as App
 participant "Broadcast TvInputService" as TIS
 participant "IDTVManager" as MGR
-participant "BroadcastRouteControl" as ROUTE
+participant "ComediaRouteManagerControl" as ROUTE
 participant "ScanControl" as SCAN
 participant "ServiceControl" as SVC
 participant "Android TV Provider" as TVP
@@ -15,8 +15,8 @@ participant "Android TV Provider" as TVP
 User -> App : Initiate scan (first-time install)
 App -> TIS : start scan
 TIS -> MGR : DtvControl.context().dtvManager()
-note over TIS,MGR : kontrole iz IDTVManager*:\ngetBroadcastRouteControl(), getScanControl(), getServiceControl()
-TIS -> ROUTE : getInstallRoute(frontendID, demuxID)
+note over TIS,MGR : kontrole iz IDTVManager*:\ngetComediaRouteManagerControl(), getScanControl(), getServiceControl()
+TIS -> ROUTE : getInstallRoute(RouteManagerMediumType.MEDIUM_IP)
 ROUTE --> TIS : routeID : int
 TIS -> SCAN : registerListener(scanListener)
 TIS -> SCAN : appendList(false)

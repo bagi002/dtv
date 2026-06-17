@@ -46,10 +46,10 @@ Potpisi su provjereni u javadoc-u. Kontrole se dobijaju iz `IDTVManager`
 
 | Konceptualno (PDF, `sequence.*`) | Konkretno liba4tv (`sequence-liba4tv.*`) |
 |---|---|
-| dobavljanje kontrola | `IDTVManager` → `getBroadcastRouteControl()` / `getServiceControl()` / `getStreamComponentControl()` / `getDisplayControl()` * |
-| `routeManagerGetLiveRoute()` | `BroadcastRouteControl.getLiveRoute(int frontendID, int demuxID, int decoderID)` → `int liveRoute` |
-| konfiguracija rute (video pozicija/dekoder mode/komponente) | `BroadcastRouteControl.configureLiveRoute(int routeID, RouteLiveSettings settings)` |
-| `onSetSurface(surface)` (gdje se crta video) | `DisplayControl.setVideoSurface(int displayId, SurfaceBundle surface)` |
+| dobavljanje kontrola | `IDTVManager` → `getComediaRouteManagerControl()` / `getServiceControl()` / `getStreamComponentControl()` / `getDisplayControl()` * |
+| `routeManagerGetLiveRoute()` | `ComediaRouteManagerControl.getLiveRoute(int listIndex, int serviceIndex, int prevRouteId)` → `int liveRoute` |
+| (opciono) detaljna konfiguracija rute | `BroadcastRouteControl.configureLiveRoute(int routeID, RouteLiveSettings settings)` — niži route control, nije dio routeManager toka |
+| `onSetSurface(surface)` (gdje se crta video) | `DisplayControl.setVideoSurface(int layer, SurfaceBundle surface)` |
 | (registracija na evente) | `ServiceControl.registerListener(ServiceListener)` |
 | `setCurrentServiceByTriplet(ONID,TSID,SID)` | `ServiceControl.startServiceByTriplet(int routeID, int listIndex, int serviceIndex, int networkId, int transportStreamId, int serviceId)` |
 | varijanta za file/IP izvor (Cuttlefish) | `ServiceControl.zapURL(int routeID, String url)` |

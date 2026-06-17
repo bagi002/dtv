@@ -47,8 +47,8 @@ Potpisi su provjereni u javadoc-u. Kontrole se dobijaju iz `IDTVManager`
 
 | Konceptualno (PDF, `sequence.*`) | Konkretno liba4tv (`sequence-liba4tv.*`) |
 |---|---|
-| dobavljanje kontrola | `IDTVManager` → `getBroadcastRouteControl()` / `getScanControl()` / `getServiceControl()` * |
-| `routeManagerGetInstallRoute()` | `BroadcastRouteControl.getInstallRoute(int frontendID, int demuxID)` → `int routeID` |
+| dobavljanje kontrola | `IDTVManager` → `getComediaRouteManagerControl()` / `getScanControl()` / `getServiceControl()` * |
+| `routeManagerGetInstallRoute()` | `ComediaRouteManagerControl.getInstallRoute(RouteManagerMediumType)` → `int routeID` (MEDIUM_IP za file/URL u Cuttlefish, MEDIUM_TER za terrestrial) |
 | (registracija na evente) | `ScanControl.registerListener(ScanListener)` |
 | `startScanByUrl(url, append=false)` | `ScanControl.appendList(false)` + `ScanControl.autoScan(int routeID, String url)` |
 | `eDMD_LOCKED` | `ScanListener.tunerLocked(int id, boolean locked)` |

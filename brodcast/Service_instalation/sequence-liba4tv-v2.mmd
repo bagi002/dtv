@@ -1,0 +1,53 @@
+sequenceDiagram
+%% Service Installation v2
+%%   GORE (Comedia javni API)   = implementation-level, konkretni pozivi, tacan hronoloski timeline
+%%   DOLE (ispod Comedije)       = PDF sablon Platforme/HAL (demonstration-level, BEZ konkretnih poziva)
+%% Sabloni: Module 5 Fig.3 (host SW stack), Module 6 Fig.2/3 (platform/HAL), Fig.4 (tune), Fig.6 (table parsing), Module 7 Fig.4 (scan)
+  autonumber
+  actor User
+  box rgb(235,245,255) Android app
+    participant App as Live TV App
+    participant TIS as Broadcast TvInputService
+  end
+  box rgb(232,245,233) Comedia - iWedia liba4tv
+    participant ROUTE as ComediaRouteManagerControl
+    participant SCAN as ScanControl
+    participant SVC as ServiceControl
+    participant CHAL as Comedia CHAL - TDAL
+  end
+  box rgb(255,243,224) Ispod Comedije - Platform i HAL - demonstration
+    participant TSDK as Tuner SDK / Tuner HAL
+  end
+  participant TVP as Android TV Provider
+
+  User->>App: Initiate scan (first-time install)
+  App->>TIS: start scan
+  TIS->>ROUTE: getInstallRoute(RouteManagerMediumType.MEDIUM_IP)
+  ROUTE-->>TIS: routeID
+  Note over ROUTE: MEDIUM_IP = file/URL scan (Cuttlefish); MEDIUM_TER za pravi terrestrial
+  TIS->>SCAN: registerListener(scanListener)
+  TIS->>SCAN: appendList(false)
+  TIS->>SCAN: autoScan(routeID, "file:///data/clear_0002.ts")
+
+  Note over SCAN,CHAL: Comedia interno: install route -> CHAL (TDAL_DMD / TDAL_DMX)
+  SCAN->>CHAL: pokreni install na ruti
+  CHAL->>TSDK: tune (file izvor) + otvori section filtere PAT/PMT/SDT
+  Note over TSDK: demonstration: frontend tune + demux section filteri<br/>komunicira sa HAL (TUNER/DEMUX) -> Nexus/Magnum (ref. Module 6 Fig.4, Fig.6)
+  TSDK-->>CHAL: locked + sekcije dostupne
+  CHAL-->>SCAN: izvor spreman / tabele parsirane
+
+  SCAN-->>TIS: tunerLocked(routeId, true)
+  SCAN-->>TIS: scanProgressChanged(routeId, value)
+  SCAN-->>TIS: installStatus(ScanInstallStatus)
+  loop za svaki servis (PAT -> PMT -> SDT)
+    SCAN-->>TIS: installServiceTVName(routeId, name)
+    SCAN-->>TIS: installServiceTVNumber(routeId, number)
+  end
+  SCAN-->>TIS: scanFinished(routeId)
+
+  TIS->>SVC: getServiceListCount(listIndex)
+  TIS->>SVC: getServiceDescriptor(listIndex, serviceIndex)
+  SVC-->>TIS: ServiceDescriptor (getName, getONID, getTSID, getServiceId)
+  TIS->>TVP: insert/update channels (TvContract.Channels)
+  TIS->>SCAN: unregisterListener(scanListener)
+  TIS-->>App: Scan complete
