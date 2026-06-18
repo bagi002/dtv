@@ -1,5 +1,5 @@
 @startuml sequence_zapping_liba4tv_v4
-title Zapping - broadcast (liba4tv) - v4
+title Zapping - broadcast (liba4tv)
 
 actor User
 box "Android app" #EBF5FF
@@ -67,7 +67,7 @@ CHAL --> CORE : komponente spremne (PCR PID, A/V kanali aktivni)
 CORE -> CHAL : TDAL_DISP - poveži dekodovani izlaz sa video surface-om (DisplayControl.setVideoSurface)
 CHAL --> CORE : graphics/video plane spreman
 
-== ServiceListener javlja TIS-u da je zap zavrsen ==
+== ServiceListener obavestava TIS da je zapping zavrsen ==
 CORE --> SVC : servis pokrenut (interno)
 SVC --> SVCL : channelChangeStatus(liveRoute, true, ServiceStateChangeError.OK)
 SVCL --> TIS : channelChangeStatus(liveRoute, true, ServiceStateChangeError.OK)

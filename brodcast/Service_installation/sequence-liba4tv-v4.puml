@@ -1,5 +1,5 @@
 @startuml sequence_service_installation_liba4tv_v4
-title Service Installation - broadcast (liba4tv) - v4
+title Service Installation - broadcast (liba4tv)
 
 actor User
 box "Android app" #EBF5FF
@@ -31,17 +31,17 @@ App -> TIS : start scan
 
 TIS -> ROUTE : getInstallRoute(RouteManagerMediumType.MEDIUM_IP)
 ROUTE --> TIS : routeID
-note over ROUTE : MEDIUM_IP = file/URL scan (Cuttlefish);\nMEDIUM_TER bi bio pravi terrestrial scan
+note over ROUTE : MEDIUM_IP = file/URL scan (Cuttlefish)
 
 TIS -> SCAN : registerListener(scanListener)
 TIS -> SCAN : appendList(false)
 note right of SCAN : append=false -> obrisi staru listu
 
-== TIS pokrene skeniranje preko ScanControl-a ==
+== Skreniranje pokrenuto kroz ScanControl ==
 TIS -> SCAN : autoScan(routeID, "file:///data/clear_0002.ts")
 SCAN --> TIS : A4TVStatus
 note right of SCAN
- poziv prihvacen, scan pokrenut
+ poziv prihvacen, skeniranje pokrenuto
 end note
 == Comedia native middleware ==
 
@@ -70,14 +70,14 @@ end
 
 SCAN --> SCANL : installStatus(ScanInstallStatus)
 SCANL --> TIS : installStatus(ScanInstallStatus)
-note over CORE, CHAL : kada nema vise multipleksa/servisa za obradu na ovoj ruti
+note over CORE, CHAL : svi servisi su obradjeni
 
 CHAL -> TSDK : zatvori section filtere + zatvori izvor (file_close/teardown)
 TSDK --> CHAL : interfejs unlocked
 CHAL --> CORE : izvor i demux path zatvoreni, route oslobodjen
 CORE -> CORE : routeManager - oslobodi install route (routeID)
 
-== Kad se skeniranje zavrsi, ScanListener javlja TIS-u da je instalacija gotova ==
+== ScanListener obavestava TIS da je instalacija gotova ==
 CORE --> SCAN : instalacija zavrsena (interno)
 SCAN --> SCANL : scanFinished(routeId)
 SCANL --> TIS : scanFinished(routeId)

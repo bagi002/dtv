@@ -26,7 +26,7 @@ end box
 TIS -> SUB : registerListener(subtitleListener)
 TIS -> SC : registerListener(streamComponentListener)
 
-== Comedia native middleware - subtitle PID vec poznat iz PMT-a (Service Installation) ==
+== Comedia native middleware ==
 CORE -> CHAL : TDAL_DMX - otvori subtitle PID filter (PID iz PIDB, vec upisan pri instalaciji)
 CHAL -> TSDK : section/PES filter za subtitle elementary stream
 TSDK --> CHAL : subtitle PES segmenti
@@ -50,7 +50,7 @@ note right of SUB : Opciono: setSubtitleMode(SubtitleMode.HEARING_IMPAIRED)\nako
 
 TIS -> SUB : enableAutomaticSubtitleDisplay(true)
 
-== Aplikacija mora proslediti graphics/overlay surface da bi se titl uopste vidio ==
+== Aplikacija  prosledjuje graphics/overlay surface da bi se titl mogao prikazati ==
 App -> TIS : onSetSurface(graphicsSurface)
 
 TIS -> DISP : setGraficSurface(graphicsSurface)
@@ -59,7 +59,6 @@ DISP -> CORE : graphics/overlay plane prosledjen middleware-u
 
 CORE -> CHAL : TDAL_GFX - poveži graphics plane sa subtitle bitmap renderom
 CHAL -> GPU : dekoduj bitmap segment + PCR/PTS sync (TDAL_PTSM); renderuj na graphics plane
-note over GPU : demonstration: TDAL_GFX (bitmap render) + TDAL_PTSM (PTS sync)\nkomunicira sa HAL (GPU/Display)
 GPU --> CHAL : bitmap composed preko video plane-a
 CHAL --> CORE : subtitle prikazan na overlay surface-u
 
