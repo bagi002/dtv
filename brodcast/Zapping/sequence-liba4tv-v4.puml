@@ -1,0 +1,87 @@
+@startuml sequence_zapping_liba4tv_v4
+title Zapping - broadcast (liba4tv) - v4
+
+actor User
+box "Android app" #EBF5FF
+  participant "Live TV App" as App
+  participant "Broadcast TvInputService" as TIS
+end box
+
+box "liba4tv Java API (Android-facing wrapper)" #E8F5E9
+  participant "ComediaRouteManagerControl" as ROUTE
+  participant "DisplayControl" as DISP
+  participant "ServiceControl" as SVC
+  participant "ServiceListener\n(callback na TIS)" as SVCL
+end box
+
+box "Comedia native middleware" #FFF8E1
+  participant "Comedia Core (MW)\nXSERV/Player + Table parser (PAT/PMT) + PTSM" as CORE
+  database "Service & Mux DB\n(SList + PIDB)" as SDB
+  participant "Comedia CHAL (TDAL)\nTDAL_DMD / TDAL_DMX / TDAL_AV / TDAL_DISP" as CHAL
+end box
+
+box "Platform / HAL - demonstration" #FFF3E0
+  participant "Tuner SDK / Tuner HAL\n(Cuttlefish: .ts fajl kao izvor)" as TSDK
+  participant "MediaCodec / AudioTrack" as AVDEC
+end box
+
+User -> App : Play channel 1
+App -> TIS : onSetSurface(surface)
+App -> TIS : onSetStreamVolume(0.0)
+App -> TIS : onTune(channelUri)
+
+TIS -> ROUTE : getLiveRoute(listIndex, serviceIndex, prevRouteId)
+ROUTE --> TIS : liveRoute
+
+TIS -> DISP : setVideoSurface(layer, SurfaceBundle)
+DISP --> TIS : A4TVStatus
+
+TIS -> SVC : registerListener(serviceListener)
+TIS -> SVC : startServiceByTriplet(liveRoute, listIndex, serviceIndex, onid, tsid, sid)
+SVC --> TIS : A4TVStatus
+
+== Comedia native middleware ==
+
+SVC -> CORE : pokreni playback na ruti (liveRoute)
+
+note over CORE, SDB
+ PAT/PMT su vec isparsirani tokom procesa instalacije servisa
+end note
+
+CORE -> SDB : ucitaj servis po tripletu (ONID/TSID/SID) iz Service & Mux DB
+SDB --> CORE : PID-ovi servisa (video/audio PID, PCR PID, stream type)
+
+CORE -> CHAL : TDAL_DMD - tune izvor (file/tuner) na ruti
+
+CHAL -> TSDK : otvori protokol ('file') + otvori A/V i PCR PID filtere (PID-ovi iz PIDB)
+TSDK --> CHAL : izvor zakljucan (locked) + PID-ovi dostupni
+
+CHAL --> CORE : TDAL_DMX - A/V/PCR PID kanali spremni
+
+CORE -> CHAL : TDAL_AV - otvori A/V kanale na PID-ovima (video/audio)
+CHAL -> AVDEC : dekoduj video + audio; PCR/STC sync (lipsync)
+note over AVDEC : demonstration: video+audio dekoder + display\nkomunicira sa HAL (VDEC/ADEC/GPU)
+AVDEC --> CHAL : A/V tece, sinhronizovano
+CHAL --> CORE : komponente spremne (PCR PID, A/V kanali aktivni)
+
+CORE -> CHAL : TDAL_DISP - poveži dekodovani izlaz sa video surface-om (DisplayControl.setVideoSurface)
+CHAL --> CORE : graphics/video plane spreman
+
+== ServiceListener javlja TIS-u da je zap zavrsen ==
+CORE --> SVC : servis pokrenut (interno)
+SVC --> SVCL : channelChangeStatus(liveRoute, true, ServiceStateChangeError.OK)
+SVCL --> TIS : channelChangeStatus(liveRoute, true, ServiceStateChangeError.OK)
+SVC --> SVCL : safeToUnblank(liveRoute)
+SVCL --> TIS : safeToUnblank(liveRoute)
+
+TIS -> App : unmute (restore volume) + video vidljiv
+
+== TIS cita osnovne info o servisu preko ServiceControl ==
+TIS -> SVC : getServiceDescriptor(listIndex, serviceIndex)
+SVC -> SDB : upit nad Service & Mux DB
+SDB --> SVC : ServiceDescriptor podaci
+SVC --> TIS : ServiceDescriptor (getName, getONID, getTSID, getServiceId)
+
+TIS --> App : Service started -> Playback active
+
+@enduml
