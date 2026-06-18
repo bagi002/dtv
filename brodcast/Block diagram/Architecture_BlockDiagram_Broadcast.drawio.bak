@@ -1,0 +1,491 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="broadcast-arch" name="Broadcast Architecture">
+    <mxGraphModel dx="1346" dy="542" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="1640" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="n2" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontColor=#1B3A5B;fontSize=26;fontStyle=1;" value="Live TV Application - Host Software Architecture (Broadcast)" vertex="1">
+          <mxGeometry height="30" width="1000" x="895" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="n4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF9F0;strokeColor=#F0A500;fontColor=#14406B;fontSize=13;verticalAlign=middle;align=center;fontStyle=0;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" value="" vertex="1">
+          <mxGeometry height="1190" width="1350" x="640" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="n5" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontColor=#8A5A00;fontSize=18;fontStyle=1;" value="Host SW" vertex="1">
+          <mxGeometry height="24" width="160" x="1263" y="178" as="geometry" />
+        </mxCell>
+        <mxCell id="n6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF2FB;strokeColor=#2F6DB0;fontColor=#14406B;fontSize=13;verticalAlign=middle;align=center;fontStyle=1;" value="Live TV App" vertex="1">
+          <mxGeometry height="46" width="180" x="699" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="n7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#9BB6D4;fontColor=#6B7785;fontSize=13;verticalAlign=middle;align=center;fontStyle=0;" value="VoD App" vertex="1">
+          <mxGeometry height="46" width="120" x="893" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="n8" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#9BB6D4;fontColor=#6B7785;fontSize=13;verticalAlign=middle;align=center;fontStyle=0;" value="OTT App" vertex="1">
+          <mxGeometry height="46" width="120" x="1027" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="n9" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#9BB6D4;fontColor=#6B7785;fontSize=13;verticalAlign=middle;align=center;fontStyle=0;" value="ExoPlayer" vertex="1">
+          <mxGeometry height="46" width="120" x="1161" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="n10" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontColor=#9BB6D4;fontSize=20;fontStyle=0;" value="…" vertex="1">
+          <mxGeometry height="30" width="40" x="1302" y="148" as="geometry" />
+        </mxCell>
+        <mxCell id="n11" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0E2A45;gradientColor=#143A5F;strokeColor=none;fontColor=#FFFFFF;fontSize=18;fontStyle=1;verticalAlign=top;align=left;spacingLeft=20;spacingTop=12;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" value="Middleware / AL  (Android)" vertex="1">
+          <mxGeometry height="480" width="1285" x="670" y="290" as="geometry" />
+        </mxCell>
+        <mxCell id="n12" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#13314F;strokeColor=#3D6C99;strokeWidth=1.5;fontColor=#CFE2F5;fontSize=14;fontStyle=1;verticalAlign=top;align=center;spacingTop=6;" value="Application runtime" vertex="1">
+          <mxGeometry height="410" width="150" x="699" y="340" as="geometry" />
+        </mxCell>
+        <mxCell id="n13" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF2FB;strokeColor=#2F6DB0;fontColor=#14406B;fontSize=12;verticalAlign=middle;align=center;fontStyle=0;" value="ART" vertex="1">
+          <mxGeometry height="34" width="126" x="711" y="392" as="geometry" />
+        </mxCell>
+        <mxCell id="n14" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF2FB;strokeColor=#2F6DB0;fontColor=#14406B;fontSize=12;verticalAlign=middle;align=center;fontStyle=0;" value="Activity Manager" vertex="1">
+          <mxGeometry height="34" width="126" x="711" y="432" as="geometry" />
+        </mxCell>
+        <mxCell id="n15" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF2FB;strokeColor=#2F6DB0;fontColor=#14406B;fontSize=12;verticalAlign=middle;align=center;fontStyle=0;" value="Content Providers" vertex="1">
+          <mxGeometry height="34" width="126" x="711" y="472" as="geometry" />
+        </mxCell>
+        <mxCell id="n16" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF2FB;strokeColor=#2F6DB0;fontColor=#14406B;fontSize=12;verticalAlign=middle;align=center;fontStyle=0;" value="Package Mgr." vertex="1">
+          <mxGeometry height="34" width="126" x="711" y="512" as="geometry" />
+        </mxCell>
+        <mxCell id="n17" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF2FB;strokeColor=#2F6DB0;fontColor=#14406B;fontSize=12;verticalAlign=middle;align=center;fontStyle=0;" value="Resource Mgr." vertex="1">
+          <mxGeometry height="34" width="126" x="711" y="552" as="geometry" />
+        </mxCell>
+        <mxCell id="n18" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF2FB;strokeColor=#2F6DB0;fontColor=#14406B;fontSize=12;verticalAlign=middle;align=center;fontStyle=0;" value="Jetpack" vertex="1">
+          <mxGeometry height="34" width="126" x="711" y="592" as="geometry" />
+        </mxCell>
+        <mxCell id="n19" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontColor=#9BB6D4;fontSize=18;fontStyle=0;" value="…" vertex="1">
+          <mxGeometry height="20" width="126" x="711" y="632" as="geometry" />
+        </mxCell>
+        <mxCell id="n20" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#13314F;strokeColor=#5FA0E0;strokeWidth=2;fontColor=#CFE2F5;fontSize=14;fontStyle=1;verticalAlign=top;align=center;spacingTop=6;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" value="DTV Middleware" vertex="1">
+          <mxGeometry height="410" width="705" x="860" y="340" as="geometry" />
+        </mxCell>
+        <mxCell id="n21" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0F2742;strokeColor=#4F86BD;strokeWidth=1.5;fontColor=#CFE2F5;fontSize=12;fontStyle=1;verticalAlign=top;align=left;spacingLeft=14;spacingTop=6;" value="TV Input Framework (TIF)" vertex="1">
+          <mxGeometry height="120" width="668" x="881" y="374" as="geometry" />
+        </mxCell>
+        <mxCell id="n22" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DFF0D8;strokeColor=#5A9F4A;fontColor=#2E5E22;fontSize=13;verticalAlign=middle;align=center;fontStyle=1;" value="TV Input Manager" vertex="1">
+          <mxGeometry height="34" width="425" x="895" y="404" as="geometry" />
+        </mxCell>
+        <mxCell id="n23" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DFF0D8;strokeColor=#5A9F4A;fontColor=#2E5E22;fontSize=12;verticalAlign=middle;align=center;fontStyle=1;" value="Broadcast TV Input (TIS)" vertex="1">
+          <mxGeometry height="36" width="200" x="895" y="448" as="geometry" />
+        </mxCell>
+        <mxCell id="n24" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EEF4FA;strokeColor=#9BB6D4;fontColor=#6B7785;fontSize=12;verticalAlign=middle;align=center;fontStyle=0;" value="OTT TV Input" vertex="1">
+          <mxGeometry height="36" width="200" x="1111" y="448" as="geometry" />
+        </mxCell>
+        <mxCell id="n25" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DFF0D8;strokeColor=#5A9F4A;fontColor=#2E5E22;fontSize=13;verticalAlign=middle;align=center;fontStyle=1;" value="TV Provider" vertex="1">
+          <mxGeometry height="36" width="208" x="1330" y="403" as="geometry" />
+        </mxCell>
+        <mxCell id="n26" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0F2742;strokeColor=#4F86BD;strokeWidth=1.5;fontColor=#CFE2F5;fontSize=12;fontStyle=1;verticalAlign=top;align=left;spacingLeft=14;spacingTop=6;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" value="Comedia DTV Middleware&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="242" width="667.5" x="880" y="500" as="geometry" />
+        </mxCell>
+        <mxCell id="n27" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDE9C8;strokeColor=#D79A3A;fontColor=#14406B;fontSize=13;verticalAlign=middle;align=center;fontStyle=0;" value="" vertex="1">
+          <mxGeometry height="44" width="640" x="887" y="528" as="geometry" />
+        </mxCell>
+        <mxCell id="n28" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontColor=#8A5A00;fontSize=11;fontStyle=1;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" value="Comedia API" vertex="1">
+          <mxGeometry height="16" width="150" x="903" y="541.5" as="geometry" />
+        </mxCell>
+        <mxCell id="n31" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDE9C8;strokeColor=#D79A3A;fontColor=#14406B;fontSize=13;verticalAlign=middle;align=center;fontStyle=0;" value="" vertex="1">
+          <mxGeometry height="96" width="641" x="890" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="n32" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontColor=#8A5A00;fontSize=11;fontStyle=1;" value="Comedia MW" vertex="1">
+          <mxGeometry height="16" width="150" x="903" y="586" as="geometry" />
+        </mxCell>
+        <mxCell id="n33" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D79A3A;fontColor=#8A5A00;fontSize=11;verticalAlign=middle;align=center;fontStyle=0;" value="Scan Control" vertex="1">
+          <mxGeometry height="30" width="86" x="1017" y="534.5" as="geometry" />
+        </mxCell>
+        <mxCell id="n34" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D79A3A;fontColor=#8A5A00;fontSize=11;verticalAlign=middle;align=center;fontStyle=0;" value="Service Control" vertex="1">
+          <mxGeometry height="30" width="96" x="1111" y="534.5" as="geometry" />
+        </mxCell>
+        <mxCell id="n35" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D79A3A;fontColor=#8A5A00;fontSize=11;verticalAlign=middle;align=center;fontStyle=0;" value="EIM" vertex="1">
+          <mxGeometry height="30" width="70" x="1199" y="622" as="geometry" />
+        </mxCell>
+        <mxCell id="n36" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D79A3A;fontColor=#8A5A00;fontSize=11;verticalAlign=middle;align=center;fontStyle=0;" value="Route / XSERV" vertex="1">
+          <mxGeometry height="30" width="92" x="1160" y="586" as="geometry" />
+        </mxCell>
+        <mxCell id="n37" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D79A3A;fontColor=#8A5A00;fontSize=11;verticalAlign=middle;align=center;fontStyle=0;" value="DSM-CC" vertex="1">
+          <mxGeometry height="30" width="60" x="1276" y="622" as="geometry" />
+        </mxCell>
+        <mxCell id="n38" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D79A3A;fontColor=#8A5A00;fontSize=11;verticalAlign=middle;align=center;fontStyle=0;" value="EPG Control" vertex="1">
+          <mxGeometry height="30" width="86" x="1216" y="535.5" as="geometry" />
+        </mxCell>
+        <mxCell id="n39" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D79A3A;fontColor=#8A5A00;fontSize=11;verticalAlign=middle;align=center;fontStyle=0;" value="SList + PIDB" vertex="1">
+          <mxGeometry height="30" width="90" x="1103" y="622" as="geometry" />
+        </mxCell>
+        <mxCell id="n40" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDE9C8;strokeColor=#D79A3A;fontColor=#14406B;fontSize=13;verticalAlign=middle;align=center;fontStyle=0;" value="" vertex="1">
+          <mxGeometry height="46" width="640" x="891" y="682" as="geometry" />
+        </mxCell>
+        <mxCell id="n41" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontColor=#8A5A00;fontSize=11;fontStyle=1;" value="Comedia CHAL" vertex="1">
+          <mxGeometry height="16" width="200" x="903" y="686" as="geometry" />
+        </mxCell>
+        <mxCell id="n42" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D79A3A;fontColor=#8A5A00;fontSize=11;verticalAlign=middle;align=center;fontStyle=0;" value="TDAL_DMD" vertex="1">
+          <mxGeometry height="30" width="80" x="1045" y="690" as="geometry" />
+        </mxCell>
+        <mxCell id="n43" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D79A3A;fontColor=#8A5A00;fontSize=11;verticalAlign=middle;align=center;fontStyle=0;" value="TDAL_DMX" vertex="1">
+          <mxGeometry height="30" width="80" x="1131" y="690" as="geometry" />
+        </mxCell>
+        <mxCell id="n44" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D79A3A;fontColor=#8A5A00;fontSize=11;verticalAlign=middle;align=center;fontStyle=0;" value="TDAL_AV" vertex="1">
+          <mxGeometry height="30" width="70" x="1217" y="690" as="geometry" />
+        </mxCell>
+        <mxCell id="n45" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D79A3A;fontColor=#8A5A00;fontSize=11;verticalAlign=middle;align=center;fontStyle=0;" value="TDAL_DISP" vertex="1">
+          <mxGeometry height="30" width="80" x="1293" y="690" as="geometry" />
+        </mxCell>
+        <mxCell id="n46" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#13314F;strokeColor=#3D6C99;strokeWidth=1.5;fontColor=#CFE2F5;fontSize=14;fontStyle=1;verticalAlign=top;align=center;spacingTop=6;" value="Media Player" vertex="1">
+          <mxGeometry height="180" width="180" x="1575" y="338" as="geometry" />
+        </mxCell>
+        <mxCell id="n47" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF2FB;strokeColor=#2F6DB0;fontColor=#14406B;fontSize=13;verticalAlign=middle;align=center;fontStyle=0;" value="Media Player" vertex="1">
+          <mxGeometry height="40" width="152" x="1595" y="408" as="geometry" />
+        </mxCell>
+        <mxCell id="n48" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#13314F;strokeColor=#3D6C99;strokeWidth=1.5;fontColor=#CFE2F5;fontSize=14;fontStyle=1;verticalAlign=top;align=center;spacingTop=6;" value="UI Frameworks" vertex="1">
+          <mxGeometry height="410" width="164" x="1775" y="340" as="geometry" />
+        </mxCell>
+        <mxCell id="n49" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF2FB;strokeColor=#2F6DB0;fontColor=#14406B;fontSize=13;verticalAlign=middle;align=center;fontStyle=0;" value="Jetpack Compose" vertex="1">
+          <mxGeometry height="36" width="136" x="1789" y="392" as="geometry" />
+        </mxCell>
+        <mxCell id="n50" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF2FB;strokeColor=#2F6DB0;fontColor=#14406B;fontSize=13;verticalAlign=middle;align=center;fontStyle=0;" value="Kotlin" vertex="1">
+          <mxGeometry height="36" width="136" x="1789" y="436" as="geometry" />
+        </mxCell>
+        <mxCell id="n51" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0F2742;strokeColor=#3D6C99;fontColor=#7F93A8;fontSize=11;verticalAlign=middle;align=center;fontStyle=2;dashed=1;dashPattern=6 4;" value="(OTT client)" vertex="1">
+          <mxGeometry height="180" width="180" x="1581" y="568" as="geometry" />
+        </mxCell>
+        <mxCell id="n52" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0E2A45;gradientColor=#143A5F;strokeColor=none;fontColor=#FFFFFF;fontSize=18;fontStyle=1;verticalAlign=top;align=left;spacingLeft=20;spacingTop=12;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" value="Platform / PAL / OS" vertex="1">
+          <mxGeometry height="288" width="1272" x="676.5" y="791" as="geometry" />
+        </mxCell>
+        <mxCell id="n53" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#13314F;strokeColor=#3D6C99;strokeWidth=1.5;fontColor=#CFE2F5;fontSize=14;fontStyle=1;verticalAlign=top;align=center;spacingTop=6;" value="OS / Common libs" vertex="1">
+          <mxGeometry height="40" width="163" x="706.5" y="842" as="geometry" />
+        </mxCell>
+        <mxCell id="n67" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#13314F;strokeColor=#5FA0E0;strokeWidth=2;fontColor=#CFE2F5;fontSize=14;fontStyle=1;verticalAlign=top;align=center;spacingTop=6;" value="&lt;span style=&quot;color: rgb(207, 226, 245);&quot;&gt;DTV SDK&lt;/span&gt;" vertex="1">
+          <mxGeometry height="210" width="591" x="1164" y="830" as="geometry" />
+        </mxCell>
+        <mxCell id="n68" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDE9C8;strokeColor=#D79A3A;fontColor=#8A5A00;fontSize=11;verticalAlign=middle;align=center;fontStyle=0;" value="InputBand" vertex="1">
+          <mxGeometry height="16" width="85" x="1180" y="864" as="geometry" />
+        </mxCell>
+        <mxCell id="n69" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDE9C8;strokeColor=#D79A3A;fontColor=#8A5A00;fontSize=11;verticalAlign=middle;align=center;fontStyle=0;" value="ParserBand" vertex="1">
+          <mxGeometry height="16" width="84" x="1271" y="864" as="geometry" />
+        </mxCell>
+        <mxCell id="n73" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDE9C8;strokeColor=#D79A3A;fontColor=#8A5A00;fontSize=11;verticalAlign=middle;align=center;fontStyle=0;" value="Audio" vertex="1">
+          <mxGeometry height="18" width="90" x="1404" y="900.5" as="geometry" />
+        </mxCell>
+        <mxCell id="n74" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDE9C8;strokeColor=#D79A3A;fontColor=#8A5A00;fontSize=11;verticalAlign=middle;align=center;fontStyle=0;" value="StcChannel" vertex="1">
+          <mxGeometry height="32" width="120" x="1180" y="940" as="geometry" />
+        </mxCell>
+        <mxCell id="n75" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDE9C8;strokeColor=#D79A3A;fontColor=#8A5A00;fontSize=11;verticalAlign=middle;align=center;fontStyle=0;" value="Display" vertex="1">
+          <mxGeometry height="32" width="120" x="1308" y="940" as="geometry" />
+        </mxCell>
+        <mxCell id="n76" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDE9C8;strokeColor=#D79A3A;fontColor=#8A5A00;fontSize=11;verticalAlign=middle;align=center;fontStyle=0;" value="VideoWindow" vertex="1">
+          <mxGeometry height="32" width="142" x="1436" y="940" as="geometry" />
+        </mxCell>
+        <mxCell id="n77" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0F2742;strokeColor=#4F86BD;fontColor=#9BC1E6;fontSize=13;verticalAlign=middle;align=center;fontStyle=0;" value="Broadcom Magnum  (lower vendor layer)" vertex="1">
+          <mxGeometry height="30" width="552" x="1176" y="1000" as="geometry" />
+        </mxCell>
+        <mxCell id="n78" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#13314F;strokeColor=#3D6C99;strokeWidth=1.5;fontColor=#CFE2F5;fontSize=14;fontStyle=1;verticalAlign=top;align=center;spacingTop=6;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" value="CA SDK" vertex="1">
+          <mxGeometry height="139" width="163.5" x="706.5" y="891" as="geometry" />
+        </mxCell>
+        <mxCell id="n79" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EEF4FA;strokeColor=#9BB6D4;fontColor=#6B7785;fontSize=13;verticalAlign=middle;align=center;fontStyle=0;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" value="CAS SDK" vertex="1">
+          <mxGeometry height="40" width="118" x="730" y="932" as="geometry" />
+        </mxCell>
+        <mxCell id="n80" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontColor=#7F93A8;fontSize=10;fontStyle=2;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" value="proprietary, separate vendor" vertex="1">
+          <mxGeometry height="30" width="118" x="730" y="978" as="geometry" />
+        </mxCell>
+        <mxCell id="n81" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0E2A45;gradientColor=#143A5F;strokeColor=none;fontColor=#FFFFFF;fontSize=18;fontStyle=1;verticalAlign=top;align=left;spacingLeft=20;spacingTop=12;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" value="Drivers / HAL" vertex="1">
+          <mxGeometry height="138" width="1272" x="694" y="1140" as="geometry" />
+        </mxCell>
+        <mxCell id="n82" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF2FB;strokeColor=#2F6DB0;fontColor=#14406B;fontSize=12;verticalAlign=middle;align=center;fontStyle=0;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" value="TUNER" vertex="1">
+          <mxGeometry height="70" width="118" x="714" y="1184" as="geometry" />
+        </mxCell>
+        <mxCell id="n83" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF2FB;strokeColor=#2F6DB0;fontColor=#14406B;fontSize=12;verticalAlign=middle;align=center;fontStyle=0;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" value="DEMUX" vertex="1">
+          <mxGeometry height="70" width="118" x="844" y="1184" as="geometry" />
+        </mxCell>
+        <mxCell id="n84" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EEF4FA;strokeColor=#9BB6D4;fontColor=#6B7785;fontSize=12;verticalAlign=middle;align=center;fontStyle=0;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" value="CAS" vertex="1">
+          <mxGeometry height="70" width="118" x="974" y="1184" as="geometry" />
+        </mxCell>
+        <mxCell id="n85" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF2FB;strokeColor=#2F6DB0;fontColor=#14406B;fontSize=12;verticalAlign=middle;align=center;fontStyle=0;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" value="VDEC" vertex="1">
+          <mxGeometry height="70" width="118" x="1104" y="1184" as="geometry" />
+        </mxCell>
+        <mxCell id="n86" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF2FB;strokeColor=#2F6DB0;fontColor=#14406B;fontSize=12;verticalAlign=middle;align=center;fontStyle=0;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" value="ADEC" vertex="1">
+          <mxGeometry height="70" width="118" x="1234" y="1184" as="geometry" />
+        </mxCell>
+        <mxCell id="n87" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF2FB;strokeColor=#2F6DB0;fontColor=#14406B;fontSize=12;verticalAlign=middle;align=center;fontStyle=0;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" value="GPU" vertex="1">
+          <mxGeometry height="70" width="118" x="1364" y="1184" as="geometry" />
+        </mxCell>
+        <mxCell id="n88" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF2FB;strokeColor=#2F6DB0;fontColor=#14406B;fontSize=12;verticalAlign=middle;align=center;fontStyle=0;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" value="HMI" vertex="1">
+          <mxGeometry height="70" width="118" x="1494" y="1184" as="geometry" />
+        </mxCell>
+        <mxCell id="n89" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EEF4FA;strokeColor=#9BB6D4;fontColor=#6B7785;fontSize=12;verticalAlign=middle;align=center;fontStyle=0;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" value="Other ACCEL" vertex="1">
+          <mxGeometry height="70" width="138" x="1624" y="1184" as="geometry" />
+        </mxCell>
+        <mxCell id="n90" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EEF4FA;strokeColor=#9BB6D4;fontColor=#6B7785;fontSize=12;verticalAlign=middle;align=center;fontStyle=0;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" value="Other I/O" vertex="1">
+          <mxGeometry height="70" width="118" x="1774" y="1184" as="geometry" />
+        </mxCell>
+        <mxCell id="n91" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontColor=#9BB6D4;fontSize=20;fontStyle=0;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" value="…" vertex="1">
+          <mxGeometry height="30" width="40" x="1359" y="1199" as="geometry" />
+        </mxCell>
+        <mxCell id="n92" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#DFF0D8;strokeColor=#5A9F4A;fontColor=#14406B;fontSize=13;verticalAlign=middle;align=center;fontStyle=0;" value="" vertex="1">
+          <mxGeometry height="14" width="22" x="655" y="1397" as="geometry" />
+        </mxCell>
+        <mxCell id="n93" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontColor=#3A4754;fontSize=11;fontStyle=2;" value="Android TIF / TV Provider" vertex="1">
+          <mxGeometry height="28" width="260" x="683" y="1390" as="geometry" />
+        </mxCell>
+        <mxCell id="n94" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FDE9C8;strokeColor=#D79A3A;fontColor=#14406B;fontSize=13;verticalAlign=middle;align=center;fontStyle=0;" value="" vertex="1">
+          <mxGeometry height="14" width="22" x="865" y="1397" as="geometry" />
+        </mxCell>
+        <mxCell id="n95" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontColor=#3A4754;fontSize=11;fontStyle=2;" value="Comedia MW &amp; vendor PAL (broadcast)" vertex="1">
+          <mxGeometry height="28" width="260" x="893" y="1390" as="geometry" />
+        </mxCell>
+        <mxCell id="n96" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#EAF2FB;strokeColor=#2F6DB0;fontColor=#14406B;fontSize=13;verticalAlign=middle;align=center;fontStyle=0;" value="" vertex="1">
+          <mxGeometry height="14" width="22" x="1145" y="1397" as="geometry" />
+        </mxCell>
+        <mxCell id="n97" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontColor=#3A4754;fontSize=11;fontStyle=2;" value="Android / platform blocks used by Live TV" vertex="1">
+          <mxGeometry height="28" width="260" x="1173" y="1390" as="geometry" />
+        </mxCell>
+        <mxCell id="n98" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#EEF4FA;strokeColor=#9BB6D4;fontColor=#14406B;fontSize=13;verticalAlign=middle;align=center;fontStyle=0;" value="" vertex="1">
+          <mxGeometry height="14" width="22" x="1455" y="1397" as="geometry" />
+        </mxCell>
+        <mxCell id="n99" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontColor=#3A4754;fontSize=11;fontStyle=2;" value="Present but not in broadcast Live-TV focus" vertex="1">
+          <mxGeometry height="28" width="260" x="1483" y="1390" as="geometry" />
+        </mxCell>
+        <mxCell id="n100" edge="1" parent="1" style="edgeStyle=none;html=1;rounded=0;strokeColor=#D4231F;strokeWidth=1.6;endArrow=classic;endFill=1;endSize=7;fontColor=#A01512;fontSize=10;fontFamily=Courier New;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1757" y="1410" as="sourcePoint" />
+            <mxPoint x="1795" y="1410" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n101" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontColor=#3A4754;fontSize=11;fontStyle=2;" value="Broadcast data / control flow (zap to service)" vertex="1">
+          <mxGeometry height="28" width="250" x="1791" y="1390" as="geometry" />
+        </mxCell>
+        <mxCell id="n102" edge="1" parent="1" source="n6" style="edgeStyle=none;html=1;rounded=0;strokeColor=#D4231F;strokeWidth=1.6;endArrow=classic;endFill=1;endSize=7;fontColor=#A01512;fontSize=10;fontFamily=Courier New;entryX=-0.002;entryY=0.795;entryDx=0;entryDy=0;exitX=0.492;exitY=0.993;exitDx=0;exitDy=0;exitPerimeter=0;entryPerimeter=0;" target="n21" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="788" y="310" />
+              <mxPoint x="788" y="404" />
+              <mxPoint x="790" y="469" />
+            </Array>
+            <mxPoint x="790" y="270" as="sourcePoint" />
+            <mxPoint x="892" y="310" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n103" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D4231F;strokeWidth=1.4;fontColor=#D4231F;fontSize=12;fontStyle=1;" value="1" vertex="1">
+          <mxGeometry height="22" width="22" x="1680" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="n105" edge="1" parent="1" style="edgeStyle=none;html=1;rounded=0;strokeColor=#D4231F;strokeWidth=1.6;endArrow=classic;endFill=1;endSize=7;fontColor=#A01512;fontSize=10;fontFamily=Courier New;entryX=0.098;entryY=-0.027;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.293;exitY=1.001;exitDx=0;exitDy=0;exitPerimeter=0;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="948.6" y="484.03599999999994" as="sourcePoint" />
+            <mxPoint x="948.72" y="526.8120000000001" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n115" edge="1" parent="1" source="n33" style="edgeStyle=none;html=1;rounded=0;strokeColor=#D4231F;strokeWidth=1.6;endArrow=classic;endFill=1;endSize=7;fontColor=#A01512;fontSize=10;fontFamily=Courier New;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.443;entryY=-0.013;entryDx=0;entryDy=0;entryPerimeter=0;" target="n42" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1070" y="670" as="sourcePoint" />
+            <mxPoint x="1070" y="690" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n116" edge="1" parent="1" source="48" style="edgeStyle=none;html=1;rounded=0;strokeColor=#D4231F;strokeWidth=1.6;endArrow=classic;endFill=1;endSize=7;fontColor=#A01512;fontSize=10;fontFamily=Courier New;exitX=0.308;exitY=1.004;exitDx=0;exitDy=0;exitPerimeter=0;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1176" y="670" as="sourcePoint" />
+            <mxPoint x="1176" y="690" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n117" edge="1" parent="1" style="edgeStyle=none;html=1;rounded=0;strokeColor=#D4231F;strokeWidth=1.6;endArrow=classic;endFill=1;endSize=7;fontColor=#A01512;fontSize=10;fontFamily=Courier New;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.575;entryY=-0.015;entryDx=0;entryDy=0;entryPerimeter=0;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1273" y="620" />
+              <mxPoint x="1233" y="620" />
+            </Array>
+            <mxPoint x="1273.5" y="565.5" as="sourcePoint" />
+            <mxPoint x="1233.25" y="639.55" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n120" edge="1" parent="1" source="n26" style="edgeStyle=none;html=1;rounded=0;strokeColor=#D4231F;strokeWidth=1.6;endArrow=classic;endFill=1;endSize=7;fontColor=#A01512;fontSize=10;fontFamily=Courier New;entryX=0.47;entryY=-0.004;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.33;exitY=0.996;exitDx=0;exitDy=0;exitPerimeter=0;" target="37" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1100" y="760" />
+              <mxPoint x="1028" y="760" />
+            </Array>
+            <mxPoint x="1097" y="655" as="sourcePoint" />
+            <mxPoint x="1029" y="791" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n126" edge="1" parent="1" style="edgeStyle=none;html=1;rounded=0;strokeColor=#D4231F;strokeWidth=1.6;endArrow=classic;endFill=1;endSize=7;fontColor=#A01512;fontSize=10;fontFamily=Courier New;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1421.5" y="776" />
+              <mxPoint x="1422" y="790" />
+            </Array>
+            <mxPoint x="1421.5" y="732" as="sourcePoint" />
+            <mxPoint x="1422" y="830" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n137" edge="1" parent="1" source="n77" style="edgeStyle=none;html=1;rounded=0;strokeColor=#D4231F;strokeWidth=1.6;endArrow=classic;endFill=1;endSize=7;fontColor=#A01512;fontSize=10;fontFamily=Courier New;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1452" y="1070" />
+              <mxPoint x="770" y="1072" />
+            </Array>
+            <mxPoint x="1435" y="1008" as="sourcePoint" />
+            <mxPoint x="770" y="1138" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n138" edge="1" parent="1" style="edgeStyle=none;html=1;rounded=0;strokeColor=#D4231F;strokeWidth=1.6;endArrow=classic;endFill=1;endSize=7;fontColor=#A01512;fontSize=10;fontFamily=Courier New;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="900" y="1072" as="sourcePoint" />
+            <mxPoint x="900" y="1138" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n139" edge="1" parent="1" style="edgeStyle=none;html=1;rounded=0;strokeColor=#D4231F;strokeWidth=1.6;endArrow=classic;endFill=1;endSize=7;fontColor=#A01512;fontSize=10;fontFamily=Courier New;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1160" y="1072" as="sourcePoint" />
+            <mxPoint x="1160" y="1138" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n140" edge="1" parent="1" style="edgeStyle=none;html=1;rounded=0;strokeColor=#D4231F;strokeWidth=1.6;endArrow=classic;endFill=1;endSize=7;fontColor=#A01512;fontSize=10;fontFamily=Courier New;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1290" y="1072" as="sourcePoint" />
+            <mxPoint x="1290" y="1138" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n141" edge="1" parent="1" style="edgeStyle=none;html=1;rounded=0;strokeColor=#D4231F;strokeWidth=1.6;endArrow=classic;endFill=1;endSize=7;fontColor=#A01512;fontSize=10;fontFamily=Courier New;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1420" y="1072" as="sourcePoint" />
+            <mxPoint x="1420" y="1138" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n146" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D4231F;fontColor=#14406B;fontSize=13;verticalAlign=middle;align=center;fontStyle=0;" value="" vertex="1">
+          <mxGeometry height="470" width="1320" x="675" y="1680" as="geometry" />
+        </mxCell>
+        <mxCell id="n147" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontColor=#A01512;fontSize=17;fontStyle=1;" value="Broadcast data-flow — call chain &quot;Zap to a Live TV service&quot; (maps directly to the UML sequence diagram)" vertex="1">
+          <mxGeometry height="24" width="1280" x="695" y="1690" as="geometry" />
+        </mxCell>
+        <mxCell id="n148" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontColor=#5A6B7B;fontSize=11;fontStyle=2;" value="References: Module 7 (Broadcast Zapping / Channel Scanning), Module 6 (Broadcast Tune &amp; A/V Playback), Module 5 (call-stack across layers), liba4tv / Comedia API." vertex="1">
+          <mxGeometry height="18" width="1280" x="695" y="1720" as="geometry" />
+        </mxCell>
+        <mxCell id="n149" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontColor=#D4231F;fontSize=12;fontStyle=1;" value="1" vertex="1">
+          <mxGeometry height="18" width="24" x="695" y="1740" as="geometry" />
+        </mxCell>
+        <mxCell id="n150" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontColor=#23323F;fontSize=12;fontStyle=0;" value="Live TV App → Broadcast TV Input (TIS).  onTune(channelUri) (+ onSetSurface, onSetStreamVolume). &quot;Tune&quot; = activate this service, not RF tuning." vertex="1">
+          <mxGeometry height="24" width="1260" x="721" y="1738" as="geometry" />
+        </mxCell>
+        <mxCell id="n151" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontColor=#D4231F;fontSize=12;fontStyle=1;" value="2" vertex="1">
+          <mxGeometry height="18" width="24" x="695" y="1770" as="geometry" />
+        </mxCell>
+        <mxCell id="n152" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontColor=#23323F;fontSize=12;fontStyle=0;" value="Broadcast TV Input → Comedia API (Service, Java).  setCurrentServiceByTriplet(ONID,TSID,SID) → ServiceControl.startServiceByTriplet(routeID,list,svc,onid,tsid,sid)." vertex="1">
+          <mxGeometry height="24" width="1260" x="721" y="1768" as="geometry" />
+        </mxCell>
+        <mxCell id="n153" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontColor=#D4231F;fontSize=12;fontStyle=1;" value="3" vertex="1">
+          <mxGeometry height="18" width="24" x="695" y="1800" as="geometry" />
+        </mxCell>
+        <mxCell id="n154" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontColor=#23323F;fontSize=12;fontStyle=0;" value="Comedia Service (Java) → MAL (native).  JNI boundary → MAL_SZ_StartTripletService() posts to the async zapper task (returns immediately; result arrives as an event)." vertex="1">
+          <mxGeometry height="24" width="1260" x="721" y="1798" as="geometry" />
+        </mxCell>
+        <mxCell id="n155" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontColor=#D4231F;fontSize=12;fontStyle=1;" value="4" vertex="1">
+          <mxGeometry height="18" width="24" x="695" y="1830" as="geometry" />
+        </mxCell>
+        <mxCell id="n156" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontColor=#23323F;fontSize=12;fontStyle=0;" value="MAL → Comedia MW core (Route/Xserv, Service Control, Table).  getLiveRoute(...); Xserv orchestrates the signal path; Table parses PAT/PMT for A/V+PCR PIDs; stored in SList+PIDB." vertex="1">
+          <mxGeometry height="24" width="1260" x="721" y="1828" as="geometry" />
+        </mxCell>
+        <mxCell id="n157" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontColor=#D4231F;fontSize=12;fontStyle=1;" value="5" vertex="1">
+          <mxGeometry height="18" width="24" x="695" y="1860" as="geometry" />
+        </mxCell>
+        <mxCell id="n158" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontColor=#23323F;fontSize=12;fontStyle=0;" value="Comedia MW → Comedia CHAL (glue / TDAL_*).  TDAL_DMD (frontend/input), TDAL_DMX (demux/PID), TDAL_AV (decoders). CHAL hides Android-Tuner-SDK vs vendor-Nexus target." vertex="1">
+          <mxGeometry height="24" width="1260" x="721" y="1858" as="geometry" />
+        </mxCell>
+        <mxCell id="n159" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontColor=#D4231F;fontSize=12;fontStyle=1;" value="6a" vertex="1">
+          <mxGeometry height="18" width="24" x="695" y="1890" as="geometry" />
+        </mxCell>
+        <mxCell id="n160" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontColor=#23323F;fontSize=12;fontStyle=0;" value="CHAL → Tuner SDK (clean Android-aligned PAL).  Tuner.tune() → JNI → Tuner Native API → TRM.requestFrontend → Tuner HAL IFrontend.tune / IDemux.openFilter. A/V via MediaCodec + AudioTrack." vertex="1">
+          <mxGeometry height="24" width="1260" x="721" y="1888" as="geometry" />
+        </mxCell>
+        <mxCell id="n161" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontColor=#D4231F;fontSize=12;fontStyle=1;" value="6b" vertex="1">
+          <mxGeometry height="18" width="24" x="695" y="1920" as="geometry" />
+        </mxCell>
+        <mxCell id="n162" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontColor=#23323F;fontSize=12;fontStyle=0;" value="CHAL / Tuner HAL → Vendor DTV SDK (Broadcom NEXUS).  NEXUS_Frontend_Tune → InputBand→ParserBand→PidChannel → VideoDecoder/AudioDecoder_SetInput+Start → StcChannel (PCR) → VideoWindow→Display." vertex="1">
+          <mxGeometry height="24" width="1260" x="721" y="1918" as="geometry" />
+        </mxCell>
+        <mxCell id="n163" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontColor=#D4231F;fontSize=12;fontStyle=1;" value="7" vertex="1">
+          <mxGeometry height="18" width="24" x="695" y="1950" as="geometry" />
+        </mxCell>
+        <mxCell id="n164" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontColor=#23323F;fontSize=12;fontStyle=0;" value="NEXUS / Magnum → Drivers / HAL.  Memory-mapped register writes, buffer setup, IRQ handling against TUNER, DEMUX, VDEC, ADEC, GPU/Display. (Cuttlefish: a TS file feeds the input.)" vertex="1">
+          <mxGeometry height="24" width="1260" x="721" y="1948" as="geometry" />
+        </mxCell>
+        <mxCell id="n165" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontColor=#D4231F;fontSize=12;fontStyle=1;" value="⟵" vertex="1">
+          <mxGeometry height="18" width="24" x="695" y="1980" as="geometry" />
+        </mxCell>
+        <mxCell id="n166" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontColor=#23323F;fontSize=12;fontStyle=0;" value="Asynchronous return (dashed).  tunerLocked / lock → channelChangeStatus + safeToUnblank (ServiceListener) → MAL_SZ_NotifyServiceStarted → Comedia Service → TIS &quot;Service started&quot; → Live TV App." vertex="1">
+          <mxGeometry height="24" width="1260" x="721" y="1978" as="geometry" />
+        </mxCell>
+        <mxCell id="n167" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontColor=#5A6B7B;fontSize=11;fontStyle=2;" value="Note — same spine for Service installation (scan): startScanByUrl → ScanControl.autoScan(routeID,url) → getInstallRoute() → TDAL_*_Tune → Table parses PAT/PMT/SDT → installStatus/scanProgressChanged/scanFinished → write to SList+PIDB &amp; publish to TV Provider." vertex="1">
+          <mxGeometry height="20" width="1280" x="695" y="2040" as="geometry" />
+        </mxCell>
+        <mxCell id="n168" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontColor=#5A6B7B;fontSize=11;fontStyle=2;" value="Note — one block-to-block arrow is not one API call: a single middleware call expands into many SDK + driver calls underneath (Module 5: &quot;call stack across the layers&quot;)." vertex="1">
+          <mxGeometry height="20" width="1280" x="695" y="2064" as="geometry" />
+        </mxCell>
+        <mxCell id="2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D79A3A;fontColor=#8A5A00;fontSize=11;verticalAlign=middle;align=center;fontStyle=0;" value="Reminder" vertex="1">
+          <mxGeometry height="30" width="86" x="1312" y="535.5" as="geometry" />
+        </mxCell>
+        <mxCell id="3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D79A3A;fontColor=#8A5A00;fontSize=11;verticalAlign=middle;align=center;fontStyle=0;" value="PVR Control" vertex="1">
+          <mxGeometry height="30" width="86" x="1408" y="535.5" as="geometry" />
+        </mxCell>
+        <mxCell id="5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDE9C8;strokeColor=#D79A3A;fontColor=#8A5A00;fontSize=11;verticalAlign=middle;align=center;fontStyle=0;" value="VideoDecoder" vertex="1">
+          <mxGeometry height="18" width="100" x="1505" y="900.5" as="geometry" />
+        </mxCell>
+        <mxCell id="6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDE9C8;strokeColor=#D79A3A;fontColor=#8A5A00;fontSize=11;verticalAlign=middle;align=center;fontStyle=0;" value="Display" vertex="1">
+          <mxGeometry height="18" width="90" x="1615" y="900.5" as="geometry" />
+        </mxCell>
+        <mxCell id="7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDE9C8;strokeColor=#D79A3A;fontColor=#8A5A00;fontSize=11;verticalAlign=middle;align=center;fontStyle=0;" value="Transport" vertex="1">
+          <mxGeometry height="18" width="120" x="1275" y="901" as="geometry" />
+        </mxCell>
+        <mxCell id="8" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDE9C8;strokeColor=#D79A3A;fontColor=#8A5A00;fontSize=11;verticalAlign=middle;align=center;fontStyle=0;" value="Frontend" vertex="1">
+          <mxGeometry height="18" width="90" x="1180" y="901.5" as="geometry" />
+        </mxCell>
+        <mxCell id="9" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDE9C8;strokeColor=#D79A3A;fontColor=#8A5A00;fontSize=11;verticalAlign=middle;align=center;fontStyle=0;" value="PidChannel" vertex="1">
+          <mxGeometry height="16" width="84" x="1365" y="864" as="geometry" />
+        </mxCell>
+        <mxCell id="23" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDE9C8;strokeColor=#D79A3A;fontColor=#8A5A00;fontSize=11;verticalAlign=middle;align=center;fontStyle=0;" value="VideoDecoder" vertex="1">
+          <mxGeometry height="16" width="89" x="1456" y="864" as="geometry" />
+        </mxCell>
+        <mxCell id="24" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDE9C8;strokeColor=#D79A3A;fontColor=#8A5A00;fontSize=11;verticalAlign=middle;align=center;fontStyle=0;" value="VideoWindow" vertex="1">
+          <mxGeometry height="16" width="89" x="1555" y="864" as="geometry" />
+        </mxCell>
+        <mxCell id="26" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDE9C8;strokeColor=#D79A3A;fontColor=#8A5A00;fontSize=11;verticalAlign=middle;align=center;fontStyle=0;" value="Display" vertex="1">
+          <mxGeometry height="16" width="89" x="1652" y="864" as="geometry" />
+        </mxCell>
+        <mxCell id="27" parent="1" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" value="&lt;span style=&quot;color: rgb(207, 226, 245); font-size: 14px; font-weight: 700;&quot;&gt;Broadcom NEXUS&lt;/span&gt;" vertex="1">
+          <mxGeometry height="30" width="201" x="1351.5" y="972" as="geometry" />
+        </mxCell>
+        <mxCell id="37" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#13314F;strokeColor=#5FA0E0;strokeWidth=2;fontColor=#CFE2F5;fontSize=14;fontStyle=1;verticalAlign=top;align=center;spacingTop=6;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" value="Tuner SDK" vertex="1">
+          <mxGeometry height="210" width="227" x="921.5" y="830" as="geometry" />
+        </mxCell>
+        <mxCell id="38" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDE9C8;strokeColor=#D79A3A;fontColor=#8A5A00;fontSize=12;verticalAlign=middle;align=center;fontStyle=0;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" value="Tuner Java API" vertex="1">
+          <mxGeometry height="34" width="200" x="937" y="876" as="geometry" />
+        </mxCell>
+        <mxCell id="39" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDE9C8;strokeColor=#D79A3A;fontColor=#8A5A00;fontSize=12;verticalAlign=middle;align=center;fontStyle=0;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" value="Tuner Native API" vertex="1">
+          <mxGeometry height="34" width="200" x="937" y="916" as="geometry" />
+        </mxCell>
+        <mxCell id="40" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDE9C8;strokeColor=#D79A3A;fontColor=#8A5A00;fontSize=12;verticalAlign=middle;align=center;fontStyle=0;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" value="TRM" vertex="1">
+          <mxGeometry height="34" width="95" x="937" y="956" as="geometry" />
+        </mxCell>
+        <mxCell id="41" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDE9C8;strokeColor=#D79A3A;fontColor=#8A5A00;fontSize=12;verticalAlign=middle;align=center;fontStyle=0;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" value="Tuner HAL" vertex="1">
+          <mxGeometry height="34" width="95" x="1042" y="956" as="geometry" />
+        </mxCell>
+        <mxCell id="42" edge="1" parent="1" style="edgeStyle=none;html=1;rounded=0;strokeColor=#D4231F;strokeWidth=1.6;endArrow=classic;endFill=1;endSize=7;fontColor=#A01512;fontSize=10;fontFamily=Courier New;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1037" y="910" as="sourcePoint" />
+            <mxPoint x="1037" y="916" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="43" edge="1" parent="1" style="edgeStyle=none;html=1;rounded=0;strokeColor=#D4231F;strokeWidth=1.6;endArrow=classic;endFill=1;endSize=7;fontColor=#A01512;fontSize=10;fontFamily=Courier New;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1015" y="950" as="sourcePoint" />
+            <mxPoint x="995" y="956" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="44" edge="1" parent="1" style="edgeStyle=none;html=1;rounded=0;strokeColor=#D4231F;strokeWidth=1.6;endArrow=classic;endFill=1;endSize=7;fontColor=#A01512;fontSize=10;fontFamily=Courier New;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1055" y="950" as="sourcePoint" />
+            <mxPoint x="1075" y="956" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="48" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D79A3A;fontColor=#8A5A00;fontSize=11;verticalAlign=middle;align=center;fontStyle=0;" value="Table" vertex="1">
+          <mxGeometry height="14" width="237" x="1103" y="655" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
