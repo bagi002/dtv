@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="broadcast-arch" name="Broadcast Architecture">
-        <mxGraphModel dx="1555" dy="994" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2280" pageHeight="1640" math="0" shadow="0">
+        <mxGraphModel dx="2073" dy="1325" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2280" pageHeight="1640" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -11,7 +11,7 @@
                     <mxGeometry x="640" y="160" width="1280" height="1190" as="geometry"/>
                 </mxCell>
                 <mxCell id="n5" value="Host SW" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontColor=#8A5A00;fontSize=18;fontStyle=1;" parent="1" vertex="1">
-                    <mxGeometry x="1263" y="178" width="160" height="24" as="geometry"/>
+                    <mxGeometry x="1199" y="178" width="160" height="24" as="geometry"/>
                 </mxCell>
                 <mxCell id="n6" value="Live TV App" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF2FB;strokeColor=#2F6DB0;fontColor=#14406B;fontSize=13;verticalAlign=middle;align=center;fontStyle=1;" parent="1" vertex="1">
                     <mxGeometry x="699" y="230" width="180" height="46" as="geometry"/>
@@ -24,9 +24,6 @@
                 </mxCell>
                 <mxCell id="n9" value="ExoPlayer" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#9BB6D4;fontColor=#6B7785;fontSize=13;verticalAlign=middle;align=center;fontStyle=0;" parent="1" vertex="1">
                     <mxGeometry x="1161" y="230" width="120" height="46" as="geometry"/>
-                </mxCell>
-                <mxCell id="n10" value="…" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontColor=#9BB6D4;fontSize=20;fontStyle=0;" parent="1" vertex="1">
-                    <mxGeometry x="1302" y="148" width="40" height="30" as="geometry"/>
                 </mxCell>
                 <mxCell id="n11" value="Middleware / AL  (Android)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0E2A45;gradientColor=#143A5F;strokeColor=none;fontColor=#FFFFFF;fontSize=18;fontStyle=1;verticalAlign=top;align=left;spacingLeft=20;spacingTop=12;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" parent="1" vertex="1">
                     <mxGeometry x="670" y="290" width="1210" height="470" as="geometry"/>
@@ -56,10 +53,10 @@
                     <mxGeometry x="711" y="632" width="126" height="20" as="geometry"/>
                 </mxCell>
                 <mxCell id="n20" value="DTV Middleware" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#13314F;strokeColor=#5FA0E0;strokeWidth=2;fontColor=#CFE2F5;fontSize=14;fontStyle=1;verticalAlign=top;align=center;spacingTop=6;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" parent="1" vertex="1">
-                    <mxGeometry x="860" y="340" width="965" height="410" as="geometry"/>
+                    <mxGeometry x="860" y="340" width="1010" height="410" as="geometry"/>
                 </mxCell>
                 <mxCell id="n21" value="TV Input Framework (TIF)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0F2742;strokeColor=#4F86BD;strokeWidth=1.5;fontColor=#CFE2F5;fontSize=12;fontStyle=1;verticalAlign=top;align=left;spacingLeft=14;spacingTop=6;" parent="1" vertex="1">
-                    <mxGeometry x="881" y="374" width="928" height="120" as="geometry"/>
+                    <mxGeometry x="881" y="374" width="979" height="120" as="geometry"/>
                 </mxCell>
                 <mxCell id="n22" value="TV Input Manager" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DFF0D8;strokeColor=#5A9F4A;fontColor=#2E5E22;fontSize=13;verticalAlign=middle;align=center;fontStyle=1;" parent="1" vertex="1">
                     <mxGeometry x="895" y="404" width="425" height="34" as="geometry"/>
@@ -71,16 +68,16 @@
                     <mxGeometry x="1590" y="403" width="208" height="36" as="geometry"/>
                 </mxCell>
                 <mxCell id="n26" value="Comedia DTV Middleware&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0F2742;strokeColor=#4F86BD;strokeWidth=1.5;fontColor=#CFE2F5;fontSize=12;fontStyle=1;verticalAlign=top;align=left;spacingLeft=14;spacingTop=6;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" parent="1" vertex="1">
-                    <mxGeometry x="880" y="500" width="927.5" height="242" as="geometry"/>
+                    <mxGeometry x="880" y="500" width="980" height="242" as="geometry"/>
                 </mxCell>
                 <mxCell id="n27" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDE9C8;strokeColor=#D79A3A;fontColor=#14406B;fontSize=13;verticalAlign=middle;align=center;fontStyle=0;" parent="1" vertex="1">
-                    <mxGeometry x="887" y="528" width="900" height="44" as="geometry"/>
+                    <mxGeometry x="890" y="528" width="950" height="44" as="geometry"/>
                 </mxCell>
                 <mxCell id="n28" value="Comedia API" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontColor=#8A5A00;fontSize=11;fontStyle=1;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" parent="1" vertex="1">
                     <mxGeometry x="903" y="541.5" width="150" height="16" as="geometry"/>
                 </mxCell>
                 <mxCell id="n31" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDE9C8;strokeColor=#D79A3A;fontColor=#14406B;fontSize=13;verticalAlign=middle;align=center;fontStyle=0;" parent="1" vertex="1">
-                    <mxGeometry x="890" y="580" width="901" height="96" as="geometry"/>
+                    <mxGeometry x="890" y="580" width="950" height="96" as="geometry"/>
                 </mxCell>
                 <mxCell id="n32" value="Comedia MW" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontColor=#8A5A00;fontSize=11;fontStyle=1;" parent="1" vertex="1">
                     <mxGeometry x="903" y="586" width="150" height="16" as="geometry"/>
@@ -107,7 +104,7 @@
                     <mxGeometry x="1103" y="622" width="90" height="30" as="geometry"/>
                 </mxCell>
                 <mxCell id="n40" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDE9C8;strokeColor=#D79A3A;fontColor=#14406B;fontSize=13;verticalAlign=middle;align=center;fontStyle=0;" parent="1" vertex="1">
-                    <mxGeometry x="891" y="682" width="900" height="46" as="geometry"/>
+                    <mxGeometry x="891" y="682" width="949" height="46" as="geometry"/>
                 </mxCell>
                 <mxCell id="n41" value="Comedia CHAL" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontColor=#8A5A00;fontSize=11;fontStyle=1;" parent="1" vertex="1">
                     <mxGeometry x="903" y="686" width="200" height="16" as="geometry"/>
@@ -272,7 +269,7 @@
                         <mxPoint x="1233.25" y="639.55" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="n120" value="" style="edgeStyle=none;html=1;rounded=0;strokeColor=#D4231F;strokeWidth=1.6;endArrow=classic;endFill=1;endSize=7;fontColor=#A01512;fontSize=10;fontFamily=Courier New;entryX=0.47;entryY=-0.004;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.323;exitY=0.997;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="n26" target="37" edge="1">
+                <mxCell id="n120" value="" style="edgeStyle=none;html=1;rounded=0;strokeColor=#D4231F;strokeWidth=1.6;endArrow=classic;endFill=1;endSize=7;fontColor=#A01512;fontSize=10;fontFamily=Courier New;entryX=0.47;entryY=-0.004;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.306;exitY=1.001;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="n26" target="37" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points">
                             <mxPoint x="1180" y="760"/>
@@ -326,75 +323,6 @@
                         <mxPoint x="1420" y="1072" as="sourcePoint"/>
                         <mxPoint x="1420" y="1138" as="targetPoint"/>
                     </mxGeometry>
-                </mxCell>
-                <mxCell id="n146" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D4231F;fontColor=#14406B;fontSize=13;verticalAlign=middle;align=center;fontStyle=0;" parent="1" vertex="1">
-                    <mxGeometry x="675" y="1680" width="1580" height="470" as="geometry"/>
-                </mxCell>
-                <mxCell id="n147" value="Broadcast data-flow — call chain &quot;Zap to a Live TV service&quot; (maps directly to the UML sequence diagram)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontColor=#A01512;fontSize=17;fontStyle=1;" parent="1" vertex="1">
-                    <mxGeometry x="695" y="1690" width="1540" height="24" as="geometry"/>
-                </mxCell>
-                <mxCell id="n148" value="References: Module 7 (Broadcast Zapping / Channel Scanning), Module 6 (Broadcast Tune &amp; A/V Playback), Module 5 (call-stack across layers), liba4tv / Comedia API." style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontColor=#5A6B7B;fontSize=11;fontStyle=2;" parent="1" vertex="1">
-                    <mxGeometry x="695" y="1720" width="1540" height="18" as="geometry"/>
-                </mxCell>
-                <mxCell id="n149" value="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontColor=#D4231F;fontSize=12;fontStyle=1;" parent="1" vertex="1">
-                    <mxGeometry x="695" y="1740" width="24" height="18" as="geometry"/>
-                </mxCell>
-                <mxCell id="n150" value="Live TV App → Broadcast TV Input (TIS).  onTune(channelUri) (+ onSetSurface, onSetStreamVolume). &quot;Tune&quot; = activate this service, not RF tuning." style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontColor=#23323F;fontSize=12;fontStyle=0;" parent="1" vertex="1">
-                    <mxGeometry x="721" y="1738" width="1520" height="24" as="geometry"/>
-                </mxCell>
-                <mxCell id="n151" value="2" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontColor=#D4231F;fontSize=12;fontStyle=1;" parent="1" vertex="1">
-                    <mxGeometry x="695" y="1770" width="24" height="18" as="geometry"/>
-                </mxCell>
-                <mxCell id="n152" value="Broadcast TV Input → Comedia API (Service, Java).  setCurrentServiceByTriplet(ONID,TSID,SID) → ServiceControl.startServiceByTriplet(routeID,list,svc,onid,tsid,sid)." style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontColor=#23323F;fontSize=12;fontStyle=0;" parent="1" vertex="1">
-                    <mxGeometry x="721" y="1768" width="1520" height="24" as="geometry"/>
-                </mxCell>
-                <mxCell id="n153" value="3" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontColor=#D4231F;fontSize=12;fontStyle=1;" parent="1" vertex="1">
-                    <mxGeometry x="695" y="1800" width="24" height="18" as="geometry"/>
-                </mxCell>
-                <mxCell id="n154" value="Comedia Service (Java) → MAL (native).  JNI boundary → MAL_SZ_StartTripletService() posts to the async zapper task (returns immediately; result arrives as an event)." style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontColor=#23323F;fontSize=12;fontStyle=0;" parent="1" vertex="1">
-                    <mxGeometry x="721" y="1798" width="1520" height="24" as="geometry"/>
-                </mxCell>
-                <mxCell id="n155" value="4" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontColor=#D4231F;fontSize=12;fontStyle=1;" parent="1" vertex="1">
-                    <mxGeometry x="695" y="1830" width="24" height="18" as="geometry"/>
-                </mxCell>
-                <mxCell id="n156" value="MAL → Comedia MW core (Route/Xserv, Service Control, Table).  getLiveRoute(...); Xserv orchestrates the signal path; Table parses PAT/PMT for A/V+PCR PIDs; stored in SList+PIDB." style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontColor=#23323F;fontSize=12;fontStyle=0;" parent="1" vertex="1">
-                    <mxGeometry x="721" y="1828" width="1520" height="24" as="geometry"/>
-                </mxCell>
-                <mxCell id="n157" value="5" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontColor=#D4231F;fontSize=12;fontStyle=1;" parent="1" vertex="1">
-                    <mxGeometry x="695" y="1860" width="24" height="18" as="geometry"/>
-                </mxCell>
-                <mxCell id="n158" value="Comedia MW → Comedia CHAL (glue / TDAL_*).  TDAL_DMD (frontend/input), TDAL_DMX (demux/PID), TDAL_AV (decoders). CHAL hides Android-Tuner-SDK vs vendor-Nexus target." style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontColor=#23323F;fontSize=12;fontStyle=0;" parent="1" vertex="1">
-                    <mxGeometry x="721" y="1858" width="1520" height="24" as="geometry"/>
-                </mxCell>
-                <mxCell id="n159" value="6a" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontColor=#D4231F;fontSize=12;fontStyle=1;" parent="1" vertex="1">
-                    <mxGeometry x="695" y="1890" width="24" height="18" as="geometry"/>
-                </mxCell>
-                <mxCell id="n160" value="CHAL → Tuner SDK (clean Android-aligned PAL).  Tuner.tune() → JNI → Tuner Native API → TRM.requestFrontend → Tuner HAL IFrontend.tune / IDemux.openFilter. A/V via MediaCodec + AudioTrack." style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontColor=#23323F;fontSize=12;fontStyle=0;" parent="1" vertex="1">
-                    <mxGeometry x="721" y="1888" width="1520" height="24" as="geometry"/>
-                </mxCell>
-                <mxCell id="n161" value="6b" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontColor=#D4231F;fontSize=12;fontStyle=1;" parent="1" vertex="1">
-                    <mxGeometry x="695" y="1920" width="24" height="18" as="geometry"/>
-                </mxCell>
-                <mxCell id="n162" value="CHAL / Tuner HAL → Vendor DTV SDK (Broadcom NEXUS).  NEXUS_Frontend_Tune → InputBand→ParserBand→PidChannel → VideoDecoder/AudioDecoder_SetInput+Start → StcChannel (PCR) → VideoWindow→Display." style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontColor=#23323F;fontSize=12;fontStyle=0;" parent="1" vertex="1">
-                    <mxGeometry x="721" y="1918" width="1520" height="24" as="geometry"/>
-                </mxCell>
-                <mxCell id="n163" value="7" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontColor=#D4231F;fontSize=12;fontStyle=1;" parent="1" vertex="1">
-                    <mxGeometry x="695" y="1950" width="24" height="18" as="geometry"/>
-                </mxCell>
-                <mxCell id="n164" value="NEXUS / Magnum → Drivers / HAL.  Memory-mapped register writes, buffer setup, IRQ handling against TUNER, DEMUX, VDEC, ADEC, GPU/Display. (Cuttlefish: a TS file feeds the input.)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontColor=#23323F;fontSize=12;fontStyle=0;" parent="1" vertex="1">
-                    <mxGeometry x="721" y="1948" width="1520" height="24" as="geometry"/>
-                </mxCell>
-                <mxCell id="n165" value="⟵" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontColor=#D4231F;fontSize=12;fontStyle=1;" parent="1" vertex="1">
-                    <mxGeometry x="695" y="1980" width="24" height="18" as="geometry"/>
-                </mxCell>
-                <mxCell id="n166" value="Asynchronous return (dashed).  tunerLocked / lock → channelChangeStatus + safeToUnblank (ServiceListener) → MAL_SZ_NotifyServiceStarted → Comedia Service → TIS &quot;Service started&quot; → Live TV App." style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontColor=#23323F;fontSize=12;fontStyle=0;" parent="1" vertex="1">
-                    <mxGeometry x="721" y="1978" width="1520" height="24" as="geometry"/>
-                </mxCell>
-                <mxCell id="n167" value="Note — same spine for Service installation (scan): startScanByUrl → ScanControl.autoScan(routeID,url) → getInstallRoute() → TDAL_*_Tune → Table parses PAT/PMT/SDT → installStatus/scanProgressChanged/scanFinished → write to SList+PIDB &amp; publish to TV Provider." style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontColor=#5A6B7B;fontSize=11;fontStyle=2;" parent="1" vertex="1">
-                    <mxGeometry x="695" y="2040" width="1540" height="20" as="geometry"/>
-                </mxCell>
-                <mxCell id="n168" value="Note — one block-to-block arrow is not one API call: a single middleware call expands into many SDK + driver calls underneath (Module 5: &quot;call stack across the layers&quot;)." style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontColor=#5A6B7B;fontSize=11;fontStyle=2;" parent="1" vertex="1">
-                    <mxGeometry x="695" y="2064" width="1540" height="20" as="geometry"/>
                 </mxCell>
                 <mxCell id="2" value="Reminder" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D79A3A;fontColor=#8A5A00;fontSize=11;verticalAlign=middle;align=center;fontStyle=0;" parent="1" vertex="1">
                     <mxGeometry x="1312" y="535.5" width="86" height="30" as="geometry"/>
