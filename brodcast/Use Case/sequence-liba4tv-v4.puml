@@ -1,5 +1,5 @@
 @startuml sequence_subtitles_liba4tv_v4
-title Subtitles - broadcast (liba4tv) - v4
+title Subtitles - broadcast (liba4tv)
 
 actor User
 box "Android app" #EBF5FF
