@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Broadcast LiveTV Application</string>
+    <string name="setup_idle">Press Start Scan to install channels</string>
+    <string name="setup_start_scan">Start Scan</string>
+    <string name="setup_scanning">Scanning…</string>
+    <string name="setup_scan_complete">Scan complete: %1$d channel(s) installed</string>
+    <string name="setup_scan_error">Scan failed: %1$s</string>
+</resources>
