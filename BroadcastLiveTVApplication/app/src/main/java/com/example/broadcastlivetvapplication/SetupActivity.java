@@ -37,8 +37,10 @@ public class SetupActivity extends Activity {
     private final ServiceConnection mServiceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder binder) {
-            mService = ((BroadcastTvInputService.LocalBinder) binder).getService();
-            mService.setScanResultListener(mScanResultListener);
+            mService = BroadcastTvInputService.getInstance();
+            if (mService != null) {
+                mService.setScanResultListener(mScanResultListener);
+            }
         }
 
         @Override
