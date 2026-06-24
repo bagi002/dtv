@@ -2,6 +2,22 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- Package visibility (API 30+): liba4tv/DtvContext binds to com.iwedia.comedia.service
+         internally; without this the system hides that package from us and the bind/start
+         silently fails as "not found" even though the service is installed and running. -->
+    <queries>
+        <package android:name="com.iwedia.comedia.service" />
+    </queries>
+
+    <!-- Write/read channels and programs into the TV provider (TV DB). -->
+    <uses-permission android:name="com.android.providers.tv.permission.WRITE_EPG_DATA" />
+    <uses-permission android:name="com.android.providers.tv.permission.READ_EPG_DATA" />
+
+    <!-- This app provides live TV channels through a TV input. -->
+    <uses-feature
+        android:name="android.software.live_tv"
+        android:required="false" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -11,8 +27,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BroadcastLiveTVApplication">
+
+        <!-- Broadcast TV Input: discovered and registered by the system (TvInputManager)
+             after install via the TvInputService intent-filter + meta-data XML. -->
         <service
             android:name=".BroadcastTvInputService"
+            android:label="@string/app_name"
             android:enabled="true"
             android:exported="true"
             android:permission="android.permission.BIND_TV_INPUT">
@@ -20,14 +40,25 @@
                 <action android:name="android.media.tv.TvInputService" />
             </intent-filter>
             <meta-data
-                android:name="android.media.tv.TvInputService"
+                android:name="android.media.tv.input"
                 android:resource="@xml/tv_input_service" />
         </service>
 
+        <!-- Service installation entry point ("channel scan").
+             The system Live Channels app launches this as the input's setupActivity
+             (declared in @xml/tv_input_service) via TvInputInfo.createSetupIntent(),
+             passing TvInputInfo.EXTRA_INPUT_ID; only android:exported is required for that.
+             The LAUNCHER filter is a fallback so the Broadcast input can be installed
+             directly on a Cuttlefish image that has no system Live TV app. -->
         <activity
             android:name=".SetupActivity"
             android:enabled="true"
-            android:exported="true" />
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

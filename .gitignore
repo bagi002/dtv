@@ -4,3 +4,7 @@ dtv/Broadcast/*.apk
 dtv/Broadcast/*.jar
 dtv/OTT/streams/
 dtv/OTT/*.zip
+Project Helper/Broadcast/streams/
+Project Helper/Broadcast/libs/
+Project Helper/Broadcast/*.apk
+Project Helper/Broadcast/*.jar

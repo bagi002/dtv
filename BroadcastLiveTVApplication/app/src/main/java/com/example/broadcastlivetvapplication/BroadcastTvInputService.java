@@ -24,8 +24,12 @@ public class BroadcastTvInputService extends TvInputService {
 
     private static final String TAG = "BroadcastTvInputService";
 
-    /** Cuttlefish demo source: .ts fajl koji glumi tuner/HAL ulaz (vidi UML "Tuner SDK/HAL - demonstration"). */
-    private static final String SCAN_SOURCE_URL = "file:///data/clear_0002.ts";
+    /** Cuttlefish demo izvori: .ts fajlovi koji glume tuner/HAL ulaz (vidi UML "Tuner SDK/HAL - demonstration"). */
+    private static final String[] SCAN_SOURCE_URLS = {
+            "file:///tmp/ch0.ts",
+            "file:///tmp/ch1.ts",
+            "file:///tmp/ch24.ts",
+    };
     private static final int SERVICE_LIST_INDEX = 0;
 
     public interface ScanResultListener {
@@ -48,6 +52,7 @@ public class BroadcastTvInputService extends TvInputService {
 
     private ScanResultListener mScanResultListener;
     private int mInstallRouteId = -1;
+    private int mNextScanSourceIndex = 0;
 
     @Override
     public void onCreate() {
@@ -56,9 +61,27 @@ public class BroadcastTvInputService extends TvInputService {
         mDtvContext = new BroadcastDtvContext(this, new BroadcastDtvContext.AvailabilityListener() {
             @Override
             public void onDtvAvailable() {
-                mRouteManagerControl = new ComediaRouteManagerControl(mDtvContext);
-                mScanControl = new ScanControl(mDtvContext);
-                mServiceControl = new ServiceControl(mDtvContext);
+                try {
+                    mRouteManagerControl = new ComediaRouteManagerControl(mDtvContext);
+                    Log.d(TAG, "new ComediaRouteManagerControl() -> " + mRouteManagerControl);
+                } catch (Throwable t) {
+                    Log.e(TAG, "new ComediaRouteManagerControl() threw", t);
+                    mRouteManagerControl = null;
+                }
+                try {
+                    mScanControl = new ScanControl(mDtvContext);
+                    Log.d(TAG, "new ScanControl() -> " + mScanControl);
+                } catch (Throwable t) {
+                    Log.e(TAG, "new ScanControl() threw", t);
+                    mScanControl = null;
+                }
+                try {
+                    mServiceControl = new ServiceControl(mDtvContext);
+                    Log.d(TAG, "new ServiceControl() -> " + mServiceControl);
+                } catch (Throwable t) {
+                    Log.e(TAG, "new ServiceControl() threw", t);
+                    mServiceControl = null;
+                }
             }
 
             @Override
@@ -74,7 +97,7 @@ public class BroadcastTvInputService extends TvInputService {
         mScanResultListener = listener;
     }
 
-    /** App -> TIS: start scan (vidi UML "Service Installation"). */
+    /** App -> TIS: start scan (vidi UML "Service Installation"). Skenira sve poznate izvore redom. */
     public void startScan(@NonNull String inputId) {
         if (mRouteManagerControl == null || mScanControl == null) {
             notifyError("Comedia middleware not connected");
@@ -85,12 +108,21 @@ public class BroadcastTvInputService extends TvInputService {
         mInstallRouteId = mRouteManagerControl.getInstallRoute(RouteManagerMediumType.MEDIUM_IP);
 
         mScanControl.registerListener(mScanListener);
-        mScanControl.appendList(false);
+        mNextScanSourceIndex = 0;
+        scanNextSource();
+    }
 
-        A4TVStatus status = mScanControl.autoScan(mInstallRouteId, SCAN_SOURCE_URL);
+    /** Pokrece autoScan za sledeci izvor iz SCAN_SOURCE_URLS; append=false samo za prvi (brise staru listu). */
+    private void scanNextSource() {
+        boolean isFirstSource = mNextScanSourceIndex == 0;
+        String sourceUrl = SCAN_SOURCE_URLS[mNextScanSourceIndex];
+
+        mScanControl.appendList(!isFirstSource);
+
+        A4TVStatus status = mScanControl.autoScan(mInstallRouteId, sourceUrl);
         if (status != A4TVStatus.SUCCESS) {
             mScanControl.unregisterListener(mScanListener);
-            notifyError("autoScan failed: " + status);
+            notifyError("autoScan failed for " + sourceUrl + ": " + status);
         }
     }
 
@@ -108,7 +140,13 @@ public class BroadcastTvInputService extends TvInputService {
 
         @Override
         public void scanFinished(int routeId) {
-            Log.d(TAG, "scanFinished routeId=" + routeId);
+            Log.d(TAG, "scanFinished routeId=" + routeId + " source=" + SCAN_SOURCE_URLS[mNextScanSourceIndex]);
+            mNextScanSourceIndex++;
+            if (mNextScanSourceIndex < SCAN_SOURCE_URLS.length) {
+                scanNextSource();
+                return;
+            }
+
             int count = publishInstalledServices(mCurrentInputId);
             mScanControl.unregisterListener(mScanListener);
             if (mScanResultListener != null) {

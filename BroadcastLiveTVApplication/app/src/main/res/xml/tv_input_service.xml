@@ -1,3 +1,3 @@
 <?xml version="1.0" encoding="utf-8"?>
-<tv-input-service xmlns:android="http://schemas.android.com/apk/res/android"
+<tv-input xmlns:android="http://schemas.android.com/apk/res/android"
     android:setupActivity="com.example.broadcastlivetvapplication.SetupActivity" />
