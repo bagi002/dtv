@@ -2,6 +2,12 @@ plugins {
     alias(libs.plugins.android.application)
 }
 
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(21))
+    }
+}
+
 android {
     namespace = "com.example.broadcastlivetvapplication"
     compileSdk {
