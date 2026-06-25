@@ -21,6 +21,12 @@ public class SetupActivity extends Activity {
     private final BroadcastTvInputService.ScanResultListener mScanResultListener =
             new BroadcastTvInputService.ScanResultListener() {
         @Override
+        public void onScanProgress(int sourceIndex, int sourceCount, String sourceUrl) {
+            runOnUiThread(() ->
+                    mStatusText.setText(getString(R.string.setup_scan_progress, sourceIndex, sourceCount, sourceUrl)));
+        }
+
+        @Override
         public void onScanFinished(int channelCount) {
             runOnUiThread(() -> {
                 mStatusText.setText(getString(R.string.setup_scan_complete, channelCount));

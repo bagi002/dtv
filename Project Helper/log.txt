@@ -1,0 +1,944 @@
+nituser@nitiw029-lin:~/Desktop/SuDTV/dtv/Broadcast/streams$ adb logcat
+--------- beginning of main
+06-25 13:58:33.048   672   686 I WifiService: getConnectionInfo uid=10035
+06-25 13:58:33.049   672   686 V WifiPermissionsUtil: checkCallersLocationPermission(com.android.google.gce.gceservice): uid 10035 doesn't have permission android.permission.ACCESS_COARSE_LOCATION
+06-25 13:58:33.049   672   686 V WifiPermissionsUtil: enforceCanAccessScanResults(pkg=com.android.google.gce.gceservice, uid=10035): canCallingUidAccessLocation=false, canAppPackageUseLocation=false
+06-25 13:58:33.049   672   686 V WifiService: Keeping REDACT_FOR_ACCESS_FINE_LOCATION:java.lang.SecurityException: UID 10035 has no location permission
+06-25 13:58:38.049   672  1037 I WifiService: getConnectionInfo uid=10035
+06-25 13:58:38.050   672  1037 V WifiPermissionsUtil: checkCallersLocationPermission(com.android.google.gce.gceservice): uid 10035 doesn't have permission android.permission.ACCESS_COARSE_LOCATION
+06-25 13:58:38.050   672  1037 V WifiPermissionsUtil: enforceCanAccessScanResults(pkg=com.android.google.gce.gceservice, uid=10035): canCallingUidAccessLocation=false, canAppPackageUseLocation=false
+06-25 13:58:38.050   672  1037 V WifiService: Keeping REDACT_FOR_ACCESS_FINE_LOCATION:java.lang.SecurityException: UID 10035 has no location permission
+--------- beginning of kernel
+06-25 13:58:42.798     0     0 I logd    : logdr: UID=0 GID=0 PID=2064 b tail=0 logMask=99 pid=0 start=0ns deadline=0ns
+06-25 13:58:43.050   672   686 I WifiService: getConnectionInfo uid=10035
+06-25 13:58:43.050   672   686 V WifiPermissionsUtil: checkCallersLocationPermission(com.android.google.gce.gceservice): uid 10035 doesn't have permission android.permission.ACCESS_COARSE_LOCATION
+06-25 13:58:43.050   672   686 V WifiPermissionsUtil: enforceCanAccessScanResults(pkg=com.android.google.gce.gceservice, uid=10035): canCallingUidAccessLocation=false, canAppPackageUseLocation=false
+06-25 13:58:43.050   672   686 V WifiService: Keeping REDACT_FOR_ACCESS_FINE_LOCATION:java.lang.SecurityException: UID 10035 has no location permission
+06-25 13:58:46.768   564   776 D installd: Device /data has 638230528 free; requested 858783744; needed 220553216
+06-25 13:58:46.768   564   776 W installd: Failed to find storage mount for /data/media
+06-25 13:58:46.771   564   776 D installd: Active ratio 447 isn't over quota, and defy not requested
+06-25 13:58:46.771   564   776 E installd: Failed to free up 858783744 on /data; final free space 638230528: Success
+06-25 13:58:46.772   564   776 D installd: Device /data has 638230528 free; requested 858783744; needed 220553216
+06-25 13:58:46.772   564   776 W installd: Failed to find storage mount for /data/media
+06-25 13:58:46.773   564   776 D installd: Purging /data/data/com.cltv.hybrid/cache/oat_primary/x86/CommonLiveTv.art size=1040384 mod=1782217674 from UID=10052 used=1200128 quota=26833603 ratio=447
+06-25 13:58:46.773   564   776 D installd: Purging /data/user_de/0/com.android.systemui/cache/oat_primary/x86/TvSystemUI.art size=1204224 mod=1782072062 from UID=10053 used=1216512 quota=29425091 ratio=413
+06-25 13:58:46.774   564   776 D installd: Purging /data/user_de/0/com.android.tv.settings/cache/oat_primary/x86/TvSettings.art size=114688 mod=1782072062 from UID=1000 used=542720 quota=39428324 ratio=137
+06-25 13:58:46.774   564   776 D installd: Purging /data/data/com.google.android.tv.dtvsetup.demo/cache/oat_primary/x86/dtvsetupdemo_app.art size=196608 mod=1782300822 from UID=10039 used=282624 quota=22965035 ratio=123
+06-25 13:58:46.774   564   776 D installd: Purging /data/user_de/0/com.android.bluetooth/cache/oat_primary/x86/Bluetooth.art size=307200 mod=1782072062 from UID=1002 used=328704 quota=29425091 ratio=111
+06-25 13:58:46.774   564   776 D installd: Purging /data/user_de/0/com.android.tv.settings/cache/oat_primary/x86 size=3584 mod=1782072062 from UID=1000 used=428032 quota=39428324 ratio=108
+06-25 13:58:46.774   564   776 D installd: Purging /data/user_de/0/com.android.tv.settings/cache/oat_primary size=3584 mod=1782072062 from UID=1000 used=424448 quota=39428324 ratio=107
+06-25 13:58:46.774   564   776 D installd: Purging /data/data/com.android.keychain/cache/oat_primary/x86/KeyChain.art size=12288 mod=1782072063 from UID=1000 used=420864 quota=39428324 ratio=106
+06-25 13:58:46.774   564   776 D installd: Purging /data/data/com.android.keychain/cache/oat_primary/x86 size=3584 mod=1782072063 from UID=1000 used=408576 quota=39428324 ratio=103
+06-25 13:58:46.774   564   776 D installd: Purging /data/data/com.android.keychain/cache/oat_primary size=3584 mod=1782072063 from UID=1000 used=404992 quota=39428324 ratio=102
+06-25 13:58:46.774   564   776 D installd: Purging /data/data/com.android.dynsystem/cache/oat_primary/x86/DynamicSystemInstallationService.art size=8192 mod=1782072064 from UID=1000 used=401408 quota=39428324 ratio=101
+06-25 13:58:46.775   564   776 D installd: Purging /data/data/com.android.dynsystem/cache/oat_primary/x86 size=3584 mod=1782072064 from UID=1000 used=393216 quota=39428324 ratio=99
+06-25 13:58:46.775   564   776 D installd: Purging /data/data/com.android.dynsystem/cache/oat_primary size=3584 mod=1782072064 from UID=1000 used=389632 quota=39428324 ratio=98
+06-25 13:58:46.775   564   776 D installd: Purging /data/data/com.android.localtransport/cache/oat_primary/x86/LocalTransport.art size=12288 mod=1782072066 from UID=1000 used=386048 quota=39428324 ratio=97
+06-25 13:58:46.775   564   776 D installd: Purging /data/data/com.android.localtransport/cache/oat_primary/x86 size=3584 mod=1782072066 from UID=1000 used=373760 quota=39428324 ratio=94
+06-25 13:58:46.775   564   776 D installd: Purging /data/data/com.android.localtransport/cache/oat_primary size=3584 mod=1782072066 from UID=1000 used=370176 quota=39428324 ratio=93
+06-25 13:58:46.775   564   776 D installd: Purging /data/user_de/0/com.android.tv.settings/cache/com.android.skia.shaders_cache size=184320 mod=1782312488 from UID=1000 used=366592 quota=39428324 ratio=92
+06-25 13:58:46.775   564   776 D installd: Purging /data/data/com.android.tv/cache/oat_primary/x86/LiveTv.art size=114688 mod=1782390534 from UID=10043 used=278528 quota=32016580 ratio=86
+06-25 13:58:46.775   564   776 D installd: Purging /data/data/com.android.providers.media.module/cache/oat_primary/x86/MediaProvider.art size=208896 mod=1782072063 from UID=10069 used=208896 quota=29425091 ratio=70
+06-25 13:58:46.775   564   776 D installd: Purging /data/user_de/0/com.android.permissioncontroller/cache/oat_primary/x86/PermissionController.art size=131072 mod=1782072062 from UID=10066 used=131072 quota=19943011 ratio=65
+06-25 13:58:46.775   564   776 D installd: Purging /data/data/com.android.devicelockcontroller/cache/oat_primary/x86/DeviceLockController.art size=188416 mod=1782072062 from UID=10059 used=188416 quota=29425091 ratio=64
+06-25 13:58:46.775   564   776 D installd: Purging /data/data/com.cltv.hybrid/cache/oat_primary/x86 size=3584 mod=1782217674 from UID=10052 used=159744 quota=26833603 ratio=59
+06-25 13:58:46.775   564   776 D installd: Purging /data/data/com.cltv.hybrid/cache/oat_primary size=3584 mod=1782217674 from UID=10052 used=156160 quota=26833603 ratio=58
+06-25 13:58:46.775   564   776 D installd: Purging /data/user_de/0/com.cltv.hybrid/cache/com.android.skia.shaders_cache size=122880 mod=1782218644 from UID=10052 used=152576 quota=26833603 ratio=56
+06-25 13:58:46.775   564   776 D installd: Purging /data/data/com.android.tv/cache/oat_primary/x86 size=3584 mod=1782390534 from UID=10043 used=163840 quota=32016580 ratio=51
+06-25 13:58:46.775   564   776 D installd: Purging /data/data/com.android.tv/cache/oat_primary size=3584 mod=1782390534 from UID=10043 used=160256 quota=32016580 ratio=50
+06-25 13:58:46.775   564   776 D installd: Purging /data/user_de/0/com.android.networkstack/cache/oat_primary/x86/NetworkStack.art size=57344 mod=1782072062 from UID=1073 used=146432 quota=29425091 ratio=49
+06-25 13:58:46.775   564   776 D installd: Purging /data/user_de/0/com.android.tv/cache/com.android.skia.shaders_cache size=126976 mod=1782390539 from UID=10043 used=156672 quota=32016580 ratio=48
+06-25 13:58:46.775   564   776 D installd: Purging /data/user_de/0/com.android.tv.settings/cache/com.android.opengl.shaders_cache size=53248 mod=1782312488 from UID=1000 used=182272 quota=39428324 ratio=46
+06-25 13:58:46.775   564   776 D installd: Purging /data/data/com.google.android.tv.dtvinput/cache/oat_primary/x86/dtvinput_service.art size=77824 mod=1782072064 from UID=10038 used=77824 quota=17501694 ratio=44
+06-25 13:58:46.775   564   776 D installd: Purging /data/data/com.google.android.tv.dtvsetup.demo/cache/oat_primary/x86 size=3584 mod=1782300822 from UID=10039 used=86016 quota=22965035 ratio=37
+06-25 13:58:46.776   564   776 D installd: Purging /data/user_de/0/com.google.android.tv.dtvsetup.demo/cache/com.android.skia.shaders_cache size=65536 mod=1782300822 from UID=10039 used=82432 quota=22965035 ratio=35
+06-25 13:58:46.776   564   776 D installd: Purging /data/data/com.example.sampleleanbacklauncher/cache/oat_primary/x86/TvSampleLeanbackLauncher.art size=73728 mod=1782072063 from UID=10041 used=237568 quota=73296385 ratio=32
+06-25 13:58:46.776   564   776 D installd: Purging /data/user_de/0/com.android.networkstack/cache/oat_primary/x86/TetheringNext.art size=53248 mod=1782072163 from UID=1073 used=89088 quota=29425091 ratio=30
+06-25 13:58:46.776   564   776 D installd: Purging /data/data/com.android.statementservice/cache/oat_primary/x86/StatementService.art size=155648 mod=1782072064 from UID=10050 used=155648 quota=67108864 ratio=23
+06-25 13:58:46.776   564   776 D installd: Purging /data/data/com.android.rkpdapp/cache/oat_primary/x86/rkpdapp.art size=151552 mod=1782072064 from UID=10064 used=151552 quota=67108864 ratio=22
+06-25 13:58:46.776   564   776 D installd: Purging /data/data/com.example.sampleleanbacklauncher/cache/oat_primary/x86 size=3584 mod=1782072063 from UID=10041 used=163840 quota=73296385 ratio=22
+06-25 13:58:46.776   564   776 D installd: Purging /data/data/com.example.sampleleanbacklauncher/cache/oat_primary size=3584 mod=1782072063 from UID=10041 used=160256 quota=73296385 ratio=21
+06-25 13:58:46.776   564   776 D installd: Purging /data/user_de/0/com.example.sampleleanbacklauncher/cache/com.android.skia.shaders_cache size=122880 mod=1782306201 from UID=10041 used=156672 quota=73296385 ratio=21
+06-25 13:58:46.776   564   776 D installd: Purging /data/user_de/0/androidx.media3.demo.main/cache/com.android.skia.shaders_cache size=45056 mod=1782221243 from UID=10033 used=61440 quota=29425091 ratio=20
+06-25 13:58:46.776   564   776 D installd: Purging /data/data/com.android.providers.contacts/cache/oat_primary/x86/E2eeContactKeysProvider.art size=8192 mod=1782072164 from UID=10013 used=57344 quota=29425091 ratio=19
+06-25 13:58:46.776   564   776 D installd: Purging /data/data/com.android.providers.contacts/cache/oat_primary/x86/ContactsProvider.art size=49152 mod=1782217760 from UID=10013 used=49152 quota=29425091 ratio=16
+06-25 13:58:46.776   564   776 D installd: Purging /data/user_de/0/com.example.broadcastlivetvapplication/cache/com.android.skia.shaders_cache size=65536 mod=1782312742 from UID=10079 used=86016 quota=51152734 ratio=16
+06-25 13:58:46.776   564   776 D installd: Purging /data/data/com.google.android.tv.dtvprovider.service/cache/oat_primary/x86/dtvprovider_service.art size=49152 mod=1782072065 from UID=10037 used=49152 quota=29425091 ratio=16
+06-25 13:58:46.776   564   776 D installd: Purging /data/user_de/0/com.android.networkstack/cache/oat_primary/x86 size=3584 mod=1782072163 from UID=1073 used=35840 quota=29425091 ratio=12
+06-25 13:58:46.776   564   776 D installd: Purging /data/data/com.android.se/cache/oat_primary/x86/SecureElement.art size=12288 mod=1782395511 from UID=1068 used=33792 quota=29425091 ratio=11
+06-25 13:58:46.776   564   776 D installd: Purging /data/data/com.android.providers.media/cache/oat_primary/x86/DownloadProvider.art size=12288 mod=1782072063 from UID=10017 used=32768 quota=29425091 ratio=11
+06-25 13:58:46.776   564   776 D installd: Purging /data/user_de/0/com.cltv.hybrid/cache/com.android.opengl.shaders_cache size=36864 mod=1782218644 from UID=10052 used=29696 quota=26833603 ratio=11
+06-25 13:58:46.776   564   776 D installd: Purging /data/user_de/0/com.android.networkstack/cache/oat_primary size=3584 mod=1782072163 from UID=1073 used=32256 quota=29425091 ratio=10
+06-25 13:58:46.776   564   776 D installd: Purging /data/user_de/0/com.android.tv/cache/com.android.opengl.shaders_cache size=36864 mod=1782390539 from UID=10043 used=29696 quota=32016580 ratio=9
+06-25 13:58:46.776   564   776 D installd: Purging /data/data/com.android.settings.intelligence/cache/oat_primary/x86/SettingsIntelligence.art size=24576 mod=1782217594 from UID=10042 used=24576 quota=29425091 ratio=8
+06-25 13:58:46.777   564   776 D installd: Purging /data/data/com.android.inputmethod.leanback/cache/oat_primary/x86/LeanbackIME.art size=24576 mod=1782072062 from UID=10045 used=24576 quota=29425091 ratio=8
+06-25 13:58:46.777   564   776 D installd: Purging /data/user_de/0/com.google.android.tv.dtvsetup.demo/cache/com.android.opengl.shaders_cache size=20480 mod=1782300822 from UID=10039 used=16896 quota=22965035 ratio=7
+06-25 13:58:46.777   564   776 D installd: Purging /data/user_de/0/com.android.bluetooth/cache/oat_primary/x86 size=3584 mod=1782072062 from UID=1002 used=21504 quota=29425091 ratio=7
+06-25 13:58:46.777   564   776 D installd: Purging /data/data/com.android.se/cache/oat_primary/x86 size=3584 mod=1782395511 from UID=1068 used=21504 quota=29425091 ratio=7
+06-25 13:58:46.777   564   776 D installd: Purging /data/data/com.android.se/cache/oat_primary size=3584 mod=1782395511 from UID=1068 used=17920 quota=29425091 ratio=6
+06-25 13:58:46.777   564   776 D installd: Purging /data/data/com.android.managedprovisioning/cache/oat_primary/x86/ManagedProvisioning.art size=45056 mod=1782072063 from UID=10021 used=45056 quota=67108864 ratio=6
+06-25 13:58:46.777   564   776 D installd: Purging /data/data/com.android.photopicker/cache/oat_primary/x86/Photopicker.art size=40960 mod=1782072063 from UID=10070 used=40960 quota=67108864 ratio=6
+06-25 13:58:46.777   564   776 D installd: Purging /data/data/com.android.providers.media/cache/oat_primary/x86 size=3584 mod=1782072063 from UID=10017 used=20480 quota=29425091 ratio=6
+06-25 13:58:46.777   564   776 D installd: Purging /data/user_de/0/com.android.bluetooth/cache/oat_primary size=3584 mod=1782072062 from UID=1002 used=17920 quota=29425091 ratio=6
+06-25 13:58:46.777   564   776 D installd: Purging /data/data/android.ext.services/cache/oat_primary/x86/ExtServices-sminus.art size=16384 mod=1782072065 from UID=10056 used=16384 quota=29425091 ratio=5
+06-25 13:58:46.777   564   776 D installd: Purging /data/data/com.android.healthconnect.controller/cache/oat_primary/x86/HealthConnectController.art size=36864 mod=1782072164 from UID=10057 used=36864 quota=67108864 ratio=5
+06-25 13:58:46.777   564   776 D installd: Purging /data/user_de/0/androidx.media3.demo.main/cache/com.android.opengl.shaders_cache size=16384 mod=1782221243 from UID=10033 used=16384 quota=29425091 ratio=5
+06-25 13:58:46.777   564   776 D installd: Purging /data/data/com.android.providers.media/cache/oat_primary size=3584 mod=1782072063 from UID=10017 used=16896 quota=29425091 ratio=5
+06-25 13:58:46.777   564   776 D installd: Purging /data/user_de/0/com.android.shell/cache/oat_primary/x86/Shell.art size=12288 mod=1782072064 from UID=2000 used=33792 quota=67108864 ratio=5
+06-25 13:58:46.777   564   776 D installd: Purging /data/user_de/0/com.android.systemui/cache/oat_primary/x86 size=3584 mod=1782072062 from UID=10053 used=12288 quota=29425091 ratio=4
+06-25 13:58:46.777   564   776 D installd: Purging /data/user_de/0/com.example.sampleleanbacklauncher/cache/com.android.opengl.shaders_cache size=40960 mod=1782306201 from UID=10041 used=33792 quota=73296385 ratio=4
+06-25 13:58:46.777   564   776 D installd: Purging /data/user_de/0/com.android.bluetooth/cache/bluetooth_db.lck size=0 mod=1782395507 from UID=1002 used=14336 quota=29425091 ratio=4
+06-25 13:58:46.777   564   776 D installd: Purging /data/data/com.android.providers.downloads/cache/oat_primary/x86/MediaProviderLegacy.art size=8192 mod=1782218176 from UID=10017 used=13312 quota=29425091 ratio=4
+06-25 13:58:46.777   564   776 D installd: Purging /data/user_de/0/com.example.broadcastlivetvapplication/cache/com.android.opengl.shaders_cache size=20480 mod=1782312742 from UID=10079 used=20480 quota=51152734 ratio=4
+06-25 13:58:46.777   564   776 D installd: Purging /data/data/com.android.google.gce.gceservice/cache/oat_primary/x86/CuttlefishService.art size=12288 mod=1782072064 from UID=10035 used=12288 quota=29425091 ratio=4
+06-25 13:58:46.777   564   776 D installd: Purging /data/data/com.android.providers.tv/cache/oat_primary/x86/TvProvider.art size=12288 mod=1782072063 from UID=10022 used=12288 quota=29425091 ratio=4
+06-25 13:58:46.777   564   776 D installd: Purging /data/data/com.android.providers.calendar/cache/oat_primary/x86/CalendarProvider.art size=20480 mod=1782072063 from UID=10014 used=20480 quota=67108864 ratio=3
+06-25 13:58:46.777   564   776 D installd: Purging /data/user_de/0/com.android.shell/cache/oat_primary/x86 size=3584 mod=1782072064 from UID=2000 used=21504 quota=67108864 ratio=3
+06-25 13:58:46.777   564   776 D installd: Purging /data/user_de/0/com.android.packageinstaller/cache/oat_primary/x86/PackageInstaller_tv.art size=20480 mod=1782072064 from UID=10020 used=20480 quota=67108864 ratio=3
+06-25 13:58:46.777   564   776 D installd: Purging /data/user_de/0/com.android.systemui/cache/oat_primary size=3584 mod=1782072062 from UID=10053 used=8704 quota=29425091 ratio=2
+06-25 13:58:46.777   564   776 D installd: Purging /data/user_de/0/com.android.shell/cache/oat_primary size=3584 mod=1782072064 from UID=2000 used=17920 quota=67108864 ratio=2
+06-25 13:58:46.777   564   776 D installd: Purging /data/data/com.android.ondevicepersonalization.services/cache/oat_primary/x86/OnDevicePersonalization.art size=16384 mod=1782072064 from UID=10075 used=16384 quota=67108864 ratio=2
+06-25 13:58:46.777   564   776 D installd: Purging /data/data/com.android.tv.provision/cache/oat_primary/x86/TvProvision.art size=8192 mod=1782072063 from UID=10040 used=8192 quota=67108864 ratio=1
+06-25 13:58:46.777   564   776 D installd: Purging /data/data/com.android.providers.downloads/cache/oat_primary/x86/DownloadProvider.art size=12288 mod=1782221405 from UID=10017 used=5120 quota=29425091 ratio=1
+06-25 13:58:46.777   564   776 D installd: Purging /data/user_de/0/com.android.systemui/cache/com.android.skia.shaders_cache size=8192 mod=1782225956 from UID=10053 used=5120 quota=29425091 ratio=1
+06-25 13:58:46.778   564   776 D installd: Purging /data/data/com.android.federatedcompute.services/cache/oat_primary/x86/FederatedCompute.art size=12288 mod=1782072064 from UID=10076 used=12288 quota=67108864 ratio=1
+06-25 13:58:46.778   564   776 D installd: Purging /data/data/com.android.externalstorage/cache/oat_primary/x86/ExternalStorageProvider.art size=8192 mod=1782072064 from UID=10015 used=8192 quota=67108864 ratio=1
+06-25 13:58:46.778   564   776 D installd: Purging /data/data/com.android.externalstorage/cache/oat_primary/x86 size=3584 mod=1782072064 from UID=10015 used=0 quota=67108864 ratio=0
+06-25 13:58:46.778   564   776 D installd: Purging /data/data/com.android.externalstorage/cache/oat_primary size=3584 mod=1782072064 from UID=10015 used=-3584 quota=67108864 ratio=0
+06-25 13:58:46.778   564   776 D installd: Purging /data/data/com.android.providers.contacts/cache/oat_primary/x86 size=3584 mod=1782217760 from UID=10013 used=0 quota=29425091 ratio=0
+06-25 13:58:46.778   564   776 D installd: Purging /data/data/com.android.devicelockcontroller/cache/oat_primary/x86 size=3584 mod=1782072062 from UID=10059 used=0 quota=29425091 ratio=0
+06-25 13:58:46.778   564   776 D installd: Purging /data/user_de/0/com.android.packageinstaller/cache/oat_primary/x86 size=3584 mod=1782072064 from UID=10020 used=0 quota=67108864 ratio=0
+06-25 13:58:46.778   564   776 D installd: Purging /data/user_de/0/com.android.packageinstaller/cache/oat_primary size=3584 mod=1782072064 from UID=10020 used=-3584 quota=67108864 ratio=0
+06-25 13:58:46.778   564   776 D installd: Purging /data/data/com.android.tv.provision/cache/oat_primary/x86 size=3584 mod=1782072063 from UID=10040 used=0 quota=67108864 ratio=0
+06-25 13:58:46.778   564   776 D installd: Purging /data/data/com.android.tv.provision/cache/oat_primary size=3584 mod=1782072063 from UID=10040 used=-3584 quota=67108864 ratio=0
+06-25 13:58:46.778   564   776 D installd: Purging /data/data/com.android.federatedcompute.services/cache/oat_primary/x86 size=3584 mod=1782072064 from UID=10076 used=0 quota=67108864 ratio=0
+06-25 13:58:46.778   564   776 D installd: Purging /data/data/com.android.federatedcompute.services/cache/oat_primary size=3584 mod=1782072064 from UID=10076 used=-3584 quota=67108864 ratio=0
+06-25 13:58:46.778   564   776 D installd: Purging /data/data/com.android.photopicker/cache/oat_primary/x86 size=3584 mod=1782072063 from UID=10070 used=0 quota=67108864 ratio=0
+06-25 13:58:46.778   564   776 D installd: Purging /data/data/com.android.photopicker/cache/oat_primary size=3584 mod=1782072063 from UID=10070 used=-3584 quota=67108864 ratio=0
+06-25 13:58:46.778   564   776 D installd: Purging /data/data/com.android.rkpdapp/cache/oat_primary/x86 size=3584 mod=1782072064 from UID=10064 used=0 quota=67108864 ratio=0
+06-25 13:58:46.778   564   776 D installd: Purging /data/data/com.android.rkpdapp/cache/oat_primary size=3584 mod=1782072064 from UID=10064 used=-3584 quota=67108864 ratio=0
+06-25 13:58:46.778   564   776 D installd: Purging /data/data/com.android.settings.intelligence/cache/oat_primary/x86 size=3584 mod=1782217594 from UID=10042 used=0 quota=29425091 ratio=0
+06-25 13:58:46.778   564   776 D installd: Purging /data/data/com.android.providers.media.module/cache/oat_primary/x86 size=3584 mod=1782072063 from UID=10069 used=0 quota=29425091 ratio=0
+06-25 13:58:46.778   564   776 D installd: Purging /data/data/com.android.healthconnect.controller/cache/oat_primary/x86 size=3584 mod=1782072164 from UID=10057 used=0 quota=67108864 ratio=0
+06-25 13:58:46.778   564   776 D installd: Purging /data/data/com.android.healthconnect.controller/cache/oat_primary size=3584 mod=1782072164 from UID=10057 used=-3584 quota=67108864 ratio=0
+06-25 13:58:46.778   564   776 D installd: Purging /data/data/com.android.google.gce.gceservice/cache/oat_primary/x86 size=3584 mod=1782072064 from UID=10035 used=0 quota=29425091 ratio=0
+06-25 13:58:46.778   564   776 D installd: Purging /data/data/com.android.statementservice/cache/oat_primary/x86 size=3584 mod=1782072064 from UID=10050 used=0 quota=67108864 ratio=0
+06-25 13:58:46.778   564   776 D installd: Purging /data/data/com.android.statementservice/cache/oat_primary size=3584 mod=1782072064 from UID=10050 used=-3584 quota=67108864 ratio=0
+06-25 13:58:46.779   564   776 D installd: Purging /data/data/com.android.managedprovisioning/cache/oat_primary/x86 size=3584 mod=1782072063 from UID=10021 used=0 quota=67108864 ratio=0
+06-25 13:58:46.779   564   776 D installd: Purging /data/data/com.android.managedprovisioning/cache/oat_primary size=3584 mod=1782072063 from UID=10021 used=-3584 quota=67108864 ratio=0
+06-25 13:58:46.779   564   776 D installd: Purging /data/data/com.google.android.tv.dtvprovider.service/cache/oat_primary/x86 size=3584 mod=1782072065 from UID=10037 used=0 quota=29425091 ratio=0
+06-25 13:58:46.779   564   776 D installd: Purging /data/data/com.android.ondevicepersonalization.services/cache/oat_primary/x86 size=3584 mod=1782072064 from UID=10075 used=0 quota=67108864 ratio=0
+06-25 13:58:46.779   564   776 D installd: Purging /data/data/com.android.ondevicepersonalization.services/cache/oat_primary size=3584 mod=1782072064 from UID=10075 used=-3584 quota=67108864 ratio=0
+06-25 13:58:46.779   564   776 D installd: Purging /data/user_de/0/com.android.permissioncontroller/cache/oat_primary/x86 size=3584 mod=1782072062 from UID=10066 used=0 quota=19943011 ratio=0
+06-25 13:58:46.779   564   776 D installd: Purging /data/data/com.android.inputmethod.leanback/cache/oat_primary/x86 size=3584 mod=1782072062 from UID=10045 used=0 quota=29425091 ratio=0
+06-25 13:58:46.779   564   776 D installd: Purging /data/data/android.ext.services/cache/oat_primary/x86 size=3584 mod=1782072065 from UID=10056 used=0 quota=29425091 ratio=0
+06-25 13:58:46.779   564   776 D installd: Purging /data/data/com.google.android.tv.dtvinput/cache/oat_primary/x86 size=3584 mod=1782072064 from UID=10038 used=0 quota=17501694 ratio=0
+06-25 13:58:46.779   564   776 D installd: Purging /data/data/com.android.providers.calendar/cache/oat_primary/x86 size=3584 mod=1782072063 from UID=10014 used=0 quota=67108864 ratio=0
+06-25 13:58:46.779   564   776 D installd: Purging /data/data/com.android.providers.calendar/cache/oat_primary size=3584 mod=1782072063 from UID=10014 used=-3584 quota=67108864 ratio=0
+06-25 13:58:46.779   564   776 D installd: Purging /data/data/com.android.providers.tv/cache/oat_primary/x86 size=3584 mod=1782072063 from UID=10022 used=0 quota=29425091 ratio=0
+06-25 13:58:46.779   564   776 D installd: Purging /data/data/com.android.devicelockcontroller/cache/oat_primary size=3584 mod=1782072062 from UID=10059 used=-3584 quota=29425091 ratio=-1
+06-25 13:58:46.779   564   776 D installd: Purging /data/data/com.android.statementservice/cache/data/user/0/com.android.statementservice/no_backup/androidx.work.workdb.lck size=0 mod=1782395509 from UID=10050 used=-7168 quota=67108864 ratio=-1
+06-25 13:58:46.780   564   776 D installd: Purging /data/data/com.android.statementservice/cache/data/user/0/com.android.statementservice/no_backup size=3584 mod=1782395509 from UID=10050 used=-7168 quota=67108864 ratio=-1
+06-25 13:58:46.780   564   776 D installd: Purging /data/data/com.android.statementservice/cache/data/user/0/com.android.statementservice size=3584 mod=1782395509 from UID=10050 used=-10752 quota=67108864 ratio=-1
+06-25 13:58:46.780   564   776 D installd: Purging /data/data/com.google.android.tv.dtvsetup.demo/cache/oat_primary size=3584 mod=1782300822 from UID=10039 used=-3584 quota=22965035 ratio=-1
+06-25 13:58:46.780   564   776 D installd: Purging /data/data/com.android.providers.contacts/cache/oat_primary size=3584 mod=1782217760 from UID=10013 used=-3584 quota=29425091 ratio=-1
+06-25 13:58:46.780   564   776 D installd: Purging /data/data/com.android.settings.intelligence/cache/oat_primary size=3584 mod=1782217594 from UID=10042 used=-3584 quota=29425091 ratio=-1
+06-25 13:58:46.780   564   776 D installd: Purging /data/data/com.android.providers.media.module/cache/oat_primary size=3584 mod=1782072063 from UID=10069 used=-3584 quota=29425091 ratio=-1
+06-25 13:58:46.780   564   776 D installd: Purging /data/data/com.google.android.tv.dtvprovider.service/cache/oat_primary size=3584 mod=1782072065 from UID=10037 used=-3584 quota=29425091 ratio=-1
+06-25 13:58:46.780   564   776 D installd: Purging /data/user_de/0/com.android.systemui/cache/com.android.opengl.shaders_cache size=4096 mod=1782225956 from UID=10053 used=-3072 quota=29425091 ratio=-1
+06-25 13:58:46.780   564   776 D installd: Purging /data/data/com.android.inputmethod.leanback/cache/oat_primary size=3584 mod=1782072062 from UID=10045 used=-3584 quota=29425091 ratio=-1
+06-25 13:58:46.780   564   776 D installd: Purging /data/user_de/0/com.android.permissioncontroller/cache/oat_primary size=3584 mod=1782072062 from UID=10066 used=-3584 quota=19943011 ratio=-1
+06-25 13:58:46.780   564   776 D installd: Purging /data/data/android.ext.services/cache/oat_primary size=3584 mod=1782072065 from UID=10056 used=-3584 quota=29425091 ratio=-1
+06-25 13:58:46.780   564   776 D installd: Purging /data/data/com.android.google.gce.gceservice/cache/oat_primary size=3584 mod=1782072064 from UID=10035 used=-3584 quota=29425091 ratio=-1
+06-25 13:58:46.780   564   776 D installd: Purging /data/data/com.android.rkpdapp/cache/data/user/0/com.android.rkpdapp/no_backup/androidx.work.workdb.lck size=0 mod=1782395509 from UID=10064 used=-7168 quota=67108864 ratio=-1
+06-25 13:58:46.780   564   776 D installd: Purging /data/data/com.android.rkpdapp/cache/data/user/0/com.android.rkpdapp/no_backup size=3584 mod=1782395509 from UID=10064 used=-7168 quota=67108864 ratio=-1
+06-25 13:58:46.780   564   776 D installd: Purging /data/data/com.android.rkpdapp/cache/data/user/0/com.android.rkpdapp size=3584 mod=1782395509 from UID=10064 used=-10752 quota=67108864 ratio=-1
+06-25 13:58:46.780   564   776 D installd: Purging /data/data/com.android.providers.tv/cache/oat_primary size=3584 mod=1782072063 from UID=10022 used=-3584 quota=29425091 ratio=-1
+06-25 13:58:46.780   564   776 D installd: Purging /data/data/com.google.android.tv.dtvinput/cache/oat_primary size=3584 mod=1782072064 from UID=10038 used=-3584 quota=17501694 ratio=-2
+06-25 13:58:46.780   564   776 D installd: Purging /data/data/com.android.devicelockcontroller/cache/data/user/0/com.android.devicelockcontroller/no_backup/androidx.work.workdb.lck size=0 mod=1782072158 from UID=10059 used=-7168 quota=29425091 ratio=-2
+06-25 13:58:46.780   564   776 D installd: Purging /data/data/com.android.devicelockcontroller/cache/data/user/0/com.android.devicelockcontroller/no_backup size=3584 mod=1782072158 from UID=10059 used=-7168 quota=29425091 ratio=-2
+06-25 13:58:46.780   564   776 D installd: Purging /data/data/com.cltv.hybrid/cache/data/user/0/com.cltv.hybrid/no_backup/androidx.work.workdb.lck size=0 mod=1782395508 from UID=10052 used=-7168 quota=26833603 ratio=-2
+06-25 13:58:46.780   564   776 D installd: Purging /data/data/com.cltv.hybrid/cache/data/user/0/com.cltv.hybrid/no_backup size=3584 mod=1782395508 from UID=10052 used=-7168 quota=26833603 ratio=-2
+06-25 13:58:46.780   564   776 D installd: Purging /data/data/com.android.providers.downloads/cache/oat_primary/x86 size=3584 mod=1782221405 from UID=10017 used=-7168 quota=29425091 ratio=-2
+06-25 13:58:46.780   564   776 D installd: Purging /data/data/com.android.providers.media.module/cache/data/user/0/com.android.providers.media.module/no_backup/androidx.work.workdb.lck size=0 mod=1782395507 from UID=10069 used=-7168 quota=29425091 ratio=-2
+06-25 13:58:46.780   564   776 D installd: Purging /data/data/com.android.providers.media.module/cache/data/user/0/com.android.providers.media.module/no_backup size=3584 mod=1782395507 from UID=10069 used=-7168 quota=29425091 ratio=-2
+06-25 13:58:46.780   564   776 D installd: Purging /data/data/com.android.statementservice/cache/data/user/0 size=3584 mod=1782395509 from UID=10050 used=-14336 quota=67108864 ratio=-2
+06-25 13:58:46.780   564   776 D installd: Purging /data/data/com.android.statementservice/cache/data/user size=3584 mod=1782395509 from UID=10050 used=-17920 quota=67108864 ratio=-2
+06-25 13:58:46.780   564   776 D installd: Purging /data/data/com.android.rkpdapp/cache/data/user/0 size=3584 mod=1782395509 from UID=10064 used=-14336 quota=67108864 ratio=-2
+06-25 13:58:46.780   564   776 D installd: Purging /data/data/com.android.rkpdapp/cache/data/user size=3584 mod=1782395509 from UID=10064 used=-17920 quota=67108864 ratio=-2
+06-25 13:58:46.780   564   776 D installd: Purging /data/data/com.android.providers.downloads/cache/oat_primary size=3584 mod=1782221405 from UID=10017 used=-10752 quota=29425091 ratio=-3
+06-25 13:58:46.780   564   776 D installd: Purging /data/data/com.android.devicelockcontroller/cache/data/user/0/com.android.devicelockcontroller size=3584 mod=1782072158 from UID=10059 used=-10752 quota=29425091 ratio=-3
+06-25 13:58:46.780   564   776 D installd: Purging /data/data/com.android.providers.media.module/cache/data/user/0/com.android.providers.media.module size=3584 mod=1782395507 from UID=10069 used=-10752 quota=29425091 ratio=-3
+06-25 13:58:46.780   564   776 D installd: Purging /data/data/com.android.rkpdapp/cache/data size=3584 mod=1782395509 from UID=10064 used=-21504 quota=67108864 ratio=-3
+06-25 13:58:46.780   564   776 D installd: Purging /data/data/com.android.statementservice/cache/data size=3584 mod=1782395509 from UID=10050 used=-21504 quota=67108864 ratio=-3
+06-25 13:58:46.780   564   776 D installd: Purging /data/data/com.cltv.hybrid/cache/data/user/0/com.cltv.hybrid size=3584 mod=1782395508 from UID=10052 used=-10752 quota=26833603 ratio=-4
+06-25 13:58:46.780   564   776 D installd: Purging /data/data/com.android.devicelockcontroller/cache/data/user/0 size=3584 mod=1782072158 from UID=10059 used=-14336 quota=29425091 ratio=-4
+06-25 13:58:46.780   564   776 D installd: Purging /data/data/com.android.providers.media.module/cache/data/user/0 size=3584 mod=1782395507 from UID=10069 used=-14336 quota=29425091 ratio=-4
+06-25 13:58:46.780   564   776 D installd: Purging /data/data/com.cltv.hybrid/cache/data/user/0 size=3584 mod=1782395508 from UID=10052 used=-14336 quota=26833603 ratio=-5
+06-25 13:58:46.780   564   776 D installd: Purging /data/data/com.cltv.hybrid/cache/data/user size=3584 mod=1782395508 from UID=10052 used=-17920 quota=26833603 ratio=-6
+06-25 13:58:46.780   564   776 D installd: Purging /data/data/com.android.devicelockcontroller/cache/data/user size=3584 mod=1782072158 from UID=10059 used=-17920 quota=29425091 ratio=-6
+06-25 13:58:46.780   564   776 D installd: Purging /data/data/com.android.providers.media.module/cache/data/user size=3584 mod=1782395507 from UID=10069 used=-17920 quota=29425091 ratio=-6
+06-25 13:58:46.780   564   776 D installd: Purging /data/data/com.android.providers.media.module/cache/data size=3584 mod=1782395507 from UID=10069 used=-21504 quota=29425091 ratio=-7
+06-25 13:58:46.780   564   776 D installd: Purging /data/data/com.android.devicelockcontroller/cache/data size=3584 mod=1782072158 from UID=10059 used=-21504 quota=29425091 ratio=-7
+06-25 13:58:46.780   564   776 D installd: Purging /data/data/com.cltv.hybrid/cache/data size=3584 mod=1782395508 from UID=10052 used=-21504 quota=26833603 ratio=-8
+06-25 13:58:46.780   564   776 E installd: Failed to free up 858783744 on /data; final free space 639758336: Success
+06-25 13:58:46.781  1174  1335 I ExternalStorageServiceImpl: Free cache requested for 219025408 bytes
+06-25 13:58:46.782  1174  1335 I ExternalStorageServiceImpl: Free cache requested for 219025408 bytes
+--------- beginning of system
+06-25 13:58:46.782   672   823 W DeviceStorageMonitorService: java.io.IOException: Failed to free 858783744 on storage device at /data
+06-25 13:58:46.782   672   823 W DeviceStorageMonitorService: 	at com.android.server.pm.FreeStorageHelper.freeStorage(FreeStorageHelper.java:182)
+06-25 13:58:46.782   672   823 W DeviceStorageMonitorService: 	at com.android.server.pm.PackageManagerService.freeStorage(PackageManagerService.java:2937)
+06-25 13:58:46.782   672   823 W DeviceStorageMonitorService: 	at com.android.server.pm.PackageManagerInternalBase.freeStorage(PackageManagerInternalBase.java:571)
+06-25 13:58:46.782   672   823 W DeviceStorageMonitorService: 	at com.android.server.storage.DeviceStorageMonitorService.checkLow(DeviceStorageMonitorService.java:194)
+06-25 13:58:46.782   672   823 W DeviceStorageMonitorService: 	at com.android.server.storage.DeviceStorageMonitorService.-$$Nest$mcheckLow(DeviceStorageMonitorService.java:0)
+06-25 13:58:46.782   672   823 W DeviceStorageMonitorService: 	at com.android.server.storage.DeviceStorageMonitorService$1.handleMessage(DeviceStorageMonitorService.java:297)
+06-25 13:58:46.782   672   823 W DeviceStorageMonitorService: 	at android.os.Handler.dispatchMessage(Handler.java:110)
+06-25 13:58:46.782   672   823 W DeviceStorageMonitorService: 	at android.os.Looper.loopOnce(Looper.java:248)
+06-25 13:58:46.782   672   823 W DeviceStorageMonitorService: 	at android.os.Looper.loop(Looper.java:338)
+06-25 13:58:46.782   672   823 W DeviceStorageMonitorService: 	at android.os.HandlerThread.run(HandlerThread.java:85)
+06-25 13:58:46.902   672   693 D HdmiControlService: Process pid: 672 is calling oneTouchPlay.
+06-25 13:58:46.903   672   672 I OneTouchPlayAction: Start action.
+06-25 13:58:46.905   447   447 E android.hardware.tv.hdmi.cec: [halimp_aidl] file open failed for writing
+06-25 13:58:46.905   672   693 W ActivityTaskManager: callingPackage for (uid=-1, pid=0) has no WPC
+06-25 13:58:46.906   672   672 E HDMI    : [3]:Invalid message type:<Active Source> 4F:82:FF:FF <Validation error: invalid parameters>
+06-25 13:58:46.907   672   672 D ResendCecCommandAction: ResendCecCommandAction started
+06-25 13:58:46.907   672   693 W ActivityStartInterceptor: Starting home with component specified, uid=0
+06-25 13:58:46.907   447   447 E android.hardware.tv.hdmi.cec: [halimp_aidl] file open failed for writing
+06-25 13:58:46.907   672   672 E HDMI    : [1]:Invalid message type:<System Audio Mode Request> 45:70:FF:FF <Validation error: invalid parameters>
+06-25 13:58:46.907   447   447 E android.hardware.tv.hdmi.cec: [halimp_aidl] file open failed for writing
+06-25 13:58:46.908   672   672 D HdmiControlService: Switching to full volume behavior
+06-25 13:58:46.908   672   672 D HdmiControlService: Switching to full volume behavior
+06-25 13:58:46.908   672   793 V WifiDialogManager: Received action: android.intent.action.CLOSE_SYSTEM_DIALOGS
+06-25 13:58:46.908   672   793 V WifiDialogManager: ACTION_CLOSE_SYSTEM_DIALOGS received, cancelling all legacy dialogs.
+06-25 13:58:46.908   672   693 W OptProp : Cannot read opt property android.window.PROPERTY_COMPAT_ALLOW_RESIZEABLE_ACTIVITY_OVERRIDES
+06-25 13:58:46.909   672   693 W OptProp : Cannot read opt property android.window.PROPERTY_COMPAT_ALLOW_MIN_ASPECT_RATIO_OVERRIDE
+06-25 13:58:46.909   672   693 V GrammaticalInflectionUtils: AttributionSource: AttributionSource { uid = 10041, packageName = null, attributionTag = null, token = android.os.Binder@1621932, deviceId = 0, next = null } does not have READ_SYSTEM_GRAMMATICAL_GENDER permission.
+06-25 13:58:46.909   672   692 D AutofillManagerService: Close system dialogs
+06-25 13:58:46.910   672   693 E CellBroadcastUtils: getDefaultCellBroadcastReceiverPackageName: no package found
+06-25 13:58:46.915   672   693 I ActivityTaskManager: START u0 {act=android.intent.action.MAIN cat=[android.intent.category.HOME] flg=0x10000100 cmp=com.example.sampleleanbacklauncher/.LauncherActivity (has extras)} with LAUNCH_SINGLE_TASK from uid 0 (BAL_ALLOW_ALLOWLISTED_UID) result code=2
+06-25 13:58:46.916   672   872 D BackgroundInstallControlService: Package event received: 0
+06-25 13:58:46.916  1189  1228 E ActivityThread: Failed to find provider info for com.android.tv.notifications.NotificationContentProvider
+06-25 13:58:46.916   672   695 D OomAdjuster: Not killing cached processes
+06-25 13:58:46.917   672   872 D BackgroundInstallControlService: Package event received: 0
+06-25 13:58:46.917   672   872 D BackgroundInstallControlService: Package event received: 0
+06-25 13:58:46.917   672   872 D BackgroundInstallControlService: Package event received: 0
+06-25 13:58:46.918   522   522 I BpBinder: onLastStrongRef automatically unlinking death recipients: 
+06-25 13:58:46.968   429   462 I netd    : tetherGetStats() -> {[]} <4.13ms>
+06-25 13:58:47.017   672   692 V WindowManager: Sent Transition (#9) createdAt=06-25 13:58:46.910 via request=TransitionRequestInfo { type = OPEN, triggerTask = TaskInfo{userId=0 taskId=48 effectiveUid=10041 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.HOME] flg=0x10000100 cmp=com.example.sampleleanbacklauncher/.LauncherActivity } baseActivity=ComponentInfo{com.example.sampleleanbacklauncher/com.example.sampleleanbacklauncher.LauncherActivity} topActivity=ComponentInfo{com.example.sampleleanbacklauncher/com.example.sampleleanbacklauncher.LauncherActivity} origActivity=null realActivity=ComponentInfo{com.example.sampleleanbacklauncher/com.example.sampleleanbacklauncher.LauncherActivity} numActivities=1 lastActiveTime=424595 supportsMultiWindow=false resizeMode=0 isResizeable=false minWidth=-1 minHeight=-1 defaultMinSize=220 token=WCT{RemoteToken{dd8739b Task{ea030a0 #48 type=home A=10041:com.example.sampleleanbacklauncher nonResizable}}} topActivityType=2 pictureInPictureParams=null shouldDockBigOverlays=true launchIntoPipHostTaskId=-1 lastParentTaskIdBeforePip=-1 displayCutoutSafeInsets=Rect(0, 0 - 0, 0) topActivityInfo=ActivityInfo{d66f70 com.example.sampleleanbacklauncher.LauncherActivity} launchCookies=[] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=true isVisible=false isVisibleRequested=true isTopActivityNoDisplay=false isSleeping=false locusId=null displayAreaFeatureId=1 isTopActivityTransparent=false isActivityStackTransparent=false lastNonFullscreenBounds=Rect(687, 54 - 1233, 1026) capturedLink=null capturedLinkTimestamp=0 requestedVisibleTypes=-9 topActivityRequestOpenInBrowserEducationTimestamp=0 appCompatTaskInfo=AppCompatTaskInfo { topActivityInSizeCompat=false eligibleForLetterboxEducation= false isLetterboxEducationEnabled= false isLetterboxDoubleTapEnabled= false eligibleForUserAspectRatioButton= false topActivityBoundsLetterboxed= false isFromLetterboxDoubleTap= false topActivityLetterboxVerticalPosition= -1 topActivityLetterboxHorizontalPosition= -1 topActivityLetterboxWidth=-1 topActivityLetterboxHeight=-1 topActivityAppBounds=Rect(0, 0 - 1920, 1080) isUserFullscreenOverrideEnabled=false isSystemFullscreenOverrideEnabled=false hasMinAspectRatioOverride=false topActivityLetterboxBounds=null cameraCompatTaskInfo=CameraCompatTaskInfo { freeformCameraCompatMode=inactive}} topActivityMainWindowFrame=null}, pipChange = null, remoteTransition = null, displayChange = null, flags = 0, debugId = 9 }
+06-25 13:58:47.058   672   672 V HotPlugDetectionAction: Poll all devices.
+06-25 13:58:47.060   672   692 V WindowManager:     startWCT=WindowContainerTransaction { changes= {} hops= [] errorCallbackToken=null taskFragmentOrganizer=null }
+06-25 13:58:47.061   672   692 V WindowManager:     info={id=9 t=OPEN f=0x0 trk=0 r=[0@Point(0, 0)] c=[
+06-25 13:58:47.061   672   692 V WindowManager:         {WCT{RemoteToken{c2182fc Task{1cf8227 #1 type=home}}} m=TO_FRONT f=SHOW_WALLPAPER|MOVE_TO_TOP leash=Surface(name=Task=1)/@0x59e0a82 sb=Rect(0, 0 - 1920, 1080) eb=Rect(0, 0 - 1920, 1080) epz=Point(1920, 1080) d=0 taskParent=-1},
+06-25 13:58:47.061   672   692 V WindowManager:         {WCT{RemoteToken{8264cce Task{f73f4ca #50 type=standard A=10043:com.android.tv}}} m=TO_BACK f=NONE leash=Surface(name=Task=50)/@0xe0a4593 sb=Rect(0, 0 - 1920, 1080) eb=Rect(0, 0 - 1920, 1080) epz=Point(1920, 1080) d=0 taskParent=-1},
+06-25 13:58:47.061   672   692 V WindowManager:         {m=TO_FRONT f=IS_WALLPAPER leash=Surface(name=WallpaperWindowToken{d57f02 showWhenLocked=false})/@0xb6921cd sb=Rect(0, 0 - 1920, 1080) eb=Rect(0, 0 - 1920, 1080) epz=Point(1920, 1080) d=0}
+06-25 13:58:47.061   672   692 V WindowManager:     ]}
+06-25 13:58:47.136   672   768 I ImeTracker: com.example.sampleleanbacklauncher:cc392635: onRequestHide at ORIGIN_SERVER reason HIDE_UNSPECIFIED_WINDOW fromUser false
+06-25 13:58:47.158   918   962 W Looper  : Slow delivery took 66ms wmshell.anim app=com.android.systemui main=false group=FOREGROUND h=android.view.Choreographer$FrameHandler c=android.view.Choreographer$FrameDisplayEventReceiver@668dd85 m=0
+06-25 13:58:47.170   918   962 W Looper  : Drained
+06-25 13:58:47.187   672  1037 I ImeTracker: system_server:3caa4aa9: onRequestHide at ORIGIN_SERVER reason IME_REQUESTED_CHANGED_LISTENER fromUser false
+06-25 13:58:47.207   672   672 D ResendCecCommandAction: sendCommandWithoutRetries failed, retry
+06-25 13:58:47.211   672   695 I ImeTracker: system_server:3caa4aa9: onCancelled at PHASE_SERVER_SHOULD_HIDE
+06-25 13:58:47.299  1189  1189 D InsetsController: hide(ime(), fromIme=false)
+06-25 13:58:47.304  1189  1189 I ImeTracker: com.example.sampleleanbacklauncher:cc392635: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+06-25 13:58:47.441   672   692 V WindowManager: Finish Transition (#9): created at 06-25 13:58:46.910 collect-started=0.078ms request-sent=3.535ms started=6.296ms ready=6.29ms sent=87.451ms commit=36.918ms finished=529.398ms
+06-25 13:58:47.448  2006  2006 D VRI[SetupActivity]: visibilityChanged oldVisibility=true newVisibility=false
+06-25 13:58:47.478   918   949 W Looper  : Slow dispatch took 41ms wmshell.main app=com.android.systemui main=false group=FOREGROUND h=android.os.Handler c=com.android.wm.shell.transition.DefaultSurfaceAnimator$$ExternalSyntheticLambda0@17531f5 m=0
+06-25 13:58:47.491   918   962 W Looper  : Slow dispatch took 55ms wmshell.anim app=com.android.systemui main=false group=FOREGROUND h=android.view.Choreographer$FrameHandler c=android.view.Choreographer$FrameDisplayEventReceiver@668dd85 m=0
+06-25 13:58:47.510   672   672 D ResendCecCommandAction: sendCommandWithoutRetries failed, retry
+06-25 13:58:47.531   672   872 D BackgroundInstallControlService: Package event received: 0
+06-25 13:58:48.051   672  1037 I WifiService: getConnectionInfo uid=10035
+06-25 13:58:48.051   672  1037 V WifiPermissionsUtil: checkCallersLocationPermission(com.android.google.gce.gceservice): uid 10035 doesn't have permission android.permission.ACCESS_COARSE_LOCATION
+06-25 13:58:48.051   672  1037 V WifiPermissionsUtil: enforceCanAccessScanResults(pkg=com.android.google.gce.gceservice, uid=10035): canCallingUidAccessLocation=false, canAppPackageUseLocation=false
+06-25 13:58:48.051   672  1037 V WifiService: Keeping REDACT_FOR_ACCESS_FINE_LOCATION:java.lang.SecurityException: UID 10035 has no location permission
+06-25 13:58:48.909   447   447 E android.hardware.tv.hdmi.cec: [halimp_aidl] file open failed for writing
+06-25 13:58:49.542   672   828 W AS.SfxHelper: MediaPlayer IOException: java.io.FileNotFoundException: /system/media/audio/ui/Effect_Tick.ogg: open failed: ENOENT (No such file or directory)
+06-25 13:58:49.544   672  1355 E CellBroadcastUtils: getDefaultCellBroadcastReceiverPackageName: no package found
+06-25 13:58:49.546   672  1355 I ActivityTaskManager: START u0 {act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10000000 xflg=0x5 cmp=com.android.tv.settings/.MainSettings} with LAUNCH_MULTIPLE from uid 10041 (sr=47808015) (BAL_ALLOW_VISIBLE_WINDOW) result code=2
+06-25 13:58:49.552   522   522 I BpBinder: onLastStrongRef automatically unlinking death recipients: 
+06-25 13:58:49.564   672  1355 D ActivityManager: quick sync unfreeze 1011 for 1
+06-25 13:58:49.615  1011  1011 D AppUtils: Have 0 number of activities in preferred list
+06-25 13:58:49.620   672   695 D ActivityManager: sync unfroze 1011 com.android.tv.settings for 1
+06-25 13:58:49.624   672   872 D BackgroundInstallControlService: Package event received: 0
+06-25 13:58:49.624   672   872 D BackgroundInstallControlService: Package event received: 0
+06-25 13:58:49.624   672   872 D BackgroundInstallControlService: Package event received: 0
+06-25 13:58:49.629   672   872 D BackgroundInstallControlService: Package event received: 0
+06-25 13:58:49.757  1011  1034 W libEGL  : ANGLE Warn:vulkan_icd.cpp:384 (ChoosePhysicalDevice): Preferred device ICD not found. Using default physicalDevice instead.
+06-25 13:58:49.757  1011  1034 W SwiftShader: external/swiftshader/src/Vulkan/VkPhysicalDevice.cpp:684 WARNING: UNSUPPORTED: curExtension->sType: 1000338000
+06-25 13:58:49.757  1011  1034 W SwiftShader: external/swiftshader/src/Vulkan/VkPhysicalDevice.cpp:684 WARNING: UNSUPPORTED: curExtension->sType: 1000437000
+06-25 13:58:49.757  1011  1034 W SwiftShader: external/swiftshader/src/Vulkan/VkPhysicalDevice.cpp:684 WARNING: UNSUPPORTED: curExtension->sType: 1000338000
+06-25 13:58:49.757  1011  1034 W SwiftShader: external/swiftshader/src/Vulkan/VkPhysicalDevice.cpp:684 WARNING: UNSUPPORTED: curExtension->sType: 1000437000
+06-25 13:58:49.757  1011  1034 W SwiftShader: external/swiftshader/src/Vulkan/VkPhysicalDevice.cpp:684 WARNING: UNSUPPORTED: curExtension->sType: 1000338000
+06-25 13:58:49.757  1011  1034 W SwiftShader: external/swiftshader/src/Vulkan/VkPhysicalDevice.cpp:684 WARNING: UNSUPPORTED: curExtension->sType: 1000437000
+06-25 13:58:49.757  1011  1034 W SwiftShader: external/swiftshader/src/Vulkan/VkPhysicalDevice.cpp:684 WARNING: UNSUPPORTED: curExtension->sType: 1000338000
+06-25 13:58:49.757  1011  1034 W SwiftShader: external/swiftshader/src/Vulkan/VkPhysicalDevice.cpp:684 WARNING: UNSUPPORTED: curExtension->sType: 1000437000
+06-25 13:58:49.757  1011  1034 W SwiftShader: external/swiftshader/src/Vulkan/VkPhysicalDevice.cpp:684 WARNING: UNSUPPORTED: curExtension->sType: 1000338000
+06-25 13:58:49.757  1011  1034 W SwiftShader: external/swiftshader/src/Vulkan/VkPhysicalDevice.cpp:684 WARNING: UNSUPPORTED: curExtension->sType: 1000437000
+06-25 13:58:49.757  1011  1034 W SwiftShader: external/swiftshader/src/Vulkan/VkPhysicalDevice.cpp:684 WARNING: UNSUPPORTED: curExtension->sType: 1000338000
+06-25 13:58:49.757  1011  1034 W SwiftShader: external/swiftshader/src/Vulkan/VkPhysicalDevice.cpp:684 WARNING: UNSUPPORTED: curExtension->sType: 1000437000
+06-25 13:58:49.757  1011  1034 W SwiftShader: external/swiftshader/src/Vulkan/VkPhysicalDevice.cpp:684 WARNING: UNSUPPORTED: curExtension->sType: 1000338000
+06-25 13:58:49.757  1011  1034 W SwiftShader: external/swiftshader/src/Vulkan/VkPhysicalDevice.cpp:684 WARNING: UNSUPPORTED: curExtension->sType: 1000437000
+06-25 13:58:49.757  1011  1034 W SwiftShader: external/swiftshader/src/Vulkan/VkPhysicalDevice.cpp:684 WARNING: UNSUPPORTED: curExtension->sType: 1000338000
+06-25 13:58:49.757  1011  1034 W SwiftShader: external/swiftshader/src/Vulkan/VkPhysicalDevice.cpp:684 WARNING: UNSUPPORTED: curExtension->sType: 1000437000
+06-25 13:58:49.770   461   598 E android.hardware.graphics.allocator-service.minigbm: Failed to convert descriptor. Unsupported format 0x3b
+06-25 13:58:49.771   461   598 E android.hardware.graphics.allocator-service.minigbm: Failed to convert descriptor. Unsupported format 0x3b
+06-25 13:58:49.771  1011  1034 I ANGLE   : Version (2.1 git hash: 1166eec4c0b125e9e945196acfc549983ef72b18), Renderer (Vulkan 1.3.0 (SwiftShader Device (LLVM 16.0.0) (0x0000C0DE)))
+06-25 13:58:49.772  1011  1034 E HWUI    : Device claims wide gamut support, cannot find matching config, error = EGL_SUCCESS
+06-25 13:58:49.772  1011  1034 W HWUI    : Failed to initialize 101010-2 format, error = EGL_SUCCESS
+06-25 13:58:50.210   672   692 V WindowManager: Sent Transition (#10) createdAt=06-25 13:58:49.542 via request=TransitionRequestInfo { type = OPEN, triggerTask = TaskInfo{userId=0 taskId=49 effectiveUid=1000 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10800000 cmp=com.android.tv.settings/.MainSettings } baseActivity=ComponentInfo{com.android.tv.settings/com.android.tv.settings.MainSettings} topActivity=ComponentInfo{com.android.tv.settings/com.android.tv.settings.MainSettings} origActivity=null realActivity=ComponentInfo{com.android.tv.settings/com.android.tv.settings.MainSettings} numActivities=1 lastActiveTime=252295 supportsMultiWindow=false resizeMode=1 isResizeable=true minWidth=-1 minHeight=-1 defaultMinSize=220 token=WCT{RemoteToken{dd41249 Task{4980bf2 #49 type=standard A=1000:com.android.tv.settings}}} topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=true launchIntoPipHostTaskId=-1 lastParentTaskIdBeforePip=-1 displayCutoutSafeInsets=Rect(0, 0 - 0, 0) topActivityInfo=ActivityInfo{e54374e com.android.tv.settings.MainSettings} launchCookies=[] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=false isVisible=false isVisibleRequested=false isTopActivityNoDisplay=false isSleeping=false locusId=null displayAreaFeatureId=1 isTopActivityTransparent=true isActivityStackTransparent=true lastNonFullscreenBounds=Rect(687, 54 - 1233, 1026) capturedLink=null capturedLinkTimestamp=0 requestedVisibleTypes=-9 topActivityRequestOpenInBrowserEducationTimestamp=0 appCompatTaskInfo=AppCompatTaskInfo { topActivityInSizeCompat=false eligibleForLetterboxEducation= false isLetterboxEducationEnabled= false isLetterboxDoubleTapEnabled= false eligibleForUserAspectRatioButton= false topActivityBoundsLetterboxed= false isFromLetterboxDoubleTap= false topActivityLetterboxVerticalPosition= -1 topActivityLetterboxHorizontalPosition= -1 topActivityLetterboxWidth=-1 topActivityLetterboxHeight=-1 topActivityAppBounds=Rect(0, 0 - 1920, 1080) isUserFullscreenOverrideEnabled=false isSystemFullscreenOverrideEnabled=false hasMinAspectRatioOverride=false topActivityLetterboxBounds=null cameraCompatTaskInfo=CameraCompatTaskInfo { freeformCameraCompatMode=inactive}} topActivityMainWindowFrame=null}, pipChange = null, remoteTransition = null, displayChange = null, flags = 0, debugId = 10 }
+06-25 13:58:50.210   672   692 V WindowManager:     startWCT=WindowContainerTransaction { changes= {} hops= [] errorCallbackToken=null taskFragmentOrganizer=null }
+06-25 13:58:50.210   672   692 V WindowManager:     info={id=10 t=OPEN f=0x0 trk=0 r=[0@Point(0, 0)] c=[
+06-25 13:58:50.210   672   692 V WindowManager:         {WCT{RemoteToken{dd41249 Task{4980bf2 #49 type=standard A=1000:com.android.tv.settings}}} m=TO_FRONT f=TRANSLUCENT|MOVE_TO_TOP leash=Surface(name=Task=49)/@0x10a4d02 sb=Rect(0, 0 - 1920, 1080) eb=Rect(0, 0 - 1920, 1080) epz=Point(1920, 1080) d=0 taskParent=-1}
+06-25 13:58:50.210   672   692 V WindowManager:     ]}
+06-25 13:58:50.210  1011  1011 D AppUtils: Have 0 number of activities in preferred list
+06-25 13:58:50.213  1011  1011 D AppUtils: Have 0 number of activities in preferred list
+06-25 13:58:50.326   672   768 I ImeTracker: com.android.tv.settings:7699712a: onRequestHide at ORIGIN_SERVER reason HIDE_UNSPECIFIED_WINDOW fromUser false
+06-25 13:58:50.333   672  1355 I ImeTracker: system_server:40537b4f: onRequestHide at ORIGIN_SERVER reason IME_REQUESTED_CHANGED_LISTENER fromUser false
+06-25 13:58:50.338   672   695 I ImeTracker: system_server:40537b4f: onCancelled at PHASE_SERVER_SHOULD_HIDE
+06-25 13:58:50.344  1011  1011 D InsetsController: hide(ime(), fromIme=false)
+06-25 13:58:50.348  1011  1011 I ImeTracker: com.android.tv.settings:7699712a: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+06-25 13:58:50.638   672   692 V WindowManager: Finish Transition (#10): created at 06-25 13:58:49.542 collect-started=0.036ms request-sent=3.007ms started=4.038ms ready=36.128ms sent=665.492ms commit=23.24ms finished=1094.712ms
+06-25 13:58:50.909   447   447 E android.hardware.tv.hdmi.cec: [halimp_aidl] file open failed for writing
+06-25 13:58:51.583   672   828 W AS.SfxHelper: MediaPlayer IOException: java.io.FileNotFoundException: /system/media/audio/ui/Effect_Tick.ogg: open failed: ENOENT (No such file or directory)
+06-25 13:58:51.585   672  1980 V GrammaticalInflectionUtils: AttributionSource: AttributionSource { uid = 10043, packageName = null, attributionTag = null, token = android.os.Binder@1621932, deviceId = 0, next = null } does not have READ_SYSTEM_GRAMMATICAL_GENDER permission.
+06-25 13:58:51.586   672  1980 W OptProp : Cannot read opt property android.window.PROPERTY_COMPAT_ALLOW_RESIZEABLE_ACTIVITY_OVERRIDES
+06-25 13:58:51.586   672  1980 W OptProp : Cannot read opt property android.window.PROPERTY_COMPAT_ALLOW_MIN_ASPECT_RATIO_OVERRIDE
+06-25 13:58:51.587   672  1980 E CellBroadcastUtils: getDefaultCellBroadcastReceiverPackageName: no package found
+06-25 13:58:51.588   672  1980 W OptProp : Cannot read opt property android.window.PROPERTY_COMPAT_ALLOW_ORIENTATION_OVERRIDE
+06-25 13:58:51.592   672  1980 I ActivityTaskManager: START u0 {act=android.intent.action.MAIN cat=[android.intent.category.LEANBACK_LAUNCHER] flg=0x10000000 xflg=0x4 pkg=com.android.tv cmp=com.android.tv/.TvActivity} with LAUNCH_SINGLE_TASK from uid 1000 (sr=223183613) (BAL_ALLOW_VISIBLE_WINDOW) result code=0
+06-25 13:58:51.642   918   949 W Looper  : Slow dispatch took 50ms wmshell.main app=com.android.systemui main=false group=FOREGROUND h=android.os.Handler c=com.android.wm.shell.transition.Transitions$ShellTransitionImpl$$ExternalSyntheticLambda0@f3eaaad m=0
+06-25 13:58:51.642   918   949 W Looper  : Slow delivery took 45ms wmshell.main app=com.android.systemui main=false group=FOREGROUND h=android.os.Handler c=null m=12
+06-25 13:58:51.652   522   522 I BpBinder: onLastStrongRef automatically unlinking death recipients: 
+06-25 13:58:51.724   918   949 W Looper  : Drained
+06-25 13:58:51.730   672   872 D BackgroundInstallControlService: Package event received: 0
+06-25 13:58:51.742   672   872 D BackgroundInstallControlService: Package event received: 0
+06-25 13:58:51.791   672   872 D BackgroundInstallControlService: Package event received: 0
+06-25 13:58:51.792   672  1037 V GrammaticalInflectionUtils: AttributionSource: AttributionSource { uid = 10043, packageName = null, attributionTag = null, token = android.os.Binder@1621932, deviceId = 0, next = null } does not have READ_SYSTEM_GRAMMATICAL_GENDER permission.
+06-25 13:58:51.793   672  1037 W OptProp : Cannot read opt property android.window.PROPERTY_COMPAT_ALLOW_RESIZEABLE_ACTIVITY_OVERRIDES
+06-25 13:58:51.794   672  1037 W OptProp : Cannot read opt property android.window.PROPERTY_COMPAT_ALLOW_MIN_ASPECT_RATIO_OVERRIDE
+06-25 13:58:51.796   672  1037 E CellBroadcastUtils: getDefaultCellBroadcastReceiverPackageName: no package found
+06-25 13:58:51.808   672  1037 W OptProp : Cannot read opt property android.window.PROPERTY_COMPAT_ALLOW_ORIENTATION_OVERRIDE
+06-25 13:58:51.818   429   462 I netd    : tetherGetStats() -> {[]} <21.88ms>
+06-25 13:58:51.828   672  1037 I ActivityTaskManager: START u0 {xflg=0x4 cmp=com.android.tv/.MainActivity (has extras)} with LAUNCH_SINGLE_TASK from uid 10043 (sr=237065248) (BAL_ALLOW_VISIBLE_WINDOW) result code=0
+06-25 13:58:51.855   672   694 I DropBoxManagerService: add tag=system_app_strictmode isTagEnabled=true flags=0x2
+06-25 13:58:51.855   672   872 D BackgroundInstallControlService: Package event received: 0
+06-25 13:58:51.857   672   872 D BackgroundInstallControlService: Package event received: 0
+06-25 13:58:51.858   672   872 D BackgroundInstallControlService: Package event received: 0
+06-25 13:58:51.878   672  1980 V GrammaticalInflectionUtils: AttributionSource: AttributionSource { uid = 10043, packageName = null, attributionTag = null, token = android.os.Binder@1621932, deviceId = 0, next = null } does not have READ_SYSTEM_GRAMMATICAL_GENDER permission.
+06-25 13:58:51.884   672  1980 W OptProp : Cannot read opt property android.window.PROPERTY_COMPAT_ALLOW_RESIZEABLE_ACTIVITY_OVERRIDES
+06-25 13:58:51.888   672  1980 W OptProp : Cannot read opt property android.window.PROPERTY_COMPAT_ALLOW_MIN_ASPECT_RATIO_OVERRIDE
+06-25 13:58:51.890   672  1980 E CellBroadcastUtils: getDefaultCellBroadcastReceiverPackageName: no package found
+06-25 13:58:51.900   672  1980 W OptProp : Cannot read opt property android.window.PROPERTY_COMPAT_ALLOW_ORIENTATION_OVERRIDE
+06-25 13:58:51.919   672  1980 I ActivityTaskManager: START u0 {xflg=0x4 cmp=com.android.tv/.onboarding.OnboardingActivity (has extras)} with LAUNCH_SINGLE_TOP from uid 10043 (sr=122783544) (BAL_ALLOW_VISIBLE_WINDOW) result code=0
+06-25 13:58:51.950   672   695 D OomAdjuster: Not killing cached processes
+06-25 13:58:51.978   672   872 D BackgroundInstallControlService: Package event received: 0
+06-25 13:58:51.979   672   872 D BackgroundInstallControlService: Package event received: 0
+06-25 13:58:51.979   672   872 D BackgroundInstallControlService: Package event received: 0
+06-25 13:58:51.997  1637  1637 D AutofillManager: Fill dialog is enabled:false, hints=[]
+06-25 13:58:52.032   672   866 D CoreBackPreview: Window{228a96f u0 com.android.tv/com.android.tv.onboarding.OnboardingActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@4d12e68, mPriority=-1, mIsAnimationCallback=false, mOverrideBehavior=0}
+06-25 13:58:52.092   918   949 W Looper  : Slow delivery took 51ms wmshell.main app=com.android.systemui main=false group=FOREGROUND h=android.os.Handler c=android.window.TaskOrganizer$1$$ExternalSyntheticLambda4@c50381c m=0
+06-25 13:58:52.093   918   949 W Looper  : Drained
+06-25 13:58:52.180   672   692 I ActivityTaskManager: Displayed com.android.tv/.onboarding.OnboardingActivity for user 0: +591ms
+06-25 13:58:52.181   672   692 V WindowManager: Sent Transition (#11) createdAt=06-25 13:58:51.586 via request=TransitionRequestInfo { type = OPEN, triggerTask = TaskInfo{userId=0 taskId=50 effectiveUid=10043 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LEANBACK_LAUNCHER] flg=0x10000000 pkg=com.android.tv cmp=com.android.tv/.TvActivity } baseActivity=ComponentInfo{com.android.tv/com.android.tv.onboarding.OnboardingActivity} topActivity=ComponentInfo{com.android.tv/com.android.tv.TvActivity} origActivity=null realActivity=ComponentInfo{com.android.tv/com.android.tv.TvActivity} numActivities=5 lastActiveTime=424594 supportsMultiWindow=false resizeMode=1 isResizeable=true minWidth=-1 minHeight=-1 defaultMinSize=220 token=WCT{RemoteToken{8264cce Task{f73f4ca #50 type=standard A=10043:com.android.tv}}} topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=true launchIntoPipHostTaskId=-1 lastParentTaskIdBeforePip=-1 displayCutoutSafeInsets=Rect(0, 0 - 0, 0) topActivityInfo=ActivityInfo{5c65767 com.android.tv.TvActivity} launchCookies=[] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=false isVisible=false isVisibleRequested=false isTopActivityNoDisplay=false isSleeping=false locusId=null displayAreaFeatureId=1 isTopActivityTransparent=false isActivityStackTransparent=false lastNonFullscreenBounds=Rect(687, 54 - 1233, 1026) capturedLink=null capturedLinkTimestamp=0 requestedVisibleTypes=-9 topActivityRequestOpenInBrowserEducationTimestamp=0 appCompatTaskInfo=AppCompatTaskInfo { topActivityInSizeCompat=false eligibleForLetterboxEducation= false isLetterboxEducationEnabled= false isLetterboxDoubleTapEnabled= false eligibleForUserAspectRatioButton= false topActivityBoundsLetterboxed= false isFromLetterboxDoubleTap= false topActivityLetterboxVerticalPosition= -1 topActivityLetterboxHorizontalPosition= -1 topActivityLetterboxWidth=-1 topActivityLetterboxHeight=-1 topActivityAppBounds=Rect(0, 0 - 1920, 1080) isUserFullscreenOverrideEnabled=false isSystemFullscreenOverrideEnabled=false hasMinAspectRatioOverride=false topActivityLetterboxBounds=null cameraCompatTaskInfo=CameraCompatTaskInfo { freeformCameraCompatMode=inactive}} topActivityMainWindowFrame=null}, pipChange = null, remoteTransition = null, displayChange = null, flags = 0, debugId = 11 }
+06-25 13:58:52.182   672   692 V WindowManager:     startWCT=WindowContainerTransaction { changes= {} hops= [] errorCallbackToken=null taskFragmentOrganizer=null }
+06-25 13:58:52.182   672   692 V WindowManager:     info={id=11 t=OPEN f=0x0 trk=0 r=[0@Point(0, 0)] c=[
+06-25 13:58:52.182   672   692 V WindowManager:         {WCT{RemoteToken{8264cce Task{f73f4ca #50 type=standard A=10043:com.android.tv}}} m=TO_FRONT f=MOVE_TO_TOP leash=Surface(name=Task=50)/@0xe0a4593 sb=Rect(0, 0 - 1920, 1080) eb=Rect(0, 0 - 1920, 1080) epz=Point(1920, 1080) d=0 taskParent=-1},
+06-25 13:58:52.182   672   692 V WindowManager:         {WCT{RemoteToken{dd41249 Task{4980bf2 #49 type=standard A=1000:com.android.tv.settings}}} m=TO_BACK f=TRANSLUCENT leash=Surface(name=Task=49)/@0x10a4d02 sb=Rect(0, 0 - 1920, 1080) eb=Rect(0, 0 - 1920, 1080) epz=Point(1920, 1080) d=0 taskParent=-1},
+06-25 13:58:52.182   672   692 V WindowManager:         {WCT{RemoteToken{c2182fc Task{1cf8227 #1 type=home}}} m=TO_BACK f=SHOW_WALLPAPER leash=Surface(name=Task=1)/@0x59e0a82 sb=Rect(0, 0 - 1920, 1080) eb=Rect(0, 0 - 1920, 1080) epz=Point(1920, 1080) d=0 taskParent=-1},
+06-25 13:58:52.182   672   692 V WindowManager:         {m=TO_BACK f=IS_WALLPAPER leash=Surface(name=WallpaperWindowToken{d57f02 showWhenLocked=false})/@0xb6921cd sb=Rect(0, 0 - 1920, 1080) eb=Rect(0, 0 - 1920, 1080) epz=Point(1920, 1080) d=0}
+06-25 13:58:52.182   672   692 V WindowManager:     ]}
+06-25 13:58:52.441   672   768 I ImeTracker: com.android.tv:63cbd2ce: onRequestHide at ORIGIN_SERVER reason HIDE_UNSPECIFIED_WINDOW fromUser false
+06-25 13:58:52.458   672  1800 I ImeTracker: system_server:a5bf932c: onRequestHide at ORIGIN_SERVER reason IME_REQUESTED_CHANGED_LISTENER fromUser false
+06-25 13:58:52.460   672   695 I ImeTracker: system_server:a5bf932c: onCancelled at PHASE_SERVER_SHOULD_HIDE
+06-25 13:58:52.529   918   962 W Looper  : Slow dispatch took 39ms wmshell.anim app=com.android.systemui main=false group=FOREGROUND h=android.view.Choreographer$FrameHandler c=android.view.Choreographer$FrameDisplayEventReceiver@668dd85 m=0
+06-25 13:58:52.591  1637  1637 D InsetsController: hide(ime(), fromIme=false)
+06-25 13:58:52.592  1637  1637 I ImeTracker: com.android.tv:63cbd2ce: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+06-25 13:58:52.626   672   692 V WindowManager: Finish Transition (#11): created at 06-25 13:58:51.586 collect-started=0.074ms request-sent=4.604ms started=54.604ms ready=360.099ms sent=589.861ms commit=28.228ms finished=1039.029ms
+06-25 13:58:52.629  1011  1011 D VRI[MainSettings]: visibilityChanged oldVisibility=true newVisibility=false
+06-25 13:58:52.630  1189  1189 D VRI[LauncherActivity]: visibilityChanged oldVisibility=true newVisibility=false
+06-25 13:58:52.710   672   872 D BackgroundInstallControlService: Package event received: 0
+06-25 13:58:52.710   672   872 D BackgroundInstallControlService: Package event received: 0
+06-25 13:58:52.733   672   872 D BackgroundInstallControlService: Package event received: 0
+06-25 13:58:52.747   672   872 D BackgroundInstallControlService: Package event received: 0
+06-25 13:58:52.752   429   462 I netd    : tetherGetStats() -> {[]} <1.48ms>
+06-25 13:58:52.909   447   447 E android.hardware.tv.hdmi.cec: [halimp_aidl] file open failed for writing
+06-25 13:58:52.909   447   447 E android.hardware.tv.hdmi.cec: [halimp_aidl] file open failed for writing
+06-25 13:58:53.052   672   866 I WifiService: getConnectionInfo uid=10035
+06-25 13:58:53.052   672   866 V WifiPermissionsUtil: checkCallersLocationPermission(com.android.google.gce.gceservice): uid 10035 doesn't have permission android.permission.ACCESS_COARSE_LOCATION
+06-25 13:58:53.052   672   866 V WifiPermissionsUtil: enforceCanAccessScanResults(pkg=com.android.google.gce.gceservice, uid=10035): canCallingUidAccessLocation=false, canAppPackageUseLocation=false
+06-25 13:58:53.052   672   866 V WifiService: Keeping REDACT_FOR_ACCESS_FINE_LOCATION:java.lang.SecurityException: UID 10035 has no location permission
+06-25 13:58:53.591   672   672 V HotPlugDetectionAction: Finish poll all devices.
+06-25 13:58:53.890   672  2078 V GrammaticalInflectionUtils: AttributionSource: AttributionSource { uid = 10043, packageName = null, attributionTag = null, token = android.os.Binder@1621932, deviceId = 0, next = null } does not have READ_SYSTEM_GRAMMATICAL_GENDER permission.
+06-25 13:58:53.890   672  2078 W OptProp : Cannot read opt property android.window.PROPERTY_COMPAT_ALLOW_RESIZEABLE_ACTIVITY_OVERRIDES
+06-25 13:58:53.890   672  2078 W OptProp : Cannot read opt property android.window.PROPERTY_COMPAT_ALLOW_MIN_ASPECT_RATIO_OVERRIDE
+06-25 13:58:53.891   672  2078 E CellBroadcastUtils: getDefaultCellBroadcastReceiverPackageName: no package found
+06-25 13:58:53.892   672  2078 W OptProp : Cannot read opt property android.window.PROPERTY_COMPAT_ALLOW_ORIENTATION_OVERRIDE
+06-25 13:58:53.894   672   828 W AS.SfxHelper: MediaPlayer IOException: java.io.FileNotFoundException: /system/media/audio/ui/Effect_Tick.ogg: open failed: ENOENT (No such file or directory)
+06-25 13:58:53.895   672  2078 I ActivityTaskManager: START u0 {act=com.android.tv.action.LAUNCH_INPUT_SETUP xflg=0x4 cmp=com.android.tv/.SetupPassthroughActivity (has extras)} with LAUNCH_MULTIPLE from uid 10043 (rr=146026259) (BAL_ALLOW_VISIBLE_WINDOW) result code=0
+06-25 13:58:53.902   522   522 I BpBinder: onLastStrongRef automatically unlinking death recipients: 
+06-25 13:58:53.912   672   872 D BackgroundInstallControlService: Package event received: 0
+06-25 13:58:53.914   672   872 D BackgroundInstallControlService: Package event received: 0
+06-25 13:58:53.914   672   872 D BackgroundInstallControlService: Package event received: 0
+06-25 13:58:53.940   672  1800 V GrammaticalInflectionUtils: AttributionSource: AttributionSource { uid = 10079, packageName = null, attributionTag = null, token = android.os.Binder@1621932, deviceId = 0, next = null } does not have READ_SYSTEM_GRAMMATICAL_GENDER permission.
+06-25 13:58:53.940   672  1800 W OptProp : Cannot read opt property android.window.PROPERTY_COMPAT_ALLOW_RESIZEABLE_ACTIVITY_OVERRIDES
+06-25 13:58:53.940   672  1800 W OptProp : Cannot read opt property android.window.PROPERTY_COMPAT_ALLOW_MIN_ASPECT_RATIO_OVERRIDE
+06-25 13:58:53.941   672  1800 E CellBroadcastUtils: getDefaultCellBroadcastReceiverPackageName: no package found
+06-25 13:58:53.943   672  1800 W OptProp : Cannot read opt property android.window.PROPERTY_COMPAT_ALLOW_ORIENTATION_OVERRIDE
+06-25 13:58:53.951   672  1800 I ActivityTaskManager: START u0 {act=android.intent.action.MAIN xflg=0x4 cmp=com.example.broadcastlivetvapplication/.SetupActivity (has extras)} with LAUNCH_MULTIPLE from uid 10043 (rr=142469207) (BAL_ALLOW_VISIBLE_WINDOW) result code=0
+06-25 13:58:53.960  1637  1637 D AutofillManager: Fill dialog is enabled:false, hints=[]
+06-25 13:58:54.002   672   737 D CoreBackPreview: Window{ed78b4f u0 com.android.tv/com.android.tv.SetupPassthroughActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@7e400c8, mPriority=-1, mIsAnimationCallback=false, mOverrideBehavior=0}
+06-25 13:58:54.131  2006  2021 W libEGL  : ANGLE Warn:vulkan_icd.cpp:384 (ChoosePhysicalDevice): Preferred device ICD not found. Using default physicalDevice instead.
+06-25 13:58:54.131  2006  2021 W SwiftShader: external/swiftshader/src/Vulkan/VkPhysicalDevice.cpp:684 WARNING: UNSUPPORTED: curExtension->sType: 1000338000
+06-25 13:58:54.131  2006  2021 W SwiftShader: external/swiftshader/src/Vulkan/VkPhysicalDevice.cpp:684 WARNING: UNSUPPORTED: curExtension->sType: 1000437000
+06-25 13:58:54.131  2006  2021 W SwiftShader: external/swiftshader/src/Vulkan/VkPhysicalDevice.cpp:684 WARNING: UNSUPPORTED: curExtension->sType: 1000338000
+06-25 13:58:54.131  2006  2021 W SwiftShader: external/swiftshader/src/Vulkan/VkPhysicalDevice.cpp:684 WARNING: UNSUPPORTED: curExtension->sType: 1000437000
+06-25 13:58:54.131  2006  2021 W SwiftShader: external/swiftshader/src/Vulkan/VkPhysicalDevice.cpp:684 WARNING: UNSUPPORTED: curExtension->sType: 1000338000
+06-25 13:58:54.131  2006  2021 W SwiftShader: external/swiftshader/src/Vulkan/VkPhysicalDevice.cpp:684 WARNING: UNSUPPORTED: curExtension->sType: 1000437000
+06-25 13:58:54.131  2006  2021 W SwiftShader: external/swiftshader/src/Vulkan/VkPhysicalDevice.cpp:684 WARNING: UNSUPPORTED: curExtension->sType: 1000338000
+06-25 13:58:54.131  2006  2021 W SwiftShader: external/swiftshader/src/Vulkan/VkPhysicalDevice.cpp:684 WARNING: UNSUPPORTED: curExtension->sType: 1000437000
+06-25 13:58:54.131  2006  2021 W SwiftShader: external/swiftshader/src/Vulkan/VkPhysicalDevice.cpp:684 WARNING: UNSUPPORTED: curExtension->sType: 1000338000
+06-25 13:58:54.131  2006  2021 W SwiftShader: external/swiftshader/src/Vulkan/VkPhysicalDevice.cpp:684 WARNING: UNSUPPORTED: curExtension->sType: 1000437000
+06-25 13:58:54.131  2006  2021 W SwiftShader: external/swiftshader/src/Vulkan/VkPhysicalDevice.cpp:684 WARNING: UNSUPPORTED: curExtension->sType: 1000338000
+06-25 13:58:54.131  2006  2021 W SwiftShader: external/swiftshader/src/Vulkan/VkPhysicalDevice.cpp:684 WARNING: UNSUPPORTED: curExtension->sType: 1000437000
+06-25 13:58:54.131  2006  2021 W SwiftShader: external/swiftshader/src/Vulkan/VkPhysicalDevice.cpp:684 WARNING: UNSUPPORTED: curExtension->sType: 1000338000
+06-25 13:58:54.131  2006  2021 W SwiftShader: external/swiftshader/src/Vulkan/VkPhysicalDevice.cpp:684 WARNING: UNSUPPORTED: curExtension->sType: 1000437000
+06-25 13:58:54.131  2006  2021 W SwiftShader: external/swiftshader/src/Vulkan/VkPhysicalDevice.cpp:684 WARNING: UNSUPPORTED: curExtension->sType: 1000338000
+06-25 13:58:54.131  2006  2021 W SwiftShader: external/swiftshader/src/Vulkan/VkPhysicalDevice.cpp:684 WARNING: UNSUPPORTED: curExtension->sType: 1000437000
+06-25 13:58:54.146   672   872 D BackgroundInstallControlService: Package event received: 0
+06-25 13:58:54.146   672   872 D BackgroundInstallControlService: Package event received: 0
+06-25 13:58:54.146   672   872 D BackgroundInstallControlService: Package event received: 0
+06-25 13:58:54.147   672   872 D BackgroundInstallControlService: Package event received: 0
+06-25 13:58:54.148   672   872 D BackgroundInstallControlService: Package event received: 0
+06-25 13:58:54.191   429   462 I netd    : tetherGetStats() -> {[]} <4.60ms>
+06-25 13:58:54.196   461   598 E android.hardware.graphics.allocator-service.minigbm: Failed to convert descriptor. Unsupported format 0x3b
+06-25 13:58:54.199   461   598 E android.hardware.graphics.allocator-service.minigbm: Failed to convert descriptor. Unsupported format 0x3b
+06-25 13:58:54.219  2006  2021 I ANGLE   : Version (2.1 git hash: 1166eec4c0b125e9e945196acfc549983ef72b18), Renderer (Vulkan 1.3.0 (SwiftShader Device (LLVM 16.0.0) (0x0000C0DE)))
+06-25 13:58:54.225  2006  2021 E HWUI    : Device claims wide gamut support, cannot find matching config, error = EGL_SUCCESS
+06-25 13:58:54.226  2006  2021 W HWUI    : Failed to initialize 101010-2 format, error = EGL_SUCCESS
+06-25 13:58:54.231  2006  2006 D AutofillManager: Fill dialog is enabled:false, hints=[]
+06-25 13:58:54.263   672   737 D CoreBackPreview: Window{4ff069d u0 com.example.broadcastlivetvapplication/com.example.broadcastlivetvapplication.SetupActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@8525e, mPriority=-1, mIsAnimationCallback=false, mOverrideBehavior=0}
+06-25 13:58:54.807  2006  2006 I Choreographer: Skipped 32 frames!  The application may be doing too much work on its main thread.
+06-25 13:58:54.830   672   692 I ActivityTaskManager: Displayed com.example.broadcastlivetvapplication/.SetupActivity for user 0: +917ms
+06-25 13:58:54.831   672   692 V WindowManager: Sent Transition (#12) createdAt=06-25 13:58:53.890 via request=TransitionRequestInfo { type = OPEN, triggerTask = TaskInfo{userId=0 taskId=50 effectiveUid=10043 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LEANBACK_LAUNCHER] flg=0x10000000 pkg=com.android.tv cmp=com.android.tv/.TvActivity } baseActivity=ComponentInfo{com.android.tv/com.android.tv.onboarding.OnboardingActivity} topActivity=ComponentInfo{com.android.tv/com.android.tv.SetupPassthroughActivity} origActivity=null realActivity=ComponentInfo{com.android.tv/com.android.tv.TvActivity} numActivities=6 lastActiveTime=431576 supportsMultiWindow=false resizeMode=1 isResizeable=true minWidth=-1 minHeight=-1 defaultMinSize=220 token=WCT{RemoteToken{8264cce Task{f73f4ca #50 type=standard A=10043:com.android.tv}}} topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=true launchIntoPipHostTaskId=-1 lastParentTaskIdBeforePip=-1 displayCutoutSafeInsets=Rect(0, 0 - 0, 0) topActivityInfo=ActivityInfo{90178d1 com.android.tv.SetupPassthroughActivity} launchCookies=[] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=true isVisible=true isVisibleRequested=true isTopActivityNoDisplay=false isSleeping=false locusId=null displayAreaFeatureId=1 isTopActivityTransparent=true isActivityStackTransparent=false lastNonFullscreenBounds=Rect(687, 54 - 1233, 1026) capturedLink=null capturedLinkTimestamp=0 requestedVisibleTypes=-9 topActivityRequestOpenInBrowserEducationTimestamp=0 appCompatTaskInfo=AppCompatTaskInfo { topActivityInSizeCompat=false eligibleForLetterboxEducation= false isLetterboxEducationEnabled= false isLetterboxDoubleTapEnabled= false eligibleForUserAspectRatioButton= false topActivityBoundsLetterboxed= false isFromLetterboxDoubleTap= false topActivityLetterboxVerticalPosition= -1 topActivityLetterboxHorizontalPosition= -1 topActivityLetterboxWidth=-1 topActivityLetterboxHeight=-1 topActivityAppBounds=Rect(0, 0 - 1920, 1080) isUserFullscreenOverrideEnabled=false isSystemFullscreenOverrideEnabled=false hasMinAspectRatioOverride=false topActivityLetterboxBounds=null cameraCompatTaskInfo=CameraCompatTaskInfo { freeformCameraCompatMode=inactive}} topActivityMainWindowFrame=null}, pipChange = null, remoteTransition = null, displayChange = null, flags = 0, debugId = 12 }
+06-25 13:58:54.831   672   692 V WindowManager:     startWCT=WindowContainerTransaction { changes= {} hops= [] errorCallbackToken=null taskFragmentOrganizer=null }
+06-25 13:58:54.831   672   692 V WindowManager:     info={id=12 t=OPEN f=0x0 trk=0 r=[0@Point(0, 0)] c=[
+06-25 13:58:54.831   672   692 V WindowManager:         {m=OPEN f=FILLS_TASK leash=Surface(name=ActivityRecord{17740531 u0 com.example.broadcastlivetvapplication/.SetupActivity)/@0xdeea75b sb=Rect(0, 0 - 0, 0) eb=Rect(0, 0 - 1920, 1080) epz=Point(1920, 1080) d=-1->0 r=-1->0:-1 bc=ff121212 component=com.example.broadcastlivetvapplication/.SetupActivity opt={t=FROM_STYLE mUserId=0}},
+06-25 13:58:54.831   672   692 V WindowManager:         {m=TO_BACK f=FILLS_TASK leash=Surface(name=ActivityRecord{146026259 u0 com.android.tv/.onboarding.OnboardingActivity)/@0xa03366a sb=Rect(0, 0 - 1920, 1080) eb=Rect(0, 0 - 1920, 1080) epz=Point(1920, 1080) d=0 bc=ff121212 component=com.android.tv/.onboarding.OnboardingActivity opt={t=FROM_STYLE mUserId=0}}
+06-25 13:58:54.831   672   692 V WindowManager:     ]}
+06-25 13:58:54.909   447   447 E android.hardware.tv.hdmi.cec: [halimp_aidl] file open failed for writing
+06-25 13:58:54.961   672   768 I ImeTracker: com.example.broadcastlivetvapplication:b86374a9: onRequestHide at ORIGIN_SERVER reason HIDE_UNSPECIFIED_WINDOW fromUser false
+06-25 13:58:54.966  2006  2006 D InsetsController: hide(ime(), fromIme=false)
+06-25 13:58:54.968  2006  2006 I ImeTracker: com.example.broadcastlivetvapplication:b86374a9: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+06-25 13:58:55.036   672   737 I ImeTracker: system_server:a396d49b: onRequestHide at ORIGIN_SERVER reason IME_REQUESTED_CHANGED_LISTENER fromUser false
+06-25 13:58:55.042   672   695 I ImeTracker: system_server:a396d49b: onCancelled at PHASE_SERVER_SHOULD_HIDE
+06-25 13:58:55.123  2006  2012 I vetvapplication: NativeAlloc concurrent mark compact GC freed 344KB AllocSpace bytes, 0(0B) LOS objects, 49% free, 2028KB/4057KB, paused 66us,3.343ms total 127.098ms
+06-25 13:58:55.159   672  1153 E TaskPersister: File error accessing recents directory (directory doesn't exist?).
+06-25 13:58:55.272   672   692 V WindowManager: Finish Transition (#12): created at 06-25 13:58:53.890 collect-started=0.037ms request-sent=4.488ms started=5.249ms ready=250.214ms sent=937.432ms commit=8.123ms finished=1380.524ms
+06-25 13:58:55.276  1637  1637 D VRI[OnboardingActivity]: visibilityChanged oldVisibility=true newVisibility=false
+06-25 13:58:55.301   918   949 W Looper  : Slow dispatch took 33ms wmshell.main app=com.android.systemui main=false group=FOREGROUND h=android.os.Handler c=com.android.wm.shell.transition.DefaultSurfaceAnimator$$ExternalSyntheticLambda0@29fe04c m=0
+06-25 13:58:55.305   918   962 W Looper  : Slow dispatch took 37ms wmshell.anim app=com.android.systemui main=false group=FOREGROUND h=android.view.Choreographer$FrameHandler c=android.view.Choreographer$FrameDisplayEventReceiver@668dd85 m=0
+06-25 13:58:55.309   429   462 I netd    : tetherGetStats() -> {[]} <4.57ms>
+06-25 13:58:55.344   672   872 D BackgroundInstallControlService: Package event received: 0
+06-25 13:58:55.346   672   872 D BackgroundInstallControlService: Package event received: 0
+06-25 13:58:56.484  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(329)]: CM_RM_GetInstallRoute: cmRMp_FindFrontendForMultiplex couldn't find free resource
+06-25 13:58:56.484  1865  1877 E iwedia/comedia3: [(C) cm_route_manager_usage_monitor.c(310)]: Used routes
+06-25 13:58:56.484  1865  1877 E iwedia/comedia3: [(C) cm_route_manager_usage_monitor.c(311)]: ******************************
+06-25 13:58:56.484  1865  1877 E iwedia/comedia3: [(C) cm_route_manager_usage_monitor.c(314)]: 0. 0xe9456b70 -1 INSTALL
+06-25 13:58:56.484  1865  1877 E iwedia/comedia3: [(C) cm_route_manager_usage_monitor.c(314)]: 1. 0xe9456b98 -1 INSTALL
+06-25 13:58:56.484  1865  1877 E iwedia/comedia3: [(C) cm_route_manager_usage_monitor.c(314)]: 2. 0xe9456bc0 -1 INSTALL
+06-25 13:58:56.484  1865  1877 E iwedia/comedia3: [(C) cm_route_manager_usage_monitor.c(319)]: ******************************
+06-25 13:58:56.484  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1849)]: ***********************************
+06-25 13:58:56.484  1865  1877 E iwedia/comedia3: 
+06-25 13:58:56.484  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1852)]: *********** FE status *************
+06-25 13:58:56.484  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1879)]: id = 0, isUsed = 1, isScanning = 1
+06-25 13:58:56.484  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1880)]: Used on routes:
+06-25 13:58:56.484  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1883)]: e9456b70
+06-25 13:58:56.484  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1886)]: 
+06-25 13:58:56.484  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1879)]: id = 1, isUsed = 1, isScanning = 1
+06-25 13:58:56.484  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1880)]: Used on routes:
+06-25 13:58:56.484  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1883)]: e9456b98
+06-25 13:58:56.484  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1886)]: 
+06-25 13:58:56.484  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1879)]: id = 2, isUsed = 1, isScanning = 1
+06-25 13:58:56.484  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1880)]: Used on routes:
+06-25 13:58:56.484  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1883)]: e9456bc0
+06-25 13:58:56.484  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1886)]: 
+06-25 13:58:56.484  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1858)]: ********* Decoder status **********
+06-25 13:58:56.484  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1896)]: id = 1, isUsed = 0, type = 0
+06-25 13:58:56.484  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1897)]: Used on routes:
+06-25 13:58:56.484  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1903)]: 
+06-25 13:58:56.484  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1864)]: ****** Mass Storage status ********
+06-25 13:58:56.484  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1913)]: id = 4d41, isUsed = 0
+06-25 13:58:56.484  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1914)]: Used on routes:
+06-25 13:58:56.484  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1920)]: 
+06-25 13:58:56.484  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1869)]: 
+06-25 13:58:56.484  1865  1877 E iwedia/comedia3: 
+06-25 13:58:56.484  1865  1877 E iwedia/comedia3: ***********************************
+06-25 13:58:56.484  1865  1877 E iwedia/comedia3: 
+06-25 13:58:56.484  1865  1877 D iwedia/mal: MAL_RM_GetInstallRoute - 193: CM_RM_GetLiveRoute failed, error = 4
+06-25 13:58:56.484  1865  1877 D ComediaRouteManagerControl: routeManagerGetInstallRoute 0
+06-25 13:58:56.485   672   828 W AS.SfxHelper: MediaPlayer IOException: java.io.FileNotFoundException: /system/media/audio/ui/Effect_Tick.ogg: open failed: ENOENT (No such file or directory)
+06-25 13:58:56.487  1865  1877 E ScanControl: appendList(false) MAL_TUNER_AppendList
+06-25 13:58:56.488  1865  1877 E ScanControl: autoScanURL ( file:///data/data/ch0.ts) routeId = 0
+06-25 13:58:56.488  1865  1877 D iwedia/mal: MAL_TUNER_AutoScanURL - line: 287: Enter MAL_TUNER_AutoScanURL, routeId = 0 
+06-25 13:58:56.488  1865  1877 D iwedia/comedia3: CM_PIPEi_GetMagicNumberFromHandle: Can't find route
+06-25 13:58:56.488  1865  1877 D iwedia/comedia3: CM_PIPE_GetFrontendDescriptor: Error in CM_PIPEi_GetMagicNumberFromHandle
+06-25 13:58:56.488  1865  1877 D iwedia/mal: MAL_TUNER_AutoScanURL - line: 307: MAL_TUNER cmPipe_GetSourceType failed
+06-25 13:58:56.488  2006  2006 E BroadcastTvInputService: autoScan failed for file:///data/data/ch0.ts: ERROR
+06-25 13:58:56.912   447   447 E android.hardware.tv.hdmi.cec: [halimp_aidl] file open failed for writing
+06-25 13:58:58.053   672  1800 I WifiService: getConnectionInfo uid=10035
+06-25 13:58:58.053   672  1800 V WifiPermissionsUtil: checkCallersLocationPermission(com.android.google.gce.gceservice): uid 10035 doesn't have permission android.permission.ACCESS_COARSE_LOCATION
+06-25 13:58:58.053   672  1800 V WifiPermissionsUtil: enforceCanAccessScanResults(pkg=com.android.google.gce.gceservice, uid=10035): canCallingUidAccessLocation=false, canAppPackageUseLocation=false
+06-25 13:58:58.053   672  1800 V WifiService: Keeping REDACT_FOR_ACCESS_FINE_LOCATION:java.lang.SecurityException: UID 10035 has no location permission
+06-25 13:58:58.485  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(329)]: CM_RM_GetInstallRoute: cmRMp_FindFrontendForMultiplex couldn't find free resource
+06-25 13:58:58.485  1865  1877 E iwedia/comedia3: [(C) cm_route_manager_usage_monitor.c(310)]: Used routes
+06-25 13:58:58.485  1865  1877 E iwedia/comedia3: [(C) cm_route_manager_usage_monitor.c(311)]: ******************************
+06-25 13:58:58.485  1865  1877 E iwedia/comedia3: [(C) cm_route_manager_usage_monitor.c(314)]: 0. 0xe9456b70 -1 INSTALL
+06-25 13:58:58.485  1865  1877 E iwedia/comedia3: [(C) cm_route_manager_usage_monitor.c(314)]: 1. 0xe9456b98 -1 INSTALL
+06-25 13:58:58.485  1865  1877 E iwedia/comedia3: [(C) cm_route_manager_usage_monitor.c(314)]: 2. 0xe9456bc0 -1 INSTALL
+06-25 13:58:58.485  1865  1877 E iwedia/comedia3: [(C) cm_route_manager_usage_monitor.c(319)]: ******************************
+06-25 13:58:58.485  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1849)]: ***********************************
+06-25 13:58:58.485  1865  1877 E iwedia/comedia3: 
+06-25 13:58:58.485  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1852)]: *********** FE status *************
+06-25 13:58:58.485  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1879)]: id = 0, isUsed = 1, isScanning = 1
+06-25 13:58:58.485  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1880)]: Used on routes:
+06-25 13:58:58.485  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1883)]: e9456b70
+06-25 13:58:58.485  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1886)]: 
+06-25 13:58:58.485  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1879)]: id = 1, isUsed = 1, isScanning = 1
+06-25 13:58:58.485  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1880)]: Used on routes:
+06-25 13:58:58.485  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1883)]: e9456b98
+06-25 13:58:58.485  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1886)]: 
+06-25 13:58:58.485  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1879)]: id = 2, isUsed = 1, isScanning = 1
+06-25 13:58:58.485  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1880)]: Used on routes:
+06-25 13:58:58.485  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1883)]: e9456bc0
+06-25 13:58:58.485  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1886)]: 
+06-25 13:58:58.485  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1858)]: ********* Decoder status **********
+06-25 13:58:58.485  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1896)]: id = 1, isUsed = 0, type = 0
+06-25 13:58:58.485  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1897)]: Used on routes:
+06-25 13:58:58.485  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1903)]: 
+06-25 13:58:58.485  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1864)]: ****** Mass Storage status ********
+06-25 13:58:58.485  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1913)]: id = 4d41, isUsed = 0
+06-25 13:58:58.485  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1914)]: Used on routes:
+06-25 13:58:58.485  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1920)]: 
+06-25 13:58:58.485  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1869)]: 
+06-25 13:58:58.485  1865  1877 E iwedia/comedia3: 
+06-25 13:58:58.485  1865  1877 E iwedia/comedia3: ***********************************
+06-25 13:58:58.485  1865  1877 E iwedia/comedia3: 
+06-25 13:58:58.485  1865  1877 D iwedia/mal: MAL_RM_GetInstallRoute - 193: CM_RM_GetLiveRoute failed, error = 4
+06-25 13:58:58.485  1865  1877 D ComediaRouteManagerControl: routeManagerGetInstallRoute 0
+06-25 13:58:58.488  1865  1877 E ScanControl: appendList(false) MAL_TUNER_AppendList
+06-25 13:58:58.490  1865  1877 E ScanControl: autoScanURL ( file:///data/data/ch0.ts) routeId = 0
+06-25 13:58:58.490  1865  1877 D iwedia/mal: MAL_TUNER_AutoScanURL - line: 287: Enter MAL_TUNER_AutoScanURL, routeId = 0 
+06-25 13:58:58.490  1865  1877 D iwedia/comedia3: CM_PIPEi_GetMagicNumberFromHandle: Can't find route
+06-25 13:58:58.490  1865  1877 D iwedia/comedia3: CM_PIPE_GetFrontendDescriptor: Error in CM_PIPEi_GetMagicNumberFromHandle
+06-25 13:58:58.490  1865  1877 D iwedia/mal: MAL_TUNER_AutoScanURL - line: 307: MAL_TUNER cmPipe_GetSourceType failed
+06-25 13:58:58.490  2006  2006 E BroadcastTvInputService: autoScan failed for file:///data/data/ch0.ts: ERROR
+06-25 13:58:58.491   672   828 W AS.SfxHelper: MediaPlayer IOException: java.io.FileNotFoundException: /system/media/audio/ui/Effect_Tick.ogg: open failed: ENOENT (No such file or directory)
+06-25 13:58:58.914   447   447 E android.hardware.tv.hdmi.cec: [halimp_aidl] file open failed for writing
+06-25 13:58:58.915   447   447 E android.hardware.tv.hdmi.cec: [halimp_aidl] file open failed for writing
+06-25 13:58:59.040   447   447 E android.hardware.tv.hdmi.cec: [halimp_aidl] file open failed for writing
+06-25 13:58:59.341  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(329)]: CM_RM_GetInstallRoute: cmRMp_FindFrontendForMultiplex couldn't find free resource
+06-25 13:58:59.341  1865  1877 E iwedia/comedia3: [(C) cm_route_manager_usage_monitor.c(310)]: Used routes
+06-25 13:58:59.341  1865  1877 E iwedia/comedia3: [(C) cm_route_manager_usage_monitor.c(311)]: ******************************
+06-25 13:58:59.341  1865  1877 E iwedia/comedia3: [(C) cm_route_manager_usage_monitor.c(314)]: 0. 0xe9456b70 -1 INSTALL
+06-25 13:58:59.341  1865  1877 E iwedia/comedia3: [(C) cm_route_manager_usage_monitor.c(314)]: 1. 0xe9456b98 -1 INSTALL
+06-25 13:58:59.341  1865  1877 E iwedia/comedia3: [(C) cm_route_manager_usage_monitor.c(314)]: 2. 0xe9456bc0 -1 INSTALL
+06-25 13:58:59.341  1865  1877 E iwedia/comedia3: [(C) cm_route_manager_usage_monitor.c(319)]: ******************************
+06-25 13:58:59.341  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1849)]: ***********************************
+06-25 13:58:59.341  1865  1877 E iwedia/comedia3: 
+06-25 13:58:59.341  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1852)]: *********** FE status *************
+06-25 13:58:59.341  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1879)]: id = 0, isUsed = 1, isScanning = 1
+06-25 13:58:59.341  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1880)]: Used on routes:
+06-25 13:58:59.341  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1883)]: e9456b70
+06-25 13:58:59.341  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1886)]: 
+06-25 13:58:59.341  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1879)]: id = 1, isUsed = 1, isScanning = 1
+06-25 13:58:59.341  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1880)]: Used on routes:
+06-25 13:58:59.341  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1883)]: e9456b98
+06-25 13:58:59.341  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1886)]: 
+06-25 13:58:59.341  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1879)]: id = 2, isUsed = 1, isScanning = 1
+06-25 13:58:59.341  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1880)]: Used on routes:
+06-25 13:58:59.341  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1883)]: e9456bc0
+06-25 13:58:59.341  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1886)]: 
+06-25 13:58:59.341  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1858)]: ********* Decoder status **********
+06-25 13:58:59.341  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1896)]: id = 1, isUsed = 0, type = 0
+06-25 13:58:59.341  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1897)]: Used on routes:
+06-25 13:58:59.341  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1903)]: 
+06-25 13:58:59.341  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1864)]: ****** Mass Storage status ********
+06-25 13:58:59.341  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1913)]: id = 4d41, isUsed = 0
+06-25 13:58:59.341  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1914)]: Used on routes:
+06-25 13:58:59.341  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1920)]: 
+06-25 13:58:59.341  1865  1877 E iwedia/comedia3: [(C) cm_route_manager.c(1869)]: 
+06-25 13:58:59.341  1865  1877 E iwedia/comedia3: 
+06-25 13:58:59.341  1865  1877 E iwedia/comedia3: ***********************************
+06-25 13:58:59.341  1865  1877 E iwedia/comedia3: 
+06-25 13:58:59.341  1865  1877 D iwedia/mal: MAL_RM_GetInstallRoute - 193: CM_RM_GetLiveRoute failed, error = 4
+06-25 13:58:59.341  1865  1877 D ComediaRouteManagerControl: routeManagerGetInstallRoute 0
+06-25 13:58:59.342   672   828 W AS.SfxHelper: MediaPlayer IOException: java.io.FileNotFoundException: /system/media/audio/ui/Effect_Tick.ogg: open failed: ENOENT (No such file or directory)
+06-25 13:58:59.343  1865  1880 E ScanControl: appendList(false) MAL_TUNER_AppendList
+06-25 13:58:59.343  1865  1880 E ScanControl: autoScanURL ( file:///data/data/ch0.ts) routeId = 0
+06-25 13:58:59.343  1865  1880 D iwedia/mal: MAL_TUNER_AutoScanURL - line: 287: Enter MAL_TUNER_AutoScanURL, routeId = 0 
+06-25 13:58:59.344  1865  1880 D iwedia/comedia3: CM_PIPEi_GetMagicNumberFromHandle: Can't find route
+06-25 13:58:59.344  1865  1880 D iwedia/comedia3: CM_PIPE_GetFrontendDescriptor: Error in CM_PIPEi_GetMagicNumberFromHandle
+06-25 13:58:59.344  1865  1880 D iwedia/mal: MAL_TUNER_AutoScanURL - line: 307: MAL_TUNER cmPipe_GetSourceType failed
+06-25 13:58:59.344  2006  2006 E BroadcastTvInputService: autoScan failed for file:///data/data/ch0.ts: ERROR
+06-25 13:58:59.822   672   828 W AS.SfxHelper: MediaPlayer IOException: java.io.FileNotFoundException: /system/media/audio/ui/Effect_Tick.ogg: open failed: ENOENT (No such file or directory)
+06-25 13:58:59.829  1865  1876 E iwedia/comedia3: [(C) cm_route_manager.c(329)]: CM_RM_GetInstallRoute: cmRMp_FindFrontendForMultiplex couldn't find free resource
+06-25 13:58:59.834  1865  1876 E iwedia/comedia3: [(C) cm_route_manager_usage_monitor.c(310)]: Used routes
+06-25 13:58:59.834  1865  1876 E iwedia/comedia3: [(C) cm_route_manager_usage_monitor.c(311)]: ******************************
+06-25 13:58:59.834  1865  1876 E iwedia/comedia3: [(C) cm_route_manager_usage_monitor.c(314)]: 0. 0xe9456b70 -1 INSTALL
+06-25 13:58:59.834  1865  1876 E iwedia/comedia3: [(C) cm_route_manager_usage_monitor.c(314)]: 1. 0xe9456b98 -1 INSTALL
+06-25 13:58:59.834  1865  1876 E iwedia/comedia3: [(C) cm_route_manager_usage_monitor.c(314)]: 2. 0xe9456bc0 -1 INSTALL
+06-25 13:58:59.834  1865  1876 E iwedia/comedia3: [(C) cm_route_manager_usage_monitor.c(319)]: ******************************
+06-25 13:58:59.834  1865  1876 E iwedia/comedia3: [(C) cm_route_manager.c(1849)]: ***********************************
+06-25 13:58:59.834  1865  1876 E iwedia/comedia3: 
+06-25 13:58:59.834  1865  1876 E iwedia/comedia3: [(C) cm_route_manager.c(1852)]: *********** FE status *************
+06-25 13:58:59.836  1865  1876 E iwedia/comedia3: [(C) cm_route_manager.c(1879)]: id = 0, isUsed = 1, isScanning = 1
+06-25 13:58:59.836  1865  1876 E iwedia/comedia3: [(C) cm_route_manager.c(1880)]: Used on routes:
+06-25 13:58:59.836  1865  1876 E iwedia/comedia3: [(C) cm_route_manager.c(1883)]: e9456b70
+06-25 13:58:59.836  1865  1876 E iwedia/comedia3: [(C) cm_route_manager.c(1886)]: 
+06-25 13:58:59.836  1865  1876 E iwedia/comedia3: [(C) cm_route_manager.c(1879)]: id = 1, isUsed = 1, isScanning = 1
+06-25 13:58:59.836  1865  1876 E iwedia/comedia3: [(C) cm_route_manager.c(1880)]: Used on routes:
+06-25 13:58:59.836  1865  1876 E iwedia/comedia3: [(C) cm_route_manager.c(1883)]: e9456b98
+06-25 13:58:59.836  1865  1876 E iwedia/comedia3: [(C) cm_route_manager.c(1886)]: 
+06-25 13:58:59.836  1865  1876 E iwedia/comedia3: [(C) cm_route_manager.c(1879)]: id = 2, isUsed = 1, isScanning = 1
+06-25 13:58:59.836  1865  1876 E iwedia/comedia3: [(C) cm_route_manager.c(1880)]: Used on routes:
+06-25 13:58:59.836  1865  1876 E iwedia/comedia3: [(C) cm_route_manager.c(1883)]: e9456bc0
+06-25 13:58:59.836  1865  1876 E iwedia/comedia3: [(C) cm_route_manager.c(1886)]: 
+06-25 13:58:59.836  1865  1876 E iwedia/comedia3: [(C) cm_route_manager.c(1858)]: ********* Decoder status **********
+06-25 13:58:59.836  1865  1876 E iwedia/comedia3: [(C) cm_route_manager.c(1896)]: id = 1, isUsed = 0, type = 0
+06-25 13:58:59.836  1865  1876 E iwedia/comedia3: [(C) cm_route_manager.c(1897)]: Used on routes:
+06-25 13:58:59.836  1865  1876 E iwedia/comedia3: [(C) cm_route_manager.c(1903)]: 
+06-25 13:58:59.836  1865  1876 E iwedia/comedia3: [(C) cm_route_manager.c(1864)]: ****** Mass Storage status ********
+06-25 13:58:59.836  1865  1876 E iwedia/comedia3: [(C) cm_route_manager.c(1913)]: id = 4d41, isUsed = 0
+06-25 13:58:59.836  1865  1876 E iwedia/comedia3: [(C) cm_route_manager.c(1914)]: Used on routes:
+06-25 13:58:59.836  1865  1876 E iwedia/comedia3: [(C) cm_route_manager.c(1920)]: 
+06-25 13:58:59.836  1865  1876 E iwedia/comedia3: [(C) cm_route_manager.c(1869)]: 
+06-25 13:58:59.836  1865  1876 E iwedia/comedia3: 
+06-25 13:58:59.836  1865  1876 E iwedia/comedia3: ***********************************
+06-25 13:58:59.836  1865  1876 E iwedia/comedia3: 
+06-25 13:58:59.836  1865  1876 D iwedia/mal: MAL_RM_GetInstallRoute - 193: CM_RM_GetLiveRoute failed, error = 4
+06-25 13:58:59.837  1865  1876 D ComediaRouteManagerControl: routeManagerGetInstallRoute 0
+06-25 13:58:59.845  1865  1876 E ScanControl: appendList(false) MAL_TUNER_AppendList
+06-25 13:58:59.846  1865  1878 E ScanControl: autoScanURL ( file:///data/data/ch0.ts) routeId = 0
+06-25 13:58:59.846  1865  1878 D iwedia/mal: MAL_TUNER_AutoScanURL - line: 287: Enter MAL_TUNER_AutoScanURL, routeId = 0 
+06-25 13:58:59.846  1865  1878 D iwedia/comedia3: CM_PIPEi_GetMagicNumberFromHandle: Can't find route
+06-25 13:58:59.846  1865  1878 D iwedia/comedia3: CM_PIPE_GetFrontendDescriptor: Error in CM_PIPEi_GetMagicNumberFromHandle
+06-25 13:58:59.846  1865  1878 D iwedia/mal: MAL_TUNER_AutoScanURL - line: 307: MAL_TUNER cmPipe_GetSourceType failed
+06-25 13:58:59.847  2006  2006 E BroadcastTvInputService: autoScan failed for file:///data/data/ch0.ts: ERROR
+06-25 13:59:00.173   672   828 W AS.SfxHelper: MediaPlayer IOException: java.io.FileNotFoundException: /system/media/audio/ui/Effect_Tick.ogg: open failed: ENOENT (No such file or directory)
+06-25 13:59:00.183  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(329)]: CM_RM_GetInstallRoute: cmRMp_FindFrontendForMultiplex couldn't find free resource
+06-25 13:59:00.183  1865  2089 E iwedia/comedia3: [(C) cm_route_manager_usage_monitor.c(310)]: Used routes
+06-25 13:59:00.183  1865  2089 E iwedia/comedia3: [(C) cm_route_manager_usage_monitor.c(311)]: ******************************
+06-25 13:59:00.183  1865  2089 E iwedia/comedia3: [(C) cm_route_manager_usage_monitor.c(314)]: 0. 0xe9456b70 -1 INSTALL
+06-25 13:59:00.183  1865  2089 E iwedia/comedia3: [(C) cm_route_manager_usage_monitor.c(314)]: 1. 0xe9456b98 -1 INSTALL
+06-25 13:59:00.183  1865  2089 E iwedia/comedia3: [(C) cm_route_manager_usage_monitor.c(314)]: 2. 0xe9456bc0 -1 INSTALL
+06-25 13:59:00.183  1865  2089 E iwedia/comedia3: [(C) cm_route_manager_usage_monitor.c(319)]: ******************************
+06-25 13:59:00.183  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1849)]: ***********************************
+06-25 13:59:00.183  1865  2089 E iwedia/comedia3: 
+06-25 13:59:00.183  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1852)]: *********** FE status *************
+06-25 13:59:00.183  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1879)]: id = 0, isUsed = 1, isScanning = 1
+06-25 13:59:00.183  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1880)]: Used on routes:
+06-25 13:59:00.183  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1883)]: e9456b70
+06-25 13:59:00.183  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1886)]: 
+06-25 13:59:00.183  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1879)]: id = 1, isUsed = 1, isScanning = 1
+06-25 13:59:00.183  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1880)]: Used on routes:
+06-25 13:59:00.183  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1883)]: e9456b98
+06-25 13:59:00.183  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1886)]: 
+06-25 13:59:00.183  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1879)]: id = 2, isUsed = 1, isScanning = 1
+06-25 13:59:00.183  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1880)]: Used on routes:
+06-25 13:59:00.183  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1883)]: e9456bc0
+06-25 13:59:00.183  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1886)]: 
+06-25 13:59:00.183  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1858)]: ********* Decoder status **********
+06-25 13:59:00.183  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1896)]: id = 1, isUsed = 0, type = 0
+06-25 13:59:00.183  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1897)]: Used on routes:
+06-25 13:59:00.183  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1903)]: 
+06-25 13:59:00.183  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1864)]: ****** Mass Storage status ********
+06-25 13:59:00.183  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1913)]: id = 4d41, isUsed = 0
+06-25 13:59:00.183  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1914)]: Used on routes:
+06-25 13:59:00.183  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1920)]: 
+06-25 13:59:00.183  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1869)]: 
+06-25 13:59:00.183  1865  2089 E iwedia/comedia3: 
+06-25 13:59:00.183  1865  2089 E iwedia/comedia3: ***********************************
+06-25 13:59:00.183  1865  2089 E iwedia/comedia3: 
+06-25 13:59:00.184  1865  2089 D iwedia/mal: MAL_RM_GetInstallRoute - 193: CM_RM_GetLiveRoute failed, error = 4
+06-25 13:59:00.184  1865  2089 D ComediaRouteManagerControl: routeManagerGetInstallRoute 0
+06-25 13:59:00.186  1865  2089 E ScanControl: appendList(false) MAL_TUNER_AppendList
+06-25 13:59:00.187  1865  2089 E ScanControl: autoScanURL ( file:///data/data/ch0.ts) routeId = 0
+06-25 13:59:00.187  1865  2089 D iwedia/mal: MAL_TUNER_AutoScanURL - line: 287: Enter MAL_TUNER_AutoScanURL, routeId = 0 
+06-25 13:59:00.187  1865  2089 D iwedia/comedia3: CM_PIPEi_GetMagicNumberFromHandle: Can't find route
+06-25 13:59:00.187  1865  2089 D iwedia/comedia3: CM_PIPE_GetFrontendDescriptor: Error in CM_PIPEi_GetMagicNumberFromHandle
+06-25 13:59:00.187  1865  2089 D iwedia/mal: MAL_TUNER_AutoScanURL - line: 307: MAL_TUNER cmPipe_GetSourceType failed
+06-25 13:59:00.187  2006  2006 E BroadcastTvInputService: autoScan failed for file:///data/data/ch0.ts: ERROR
+06-25 13:59:00.366   672   828 W AS.SfxHelper: MediaPlayer IOException: java.io.FileNotFoundException: /system/media/audio/ui/Effect_Tick.ogg: open failed: ENOENT (No such file or directory)
+06-25 13:59:00.367  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(329)]: CM_RM_GetInstallRoute: cmRMp_FindFrontendForMultiplex couldn't find free resource
+06-25 13:59:00.367  1865  2089 E iwedia/comedia3: [(C) cm_route_manager_usage_monitor.c(310)]: Used routes
+06-25 13:59:00.367  1865  2089 E iwedia/comedia3: [(C) cm_route_manager_usage_monitor.c(311)]: ******************************
+06-25 13:59:00.367  1865  2089 E iwedia/comedia3: [(C) cm_route_manager_usage_monitor.c(314)]: 0. 0xe9456b70 -1 INSTALL
+06-25 13:59:00.367  1865  2089 E iwedia/comedia3: [(C) cm_route_manager_usage_monitor.c(314)]: 1. 0xe9456b98 -1 INSTALL
+06-25 13:59:00.367  1865  2089 E iwedia/comedia3: [(C) cm_route_manager_usage_monitor.c(314)]: 2. 0xe9456bc0 -1 INSTALL
+06-25 13:59:00.367  1865  2089 E iwedia/comedia3: [(C) cm_route_manager_usage_monitor.c(319)]: ******************************
+06-25 13:59:00.367  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1849)]: ***********************************
+06-25 13:59:00.367  1865  2089 E iwedia/comedia3: 
+06-25 13:59:00.367  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1852)]: *********** FE status *************
+06-25 13:59:00.367  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1879)]: id = 0, isUsed = 1, isScanning = 1
+06-25 13:59:00.367  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1880)]: Used on routes:
+06-25 13:59:00.367  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1883)]: e9456b70
+06-25 13:59:00.367  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1886)]: 
+06-25 13:59:00.367  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1879)]: id = 1, isUsed = 1, isScanning = 1
+06-25 13:59:00.367  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1880)]: Used on routes:
+06-25 13:59:00.367  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1883)]: e9456b98
+06-25 13:59:00.367  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1886)]: 
+06-25 13:59:00.367  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1879)]: id = 2, isUsed = 1, isScanning = 1
+06-25 13:59:00.367  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1880)]: Used on routes:
+06-25 13:59:00.367  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1883)]: e9456bc0
+06-25 13:59:00.367  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1886)]: 
+06-25 13:59:00.367  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1858)]: ********* Decoder status **********
+06-25 13:59:00.367  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1896)]: id = 1, isUsed = 0, type = 0
+06-25 13:59:00.367  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1897)]: Used on routes:
+06-25 13:59:00.367  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1903)]: 
+06-25 13:59:00.367  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1864)]: ****** Mass Storage status ********
+06-25 13:59:00.367  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1913)]: id = 4d41, isUsed = 0
+06-25 13:59:00.367  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1914)]: Used on routes:
+06-25 13:59:00.367  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1920)]: 
+06-25 13:59:00.367  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1869)]: 
+06-25 13:59:00.367  1865  2089 E iwedia/comedia3: 
+06-25 13:59:00.367  1865  2089 E iwedia/comedia3: ***********************************
+06-25 13:59:00.367  1865  2089 E iwedia/comedia3: 
+06-25 13:59:00.367  1865  2089 D iwedia/mal: MAL_RM_GetInstallRoute - 193: CM_RM_GetLiveRoute failed, error = 4
+06-25 13:59:00.367  1865  2089 D ComediaRouteManagerControl: routeManagerGetInstallRoute 0
+06-25 13:59:00.378  1865  2089 E ScanControl: appendList(false) MAL_TUNER_AppendList
+06-25 13:59:00.380  1865  2089 E ScanControl: autoScanURL ( file:///data/data/ch0.ts) routeId = 0
+06-25 13:59:00.380  1865  2089 D iwedia/mal: MAL_TUNER_AutoScanURL - line: 287: Enter MAL_TUNER_AutoScanURL, routeId = 0 
+06-25 13:59:00.380  1865  2089 D iwedia/comedia3: CM_PIPEi_GetMagicNumberFromHandle: Can't find route
+06-25 13:59:00.380  1865  2089 D iwedia/comedia3: CM_PIPE_GetFrontendDescriptor: Error in CM_PIPEi_GetMagicNumberFromHandle
+06-25 13:59:00.380  1865  2089 D iwedia/mal: MAL_TUNER_AutoScanURL - line: 307: MAL_TUNER cmPipe_GetSourceType failed
+06-25 13:59:00.381  2006  2006 E BroadcastTvInputService: autoScan failed for file:///data/data/ch0.ts: ERROR
+06-25 13:59:00.559  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(329)]: CM_RM_GetInstallRoute: cmRMp_FindFrontendForMultiplex couldn't find free resource
+06-25 13:59:00.559  1865  2089 E iwedia/comedia3: [(C) cm_route_manager_usage_monitor.c(310)]: Used routes
+06-25 13:59:00.559  1865  2089 E iwedia/comedia3: [(C) cm_route_manager_usage_monitor.c(311)]: ******************************
+06-25 13:59:00.559  1865  2089 E iwedia/comedia3: [(C) cm_route_manager_usage_monitor.c(314)]: 0. 0xe9456b70 -1 INSTALL
+06-25 13:59:00.559  1865  2089 E iwedia/comedia3: [(C) cm_route_manager_usage_monitor.c(314)]: 1. 0xe9456b98 -1 INSTALL
+06-25 13:59:00.559  1865  2089 E iwedia/comedia3: [(C) cm_route_manager_usage_monitor.c(314)]: 2. 0xe9456bc0 -1 INSTALL
+06-25 13:59:00.559  1865  2089 E iwedia/comedia3: [(C) cm_route_manager_usage_monitor.c(319)]: ******************************
+06-25 13:59:00.559  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1849)]: ***********************************
+06-25 13:59:00.559  1865  2089 E iwedia/comedia3: 
+06-25 13:59:00.559  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1852)]: *********** FE status *************
+06-25 13:59:00.559  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1879)]: id = 0, isUsed = 1, isScanning = 1
+06-25 13:59:00.559  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1880)]: Used on routes:
+06-25 13:59:00.559  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1883)]: e9456b70
+06-25 13:59:00.559  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1886)]: 
+06-25 13:59:00.559  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1879)]: id = 1, isUsed = 1, isScanning = 1
+06-25 13:59:00.559  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1880)]: Used on routes:
+06-25 13:59:00.559  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1883)]: e9456b98
+06-25 13:59:00.559  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1886)]: 
+06-25 13:59:00.559  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1879)]: id = 2, isUsed = 1, isScanning = 1
+06-25 13:59:00.559  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1880)]: Used on routes:
+06-25 13:59:00.559  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1883)]: e9456bc0
+06-25 13:59:00.559  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1886)]: 
+06-25 13:59:00.559  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1858)]: ********* Decoder status **********
+06-25 13:59:00.559  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1896)]: id = 1, isUsed = 0, type = 0
+06-25 13:59:00.559  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1897)]: Used on routes:
+06-25 13:59:00.559  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1903)]: 
+06-25 13:59:00.559  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1864)]: ****** Mass Storage status ********
+06-25 13:59:00.559  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1913)]: id = 4d41, isUsed = 0
+06-25 13:59:00.559  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1914)]: Used on routes:
+06-25 13:59:00.559  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1920)]: 
+06-25 13:59:00.559  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1869)]: 
+06-25 13:59:00.559  1865  2089 E iwedia/comedia3: 
+06-25 13:59:00.559  1865  2089 E iwedia/comedia3: ***********************************
+06-25 13:59:00.559  1865  2089 E iwedia/comedia3: 
+06-25 13:59:00.559  1865  2089 D iwedia/mal: MAL_RM_GetInstallRoute - 193: CM_RM_GetLiveRoute failed, error = 4
+06-25 13:59:00.559  1865  2089 D ComediaRouteManagerControl: routeManagerGetInstallRoute 0
+06-25 13:59:00.559  1865  2089 E ScanControl: appendList(false) MAL_TUNER_AppendList
+06-25 13:59:00.559  1865  2089 E ScanControl: autoScanURL ( file:///data/data/ch0.ts) routeId = 0
+06-25 13:59:00.559  1865  2089 D iwedia/mal: MAL_TUNER_AutoScanURL - line: 287: Enter MAL_TUNER_AutoScanURL, routeId = 0 
+06-25 13:59:00.559  1865  2089 D iwedia/comedia3: CM_PIPEi_GetMagicNumberFromHandle: Can't find route
+06-25 13:59:00.559  1865  2089 D iwedia/comedia3: CM_PIPE_GetFrontendDescriptor: Error in CM_PIPEi_GetMagicNumberFromHandle
+06-25 13:59:00.559  1865  2089 D iwedia/mal: MAL_TUNER_AutoScanURL - line: 307: MAL_TUNER cmPipe_GetSourceType failed
+06-25 13:59:00.559  2006  2006 E BroadcastTvInputService: autoScan failed for file:///data/data/ch0.ts: ERROR
+06-25 13:59:00.564   672   828 W AS.SfxHelper: MediaPlayer IOException: java.io.FileNotFoundException: /system/media/audio/ui/Effect_Tick.ogg: open failed: ENOENT (No such file or directory)
+06-25 13:59:00.720  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(329)]: CM_RM_GetInstallRoute: cmRMp_FindFrontendForMultiplex couldn't find free resource
+06-25 13:59:00.720  1865  2089 E iwedia/comedia3: [(C) cm_route_manager_usage_monitor.c(310)]: Used routes
+06-25 13:59:00.720  1865  2089 E iwedia/comedia3: [(C) cm_route_manager_usage_monitor.c(311)]: ******************************
+06-25 13:59:00.720  1865  2089 E iwedia/comedia3: [(C) cm_route_manager_usage_monitor.c(314)]: 0. 0xe9456b70 -1 INSTALL
+06-25 13:59:00.720  1865  2089 E iwedia/comedia3: [(C) cm_route_manager_usage_monitor.c(314)]: 1. 0xe9456b98 -1 INSTALL
+06-25 13:59:00.720  1865  2089 E iwedia/comedia3: [(C) cm_route_manager_usage_monitor.c(314)]: 2. 0xe9456bc0 -1 INSTALL
+06-25 13:59:00.720  1865  2089 E iwedia/comedia3: [(C) cm_route_manager_usage_monitor.c(319)]: ******************************
+06-25 13:59:00.720  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1849)]: ***********************************
+06-25 13:59:00.720  1865  2089 E iwedia/comedia3: 
+06-25 13:59:00.720  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1852)]: *********** FE status *************
+06-25 13:59:00.720  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1879)]: id = 0, isUsed = 1, isScanning = 1
+06-25 13:59:00.720  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1880)]: Used on routes:
+06-25 13:59:00.720  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1883)]: e9456b70
+06-25 13:59:00.720  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1886)]: 
+06-25 13:59:00.720  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1879)]: id = 1, isUsed = 1, isScanning = 1
+06-25 13:59:00.720  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1880)]: Used on routes:
+06-25 13:59:00.720  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1883)]: e9456b98
+06-25 13:59:00.720  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1886)]: 
+06-25 13:59:00.720  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1879)]: id = 2, isUsed = 1, isScanning = 1
+06-25 13:59:00.720  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1880)]: Used on routes:
+06-25 13:59:00.720  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1883)]: e9456bc0
+06-25 13:59:00.720  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1886)]: 
+06-25 13:59:00.720  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1858)]: ********* Decoder status **********
+06-25 13:59:00.720  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1896)]: id = 1, isUsed = 0, type = 0
+06-25 13:59:00.720  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1897)]: Used on routes:
+06-25 13:59:00.720  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1903)]: 
+06-25 13:59:00.720  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1864)]: ****** Mass Storage status ********
+06-25 13:59:00.720  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1913)]: id = 4d41, isUsed = 0
+06-25 13:59:00.720  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1914)]: Used on routes:
+06-25 13:59:00.720  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1920)]: 
+06-25 13:59:00.720  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1869)]: 
+06-25 13:59:00.720  1865  2089 E iwedia/comedia3: 
+06-25 13:59:00.720  1865  2089 E iwedia/comedia3: ***********************************
+06-25 13:59:00.720  1865  2089 E iwedia/comedia3: 
+06-25 13:59:00.720  1865  2089 D iwedia/mal: MAL_RM_GetInstallRoute - 193: CM_RM_GetLiveRoute failed, error = 4
+06-25 13:59:00.720  1865  2089 D ComediaRouteManagerControl: routeManagerGetInstallRoute 0
+06-25 13:59:00.720  1865  2089 E ScanControl: appendList(false) MAL_TUNER_AppendList
+06-25 13:59:00.720  1865  2089 E ScanControl: autoScanURL ( file:///data/data/ch0.ts) routeId = 0
+06-25 13:59:00.720  1865  2089 D iwedia/mal: MAL_TUNER_AutoScanURL - line: 287: Enter MAL_TUNER_AutoScanURL, routeId = 0 
+06-25 13:59:00.720  1865  2089 D iwedia/comedia3: CM_PIPEi_GetMagicNumberFromHandle: Can't find route
+06-25 13:59:00.720  1865  2089 D iwedia/comedia3: CM_PIPE_GetFrontendDescriptor: Error in CM_PIPEi_GetMagicNumberFromHandle
+06-25 13:59:00.720  1865  2089 D iwedia/mal: MAL_TUNER_AutoScanURL - line: 307: MAL_TUNER cmPipe_GetSourceType failed
+06-25 13:59:00.720  2006  2006 E BroadcastTvInputService: autoScan failed for file:///data/data/ch0.ts: ERROR
+06-25 13:59:00.728   672   828 W AS.SfxHelper: MediaPlayer IOException: java.io.FileNotFoundException: /system/media/audio/ui/Effect_Tick.ogg: open failed: ENOENT (No such file or directory)
+06-25 13:59:00.867  1865  1915 D iwedia/mal: MAL_COMMON_TimeDate_NotifyFct - line: 1599: Invalid event 1
+06-25 13:59:00.873  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(329)]: CM_RM_GetInstallRoute: cmRMp_FindFrontendForMultiplex couldn't find free resource
+06-25 13:59:00.873  1865  2089 E iwedia/comedia3: [(C) cm_route_manager_usage_monitor.c(310)]: Used routes
+06-25 13:59:00.873  1865  2089 E iwedia/comedia3: [(C) cm_route_manager_usage_monitor.c(311)]: ******************************
+06-25 13:59:00.873  1865  2089 E iwedia/comedia3: [(C) cm_route_manager_usage_monitor.c(314)]: 0. 0xe9456b70 -1 INSTALL
+06-25 13:59:00.873  1865  2089 E iwedia/comedia3: [(C) cm_route_manager_usage_monitor.c(314)]: 1. 0xe9456b98 -1 INSTALL
+06-25 13:59:00.873  1865  2089 E iwedia/comedia3: [(C) cm_route_manager_usage_monitor.c(314)]: 2. 0xe9456bc0 -1 INSTALL
+06-25 13:59:00.873  1865  2089 E iwedia/comedia3: [(C) cm_route_manager_usage_monitor.c(319)]: ******************************
+06-25 13:59:00.873  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1849)]: ***********************************
+06-25 13:59:00.873  1865  2089 E iwedia/comedia3: 
+06-25 13:59:00.873  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1852)]: *********** FE status *************
+06-25 13:59:00.873  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1879)]: id = 0, isUsed = 1, isScanning = 1
+06-25 13:59:00.873  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1880)]: Used on routes:
+06-25 13:59:00.873  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1883)]: e9456b70
+06-25 13:59:00.873  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1886)]: 
+06-25 13:59:00.873  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1879)]: id = 1, isUsed = 1, isScanning = 1
+06-25 13:59:00.873  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1880)]: Used on routes:
+06-25 13:59:00.873  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1883)]: e9456b98
+06-25 13:59:00.873  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1886)]: 
+06-25 13:59:00.873  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1879)]: id = 2, isUsed = 1, isScanning = 1
+06-25 13:59:00.873  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1880)]: Used on routes:
+06-25 13:59:00.873  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1883)]: e9456bc0
+06-25 13:59:00.873  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1886)]: 
+06-25 13:59:00.873  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1858)]: ********* Decoder status **********
+06-25 13:59:00.873  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1896)]: id = 1, isUsed = 0, type = 0
+06-25 13:59:00.873  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1897)]: Used on routes:
+06-25 13:59:00.873  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1903)]: 
+06-25 13:59:00.873  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1864)]: ****** Mass Storage status ********
+06-25 13:59:00.873  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1913)]: id = 4d41, isUsed = 0
+06-25 13:59:00.873  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1914)]: Used on routes:
+06-25 13:59:00.873  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1920)]: 
+06-25 13:59:00.873  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1869)]: 
+06-25 13:59:00.873  1865  2089 E iwedia/comedia3: 
+06-25 13:59:00.873  1865  2089 E iwedia/comedia3: ***********************************
+06-25 13:59:00.873  1865  2089 E iwedia/comedia3: 
+06-25 13:59:00.873  1865  2089 D iwedia/mal: MAL_RM_GetInstallRoute - 193: CM_RM_GetLiveRoute failed, error = 4
+06-25 13:59:00.873  1865  2089 D ComediaRouteManagerControl: routeManagerGetInstallRoute 0
+06-25 13:59:00.873  1865  2089 E ScanControl: appendList(false) MAL_TUNER_AppendList
+06-25 13:59:00.873  1865  2089 E ScanControl: autoScanURL ( file:///data/data/ch0.ts) routeId = 0
+06-25 13:59:00.873  1865  2089 D iwedia/mal: MAL_TUNER_AutoScanURL - line: 287: Enter MAL_TUNER_AutoScanURL, routeId = 0 
+06-25 13:59:00.873  1865  2089 D iwedia/comedia3: CM_PIPEi_GetMagicNumberFromHandle: Can't find route
+06-25 13:59:00.873  1865  2089 D iwedia/comedia3: CM_PIPE_GetFrontendDescriptor: Error in CM_PIPEi_GetMagicNumberFromHandle
+06-25 13:59:00.873  1865  2089 D iwedia/mal: MAL_TUNER_AutoScanURL - line: 307: MAL_TUNER cmPipe_GetSourceType failed
+06-25 13:59:00.873  2006  2006 E BroadcastTvInputService: autoScan failed for file:///data/data/ch0.ts: ERROR
+06-25 13:59:00.874  1865  1891 D iwedia/comedia3: Assertion failed (isDone == 1) in FILE vendor/iwedia/tuner-halx/software_components/xcross-mw/comedia3/comedia/core/system/src/sys_mngr/sys_mngr_state_machine.c, LINE 706
+06-25 13:59:00.876   672   828 W AS.SfxHelper: MediaPlayer IOException: java.io.FileNotFoundException: /system/media/audio/ui/Effect_Tick.ogg: open failed: ENOENT (No such file or directory)
+06-25 13:59:00.915   447   447 E android.hardware.tv.hdmi.cec: [halimp_aidl] file open failed for writing
+06-25 13:59:01.009  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(329)]: CM_RM_GetInstallRoute: cmRMp_FindFrontendForMultiplex couldn't find free resource
+06-25 13:59:01.009  1865  2089 E iwedia/comedia3: [(C) cm_route_manager_usage_monitor.c(310)]: Used routes
+06-25 13:59:01.009  1865  2089 E iwedia/comedia3: [(C) cm_route_manager_usage_monitor.c(311)]: ******************************
+06-25 13:59:01.009  1865  2089 E iwedia/comedia3: [(C) cm_route_manager_usage_monitor.c(314)]: 0. 0xe9456b70 -1 INSTALL
+06-25 13:59:01.009  1865  2089 E iwedia/comedia3: [(C) cm_route_manager_usage_monitor.c(314)]: 1. 0xe9456b98 -1 INSTALL
+06-25 13:59:01.009  1865  2089 E iwedia/comedia3: [(C) cm_route_manager_usage_monitor.c(314)]: 2. 0xe9456bc0 -1 INSTALL
+06-25 13:59:01.009  1865  2089 E iwedia/comedia3: [(C) cm_route_manager_usage_monitor.c(319)]: ******************************
+06-25 13:59:01.009  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1849)]: ***********************************
+06-25 13:59:01.009  1865  2089 E iwedia/comedia3: 
+06-25 13:59:01.009  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1852)]: *********** FE status *************
+06-25 13:59:01.009  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1879)]: id = 0, isUsed = 1, isScanning = 1
+06-25 13:59:01.009  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1880)]: Used on routes:
+06-25 13:59:01.009  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1883)]: e9456b70
+06-25 13:59:01.009  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1886)]: 
+06-25 13:59:01.009  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1879)]: id = 1, isUsed = 1, isScanning = 1
+06-25 13:59:01.009  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1880)]: Used on routes:
+06-25 13:59:01.009  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1883)]: e9456b98
+06-25 13:59:01.009  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1886)]: 
+06-25 13:59:01.009  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1879)]: id = 2, isUsed = 1, isScanning = 1
+06-25 13:59:01.009  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1880)]: Used on routes:
+06-25 13:59:01.009  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1883)]: e9456bc0
+06-25 13:59:01.009  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1886)]: 
+06-25 13:59:01.009  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1858)]: ********* Decoder status **********
+06-25 13:59:01.009  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1896)]: id = 1, isUsed = 0, type = 0
+06-25 13:59:01.009  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1897)]: Used on routes:
+06-25 13:59:01.009  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1903)]: 
+06-25 13:59:01.009  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1864)]: ****** Mass Storage status ********
+06-25 13:59:01.009  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1913)]: id = 4d41, isUsed = 0
+06-25 13:59:01.009  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1914)]: Used on routes:
+06-25 13:59:01.009  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1920)]: 
+06-25 13:59:01.009  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1869)]: 
+06-25 13:59:01.009  1865  2089 E iwedia/comedia3: 
+06-25 13:59:01.009  1865  2089 E iwedia/comedia3: ***********************************
+06-25 13:59:01.009  1865  2089 E iwedia/comedia3: 
+06-25 13:59:01.009  1865  2089 D iwedia/mal: MAL_RM_GetInstallRoute - 193: CM_RM_GetLiveRoute failed, error = 4
+06-25 13:59:01.009  1865  2089 D ComediaRouteManagerControl: routeManagerGetInstallRoute 0
+06-25 13:59:01.010  1865  2089 E ScanControl: appendList(false) MAL_TUNER_AppendList
+06-25 13:59:01.010  1865  2089 E ScanControl: autoScanURL ( file:///data/data/ch0.ts) routeId = 0
+06-25 13:59:01.010  1865  2089 D iwedia/mal: MAL_TUNER_AutoScanURL - line: 287: Enter MAL_TUNER_AutoScanURL, routeId = 0 
+06-25 13:59:01.010  1865  2089 D iwedia/comedia3: CM_PIPEi_GetMagicNumberFromHandle: Can't find route
+06-25 13:59:01.010  1865  2089 D iwedia/comedia3: CM_PIPE_GetFrontendDescriptor: Error in CM_PIPEi_GetMagicNumberFromHandle
+06-25 13:59:01.010  1865  2089 D iwedia/mal: MAL_TUNER_AutoScanURL - line: 307: MAL_TUNER cmPipe_GetSourceType failed
+06-25 13:59:01.010  2006  2006 E BroadcastTvInputService: autoScan failed for file:///data/data/ch0.ts: ERROR
+06-25 13:59:01.015   672   828 W AS.SfxHelper: MediaPlayer IOException: java.io.FileNotFoundException: /system/media/audio/ui/Effect_Tick.ogg: open failed: ENOENT (No such file or directory)
+06-25 13:59:01.174  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(329)]: CM_RM_GetInstallRoute: cmRMp_FindFrontendForMultiplex couldn't find free resource
+06-25 13:59:01.174  1865  2089 E iwedia/comedia3: [(C) cm_route_manager_usage_monitor.c(310)]: Used routes
+06-25 13:59:01.174  1865  2089 E iwedia/comedia3: [(C) cm_route_manager_usage_monitor.c(311)]: ******************************
+06-25 13:59:01.174  1865  2089 E iwedia/comedia3: [(C) cm_route_manager_usage_monitor.c(314)]: 0. 0xe9456b70 -1 INSTALL
+06-25 13:59:01.174  1865  2089 E iwedia/comedia3: [(C) cm_route_manager_usage_monitor.c(314)]: 1. 0xe9456b98 -1 INSTALL
+06-25 13:59:01.174  1865  2089 E iwedia/comedia3: [(C) cm_route_manager_usage_monitor.c(314)]: 2. 0xe9456bc0 -1 INSTALL
+06-25 13:59:01.174  1865  2089 E iwedia/comedia3: [(C) cm_route_manager_usage_monitor.c(319)]: ******************************
+06-25 13:59:01.174  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1849)]: ***********************************
+06-25 13:59:01.174  1865  2089 E iwedia/comedia3: 
+06-25 13:59:01.174  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1852)]: *********** FE status *************
+06-25 13:59:01.174  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1879)]: id = 0, isUsed = 1, isScanning = 1
+06-25 13:59:01.174  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1880)]: Used on routes:
+06-25 13:59:01.174  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1883)]: e9456b70
+06-25 13:59:01.174  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1886)]: 
+06-25 13:59:01.174  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1879)]: id = 1, isUsed = 1, isScanning = 1
+06-25 13:59:01.174  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1880)]: Used on routes:
+06-25 13:59:01.174  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1883)]: e9456b98
+06-25 13:59:01.174  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1886)]: 
+06-25 13:59:01.174  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1879)]: id = 2, isUsed = 1, isScanning = 1
+06-25 13:59:01.174  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1880)]: Used on routes:
+06-25 13:59:01.174  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1883)]: e9456bc0
+06-25 13:59:01.174  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1886)]: 
+06-25 13:59:01.174  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1858)]: ********* Decoder status **********
+06-25 13:59:01.174  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1896)]: id = 1, isUsed = 0, type = 0
+06-25 13:59:01.174  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1897)]: Used on routes:
+06-25 13:59:01.174  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1903)]: 
+06-25 13:59:01.174  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1864)]: ****** Mass Storage status ********
+06-25 13:59:01.174  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1913)]: id = 4d41, isUsed = 0
+06-25 13:59:01.174  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1914)]: Used on routes:
+06-25 13:59:01.174  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1920)]: 
+06-25 13:59:01.174  1865  2089 E iwedia/comedia3: [(C) cm_route_manager.c(1869)]: 
+06-25 13:59:01.174  1865  2089 E iwedia/comedia3: 
+06-25 13:59:01.174  1865  2089 E iwedia/comedia3: ***********************************
+06-25 13:59:01.174  1865  2089 E iwedia/comedia3: 
+06-25 13:59:01.174  1865  2089 D iwedia/mal: MAL_RM_GetInstallRoute - 193: CM_RM_GetLiveRoute failed, error = 4
+06-25 13:59:01.174  1865  2089 D ComediaRouteManagerControl: routeManagerGetInstallRoute 0
+06-25 13:59:01.174  1865  2089 E ScanControl: appendList(false) MAL_TUNER_AppendList
+06-25 13:59:01.174  1865  2089 E ScanControl: autoScanURL ( file:///data/data/ch0.ts) routeId = 0
+06-25 13:59:01.174  1865  2089 D iwedia/mal: MAL_TUNER_AutoScanURL - line: 287: Enter MAL_TUNER_AutoScanURL, routeId = 0 
+06-25 13:59:01.174  1865  2089 D iwedia/comedia3: CM_PIPEi_GetMagicNumberFromHandle: Can't find route
+06-25 13:59:01.174  1865  2089 D iwedia/comedia3: CM_PIPE_GetFrontendDescriptor: Error in CM_PIPEi_GetMagicNumberFromHandle
+06-25 13:59:01.174  1865  2089 D iwedia/mal: MAL_TUNER_AutoScanURL - line: 307: MAL_TUNER cmPipe_GetSourceType failed
+06-25 13:59:01.174  2006  2006 E BroadcastTvInputService: autoScan failed for file:///data/data/ch0.ts: ERROR
+06-25 13:59:01.182   672   828 W AS.SfxHelper: MediaPlayer IOException: java.io.FileNotFoundException: /system/media/audio/ui/Effect_Tick.ogg: open failed: ENOENT (No such file or directory)
+06-25 13:59:02.917   447   447 E android.hardware.tv.hdmi.cec: [halimp_aidl] file open failed for writing
+06-25 13:59:03.054   672  1800 I WifiService: getConnectionInfo uid=10035
+06-25 13:59:03.054   672  1800 V WifiPermissionsUtil: checkCallersLocationPermission(com.android.google.gce.gceservice): uid 10035 doesn't have permission android.permission.ACCESS_COARSE_LOCATION
+06-25 13:59:03.055   672  1800 V WifiPermissionsUtil: enforceCanAccessScanResults(pkg=com.android.google.gce.gceservice, uid=10035): canCallingUidAccessLocation=false, canAppPackageUseLocation=false
+06-25 13:59:03.055   672  1800 V WifiService: Keeping REDACT_FOR_ACCESS_FINE_LOCATION:java.lang.SecurityException: UID 10035 has no location permission
+06-25 13:59:04.919   447   447 E android.hardware.tv.hdmi.cec: [halimp_aidl] file open failed for writing
+06-25 13:59:04.920   447   447 E android.hardware.tv.hdmi.cec: [halimp_aidl] file open failed for writing
+06-25 13:59:05.379   672   753 D ActivityManager: freezing 1011 com.android.tv.settings

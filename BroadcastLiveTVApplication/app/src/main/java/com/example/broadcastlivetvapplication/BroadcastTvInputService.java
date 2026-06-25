@@ -26,13 +26,13 @@ public class BroadcastTvInputService extends TvInputService {
 
     /** Cuttlefish demo izvori: .ts fajlovi koji glume tuner/HAL ulaz (vidi UML "Tuner SDK/HAL - demonstration"). */
     private static final String[] SCAN_SOURCE_URLS = {
-            "file:///tmp/ch0.ts",
-            "file:///tmp/ch1.ts",
-            "file:///tmp/ch24.ts",
+            "file:///data/data/ch0.ts",
+            "file:///data/data/ch1.ts",
+            "file:///data/data/ch24.ts",
     };
-    private static final int SERVICE_LIST_INDEX = 0;
 
     public interface ScanResultListener {
+        void onScanProgress(int sourceIndex, int sourceCount, String sourceUrl);
         void onScanFinished(int channelCount);
         void onScanError(String reason);
     }
@@ -51,6 +51,7 @@ public class BroadcastTvInputService extends TvInputService {
     private ServiceControl mServiceControl;
 
     private ScanResultListener mScanResultListener;
+    private String mCurrentInputId;
     private int mInstallRouteId = -1;
     private int mNextScanSourceIndex = 0;
 
@@ -58,6 +59,7 @@ public class BroadcastTvInputService extends TvInputService {
     public void onCreate() {
         super.onCreate();
         sInstance = this;
+
         mDtvContext = new BroadcastDtvContext(this, new BroadcastDtvContext.AvailabilityListener() {
             @Override
             public void onDtvAvailable() {
@@ -97,7 +99,6 @@ public class BroadcastTvInputService extends TvInputService {
         mScanResultListener = listener;
     }
 
-    /** App -> TIS: start scan (vidi UML "Service Installation"). Skenira sve poznate izvore redom. */
     public void startScan(@NonNull String inputId) {
         if (mRouteManagerControl == null || mScanControl == null) {
             notifyError("Comedia middleware not connected");
@@ -106,8 +107,19 @@ public class BroadcastTvInputService extends TvInputService {
 
         mCurrentInputId = inputId;
         mInstallRouteId = mRouteManagerControl.getInstallRoute(RouteManagerMediumType.MEDIUM_IP);
+        Log.d(TAG, "startScan inputId=" + inputId + " installRouteId=" + mInstallRouteId);
 
-        mScanControl.registerListener(mScanListener);
+        if (mInstallRouteId == 0) {
+            notifyError("getInstallRoute failed (no free route resource)");
+            return;
+        }
+
+        A4TVStatus registerStatus = mScanControl.registerListener(mScanListener);
+        if (registerStatus != A4TVStatus.SUCCESS) {
+            notifyError("registerListener failed: " + registerStatus);
+            return;
+        }
+
         mNextScanSourceIndex = 0;
         scanNextSource();
     }
@@ -119,14 +131,16 @@ public class BroadcastTvInputService extends TvInputService {
 
         mScanControl.appendList(!isFirstSource);
 
+        Log.d(TAG, "scanNextSource: index=" + mNextScanSourceIndex + " url=" + sourceUrl);
+        if (mScanResultListener != null) {
+            mScanResultListener.onScanProgress(mNextScanSourceIndex + 1, SCAN_SOURCE_URLS.length, sourceUrl);
+        }
         A4TVStatus status = mScanControl.autoScan(mInstallRouteId, sourceUrl);
         if (status != A4TVStatus.SUCCESS) {
             mScanControl.unregisterListener(mScanListener);
             notifyError("autoScan failed for " + sourceUrl + ": " + status);
         }
     }
-
-    private String mCurrentInputId;
 
     private final ScanListener mScanListener = new ScanListener() {
         @Override
@@ -147,17 +161,18 @@ public class BroadcastTvInputService extends TvInputService {
                 return;
             }
 
-            int count = publishInstalledServices(mCurrentInputId);
             mScanControl.unregisterListener(mScanListener);
+            int count = publishInstalledServices(mCurrentInputId);
             if (mScanResultListener != null) {
                 mScanResultListener.onScanFinished(count);
             }
         }
 
         @Override
-        public void scanAborted(int routeId, int reason) {
+        public void scanAborted(int routeId, int broadcastType) {
+            Log.e(TAG, "scanAborted routeId=" + routeId + " broadcastType=" + broadcastType);
             mScanControl.unregisterListener(mScanListener);
-            notifyError("scan aborted: " + reason);
+            notifyError("scan aborted: " + broadcastType);
         }
 
         @Override
@@ -187,11 +202,11 @@ public class BroadcastTvInputService extends TvInputService {
         }
 
         @Override
-        public void scanProgressChanged(int routeId, int percent) {
+        public void scanProgressChanged(int routeId, int value) {
         }
 
         @Override
-        public void antennaConnected(int routeId, boolean connected) {
+        public void antennaConnected(int routeId, boolean state) {
         }
 
         @Override
@@ -211,12 +226,12 @@ public class BroadcastTvInputService extends TvInputService {
         }
 
         @Override
-        public void tunerLocked(int routeId, boolean locked) {
-            Log.d(TAG, "tunerLocked routeId=" + routeId + " locked=" + locked);
+        public void tunerLocked(int id, boolean locked) {
+            Log.d(TAG, "tunerLocked id=" + id + " locked=" + locked);
         }
 
         @Override
-        public void networkChanged(int routeId) {
+        public void networkChanged(int networkId) {
         }
 
         @Override
@@ -224,7 +239,7 @@ public class BroadcastTvInputService extends TvInputService {
         }
 
         @Override
-        public void triggerStatus(int status) {
+        public void triggerStatus(int routeId) {
         }
 
         @Override
@@ -235,6 +250,8 @@ public class BroadcastTvInputService extends TvInputService {
         public void signalReturned() {
         }
     };
+
+    private static final int SERVICE_LIST_INDEX = 0;
 
     /** TIS cita rezultate iz Service & Mux DB preko ServiceControl i upisuje ih u TvContract.Channels. */
     private int publishInstalledServices(String inputId) {
@@ -257,6 +274,8 @@ public class BroadcastTvInputService extends TvInputService {
         values.put(TvContract.Channels.COLUMN_INPUT_ID, inputId);
         values.put(TvContract.Channels.COLUMN_DISPLAY_NAME, descriptor.getName());
         values.put(TvContract.Channels.COLUMN_DISPLAY_NUMBER, String.valueOf(descriptor.getLCN()));
+        values.put(TvContract.Channels.COLUMN_TYPE, TvContract.Channels.TYPE_DVB_T);
+        values.put(TvContract.Channels.COLUMN_SERVICE_TYPE, TvContract.Channels.SERVICE_TYPE_AUDIO_VIDEO);
         values.put(TvContract.Channels.COLUMN_ORIGINAL_NETWORK_ID, descriptor.getONID());
         values.put(TvContract.Channels.COLUMN_TRANSPORT_STREAM_ID, descriptor.getTSID());
         values.put(TvContract.Channels.COLUMN_SERVICE_ID, descriptor.getServiceId());
@@ -304,14 +323,10 @@ public class BroadcastTvInputService extends TvInputService {
         if (mScanControl != null) {
             mScanControl.unregisterListener(mScanListener);
         }
-        if (mDtvContext != null) {
-            mDtvContext.disconnect();
-        }
         sInstance = null;
         super.onDestroy();
     }
 
-    // Tuning/playback (Session) je van scope-a Service Installation toka - sledeci korak.
     @Nullable
     @Override
     public Session onCreateSession(@NonNull String inputId) {
