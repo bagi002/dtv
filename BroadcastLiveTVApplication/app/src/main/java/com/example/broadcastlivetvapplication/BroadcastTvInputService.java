@@ -1,6 +1,7 @@
 package com.example.broadcastlivetvapplication;
 
 import android.content.ContentValues;
+import android.content.res.XmlResourceParser;
 import android.database.Cursor;
 import android.media.tv.TvContract;
 import android.media.tv.TvInputService;
@@ -15,6 +16,13 @@ import com.iwedia.dtv.comediaroutemanager.RouteManagerMediumType;
 import com.iwedia.dtv.scan.ScanInstallStatus;
 import com.iwedia.dtv.service.ServiceDescriptor;
 
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import iwedia.dtv.comediaroutemanager.ComediaRouteManagerControl;
 import iwedia.dtv.scan.ScanControl;
 import iwedia.dtv.scan.ScanListener;
@@ -24,12 +32,33 @@ public class BroadcastTvInputService extends TvInputService {
 
     private static final String TAG = "BroadcastTvInputService";
 
-    /** Cuttlefish demo izvori: .ts fajlovi koji glume tuner/HAL ulaz (vidi UML "Tuner SDK/HAL - demonstration"). */
-    private static final String[] SCAN_SOURCE_URLS = {
-            "file:///data/data/ch0.ts",
-            "file:///data/data/ch1.ts",
-            "file:///data/data/ch24.ts",
-    };
+    /** Izvori za scan se ucitavaju iz res/xml/streams.xml (vidi UML "Tuner SDK/HAL - demonstration"). */
+    private String[] mScanSourceUrls = new String[0];
+
+    /** Parsira res/xml/streams.xml i vraca <input> vrednosti svih <channel> elemenata. */
+    private String[] loadScanSourceUrls() {
+        List<String> urls = new ArrayList<>();
+        try (XmlResourceParser parser = getResources().getXml(R.xml.streams)) {
+            int eventType = parser.getEventType();
+            boolean insideInput = false;
+            while (eventType != XmlPullParser.END_DOCUMENT) {
+                if (eventType == XmlPullParser.START_TAG && "input".equals(parser.getName())) {
+                    insideInput = true;
+                } else if (eventType == XmlPullParser.TEXT && insideInput) {
+                    String text = parser.getText();
+                    if (text != null && !text.trim().isEmpty()) {
+                        urls.add(text.trim());
+                    }
+                } else if (eventType == XmlPullParser.END_TAG && "input".equals(parser.getName())) {
+                    insideInput = false;
+                }
+                eventType = parser.next();
+            }
+        } catch (XmlPullParserException | IOException e) {
+            Log.e(TAG, "Failed to parse streams.xml", e);
+        }
+        return urls.toArray(new String[0]);
+    }
 
     public interface ScanResultListener {
         void onScanProgress(int sourceIndex, int sourceCount, String sourceUrl);
@@ -59,6 +88,7 @@ public class BroadcastTvInputService extends TvInputService {
     public void onCreate() {
         super.onCreate();
         sInstance = this;
+        mScanSourceUrls = loadScanSourceUrls();
 
         mDtvContext = new BroadcastDtvContext(this, new BroadcastDtvContext.AvailabilityListener() {
             @Override
@@ -124,16 +154,16 @@ public class BroadcastTvInputService extends TvInputService {
         scanNextSource();
     }
 
-    /** Pokrece autoScan za sledeci izvor iz SCAN_SOURCE_URLS; append=false samo za prvi (brise staru listu). */
+    /** Pokrece autoScan za sledeci izvor iz mScanSourceUrls; append=false samo za prvi (brise staru listu). */
     private void scanNextSource() {
         boolean isFirstSource = mNextScanSourceIndex == 0;
-        String sourceUrl = SCAN_SOURCE_URLS[mNextScanSourceIndex];
+        String sourceUrl = mScanSourceUrls[mNextScanSourceIndex];
 
         mScanControl.appendList(!isFirstSource);
 
         Log.d(TAG, "scanNextSource: index=" + mNextScanSourceIndex + " url=" + sourceUrl);
         if (mScanResultListener != null) {
-            mScanResultListener.onScanProgress(mNextScanSourceIndex + 1, SCAN_SOURCE_URLS.length, sourceUrl);
+            mScanResultListener.onScanProgress(mNextScanSourceIndex + 1, mScanSourceUrls.length, sourceUrl);
         }
         A4TVStatus status = mScanControl.autoScan(mInstallRouteId, sourceUrl);
         if (status != A4TVStatus.SUCCESS) {
@@ -154,9 +184,9 @@ public class BroadcastTvInputService extends TvInputService {
 
         @Override
         public void scanFinished(int routeId) {
-            Log.d(TAG, "scanFinished routeId=" + routeId + " source=" + SCAN_SOURCE_URLS[mNextScanSourceIndex]);
+            Log.d(TAG, "scanFinished routeId=" + routeId + " source=" + mScanSourceUrls[mNextScanSourceIndex]);
             mNextScanSourceIndex++;
-            if (mNextScanSourceIndex < SCAN_SOURCE_URLS.length) {
+            if (mNextScanSourceIndex < mScanSourceUrls.length) {
                 scanNextSource();
                 return;
             }
@@ -273,7 +303,7 @@ public class BroadcastTvInputService extends TvInputService {
         ContentValues values = new ContentValues();
         values.put(TvContract.Channels.COLUMN_INPUT_ID, inputId);
         values.put(TvContract.Channels.COLUMN_DISPLAY_NAME, descriptor.getName());
-        values.put(TvContract.Channels.COLUMN_DISPLAY_NUMBER, String.valueOf(descriptor.getLCN()));
+        values.put(TvContract.Channels.COLUMN_DISPLAY_NUMBER, String.valueOf(descriptor.getServiceId()));
         values.put(TvContract.Channels.COLUMN_TYPE, TvContract.Channels.TYPE_DVB_T);
         values.put(TvContract.Channels.COLUMN_SERVICE_TYPE, TvContract.Channels.SERVICE_TYPE_AUDIO_VIDEO);
         values.put(TvContract.Channels.COLUMN_ORIGINAL_NETWORK_ID, descriptor.getONID());
