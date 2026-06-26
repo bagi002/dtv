@@ -5,9 +5,9 @@ import android.util.Log;
 
 import iwedia.dtv.DtvContext;
 
-public class BroadcastDtvContext extends DtvContext {
+public class ComediaDtvContext extends DtvContext {
 
-    private static final String TAG = "BroadcastDtvContext";
+    private static final String TAG = "ComediaDtvContext";
 
     public interface AvailabilityListener {
         void onDtvAvailable();
@@ -16,7 +16,7 @@ public class BroadcastDtvContext extends DtvContext {
 
     private final AvailabilityListener mListener;
 
-    public BroadcastDtvContext(Context context, AvailabilityListener listener) {
+    public ComediaDtvContext(Context context, AvailabilityListener listener) {
         super(context);
         mListener = listener;
     }

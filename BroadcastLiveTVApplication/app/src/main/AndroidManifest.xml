@@ -31,7 +31,7 @@
         <!-- Broadcast TV Input: discovered and registered by the system (TvInputManager)
              after install via the TvInputService intent-filter + meta-data XML. -->
         <service
-            android:name=".BroadcastTvInputService"
+            android:name=".DtvTvInputService"
             android:label="@string/app_name"
             android:enabled="true"
             android:exported="true"

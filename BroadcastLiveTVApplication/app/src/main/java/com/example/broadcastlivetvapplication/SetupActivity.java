@@ -18,12 +18,12 @@ import android.widget.TextView;
 public class SetupActivity extends Activity {
 
     private String mInputId;
-    private BroadcastTvInputService mService;
+    private DtvTvInputService mService;
     private TextView mStatusText;
     private ProgressBar mScanProgressBar;
 
-    private final BroadcastTvInputService.ScanResultListener mScanResultListener =
-            new BroadcastTvInputService.ScanResultListener() {
+    private final DtvTvInputService.ScanResultListener mScanResultListener =
+            new DtvTvInputService.ScanResultListener() {
         @Override
         public void onScanProgress(int sourceIndex, int sourceCount, String sourceUrl) {
             runOnUiThread(() -> {
@@ -51,7 +51,7 @@ public class SetupActivity extends Activity {
     private final ServiceConnection mServiceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder binder) {
-            mService = BroadcastTvInputService.getInstance();
+            mService = DtvTvInputService.getInstance();
             if (mService != null) {
                 mService.setScanResultListener(mScanResultListener);
             }
@@ -75,7 +75,7 @@ public class SetupActivity extends Activity {
         Button scanButton = findViewById(R.id.scan_button);
         scanButton.setOnClickListener(v -> startScan());
 
-        bindService(new Intent(this, BroadcastTvInputService.class), mServiceConnection, Context.BIND_AUTO_CREATE);
+        bindService(new Intent(this, DtvTvInputService.class), mServiceConnection, Context.BIND_AUTO_CREATE);
     }
 
     private void startScan() {
