@@ -3,8 +3,12 @@ title Service Installation - broadcast (liba4tv)
 
 actor User
 box "Android app" #EBF5FF
-  participant "Live TV App" as App
-  participant "Broadcast TvInputService" as TIS
+  participant "Live TV App\n(SetupActivity)" as App
+  participant "DtvTvInputService" as TIS
+  participant "StreamsXmlReader" as XMLR
+  participant "ComediaMiddlewareConnection" as MWC
+  participant "ChannelScanner" as CHSC
+  participant "ChannelPublisher" as CHPB
 end box
 
 box "liba4tv Java API (Android-facing wrapper)" #E8F5E9
@@ -27,21 +31,32 @@ end box
 participant "Android TV Provider\n(TvContract.Channels)" as TVP
 
 User -> App : Initiate scan (first-time install)
-App -> TIS : start scan
+App -> TIS : startScan(inputId)
 
-TIS -> ROUTE : getInstallRoute(RouteManagerMediumType.MEDIUM_IP)
-ROUTE --> TIS : routeID
+TIS -> XMLR : readScanSourceUrls(context)
+XMLR --> TIS : String[] sourceUrls\n(iz res/xml/streams.xml)
+
+TIS -> MWC : getRouteManagerControl() / getScanControl()
+MWC --> TIS : ComediaRouteManagerControl, ScanControl
+note over MWC : drzi konekciju ka Comedia middleware-u\n(ComediaDtvContext) i Control instance
+
+TIS -> CHSC : startScan(sourceUrls)
+
+CHSC -> ROUTE : getInstallRoute(RouteManagerMediumType.MEDIUM_IP)
+ROUTE --> CHSC : routeID
 note over ROUTE : MEDIUM_IP = file/URL scan (Cuttlefish)
 
-TIS -> SCAN : registerListener(scanListener)
-TIS -> SCAN : appendList(false)
-note right of SCAN : append=false -> obrisi staru listu
+CHSC -> SCAN : registerListener(scanListener)
 
-== Skreniranje pokrenuto kroz ScanControl ==
-TIS -> SCAN : autoScan(routeID, "file:///data/clear_0002.ts")
-SCAN --> TIS : A4TVStatus
+== Skeniranje kroz niz izvora (ChannelScanner) ==
+loop za svaki sourceUrl u sourceUrls
+  CHSC -> SCAN : appendList(append)
+  note right of SCAN : append=false samo za prvi izvor (brise staru listu),\nappend=true za sve sledece (akumulira)
+  CHSC -> SCAN : autoScan(routeID, sourceUrl)
+  SCAN --> CHSC : A4TVStatus
+end
 note right of SCAN
- poziv prihvacen, skeniranje pokrenuto
+ poziv prihvacen, skeniranje pokrenuto za prvi izvor;\nostali izvori iz petlje se obradjuju nakon scanFinished (vidi nize)
 end note
 == Comedia native middleware ==
 
@@ -54,7 +69,7 @@ TSDK --> CHAL : izvor zakljucan (locked) + sekcije dostupne
 CHAL --> CORE : TDAL_DMX - section data (PAT, PMT, SDT)
 
 SCAN --> SCANL : tunerLocked(routeId, true)
-SCANL --> TIS : tunerLocked(routeId, true)
+SCANL --> CHSC : tunerLocked(routeId, true)
 
 loop za svaki servis/multipleks pronadjen u TS-u
   group Comedia Middleware Core
@@ -69,7 +84,7 @@ loop za svaki servis/multipleks pronadjen u TS-u
 end
 
 SCAN --> SCANL : installStatus(ScanInstallStatus)
-SCANL --> TIS : installStatus(ScanInstallStatus)
+SCANL --> CHSC : installStatus(ScanInstallStatus)
 note over CORE, CHAL : svi servisi su obradjeni
 
 CHAL -> TSDK : zatvori section filtere + zatvori izvor (file_close/teardown)
@@ -77,27 +92,37 @@ TSDK --> CHAL : interfejs unlocked
 CHAL --> CORE : izvor i demux path zatvoreni, route oslobodjen
 CORE -> CORE : routeManager - oslobodi install route (routeID)
 
-== ScanListener obavestava TIS da je instalacija gotova ==
+== ScanListener obavestava ChannelScanner da je instalacija (za trenutni izvor) gotova ==
 CORE --> SCAN : instalacija zavrsena (interno)
 SCAN --> SCANL : scanFinished(routeId)
-SCANL --> TIS : scanFinished(routeId)
+SCANL --> CHSC : scanFinished(routeId)
+note over CHSC
+ ako postoji sledeci sourceUrl u listi -> nazad na appendList(true)+autoScan
+ (ponavlja se petlja iz "Skeniranje kroz niz izvora");
+ inace -> unregisterListener(scanListener) i javi TIS-u kraj
+end note
 
-== TIS cita rezultate iz Service & Mux DB preko ServiceControl ==
+CHSC -> SCAN : unregisterListener(scanListener)
+CHSC --> TIS : onScanFinished()
 
-TIS -> SVC : getServiceListCount(listIndex)
+== TIS preko ChannelPublisher cita rezultate iz Service & Mux DB ==
+
+TIS -> CHPB : publishInstalledServices(inputId)
+
+CHPB -> SVC : getServiceListCount(listIndex)
 SVC -> SDB : upit nad Service & Mux DB
 SDB --> SVC : broj servisa u listi
-SVC --> TIS : count
+SVC --> CHPB : count
 
 loop za svaki serviceIndex u [0, count)
-  TIS -> SVC : getServiceDescriptor(listIndex, serviceIndex)
+  CHPB -> SVC : getServiceDescriptor(listIndex, serviceIndex)
   SVC -> SDB : upit nad Service & Mux DB
   SDB --> SVC : ServiceDescriptor podaci
-  SVC --> TIS : ServiceDescriptor\n(getName, getONID, getTSID, getServiceId, getLCN, isScrambled...)
-  TIS -> TVP : insert/update channel (TvContract.Channels)\nmapiranje: ONID/TSID/SID -> Android channel/internal_provider_data
+  SVC --> CHPB : ServiceDescriptor\n(getName, getONID, getTSID, getServiceId, getLCN, isScrambled...)
+  CHPB -> TVP : insert/update channel (TvContract.Channels)\nmapiranje: ONID/TSID/SID -> Android channel/internal_provider_data\n(keyed po ONID+TSID+serviceId tripletu)
 end
 
-TIS -> SCAN : unregisterListener(scanListener)
-TIS --> App : Scan complete
+CHPB --> TIS : channelCount
+TIS --> App : Scan complete (onScanFinished(channelCount))
 
 @enduml
