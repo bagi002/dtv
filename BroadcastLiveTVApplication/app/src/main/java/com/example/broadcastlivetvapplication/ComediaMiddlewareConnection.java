@@ -6,6 +6,7 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 
 import iwedia.dtv.comediaroutemanager.ComediaRouteManagerControl;
+import iwedia.dtv.display.DisplayControl;
 import iwedia.dtv.scan.ScanControl;
 import iwedia.dtv.service.ServiceControl;
 
@@ -28,6 +29,8 @@ final class ComediaMiddlewareConnection {
     private ScanControl mScanControl;
     @Nullable
     private ServiceControl mServiceControl;
+    @Nullable
+    private DisplayControl mDisplayControl;
 
     ComediaMiddlewareConnection(Context context, Listener listener) {
         mListener = listener;
@@ -37,6 +40,7 @@ final class ComediaMiddlewareConnection {
                 mRouteManagerControl = createOrNull("ComediaRouteManagerControl", () -> new ComediaRouteManagerControl(mDtvContext));
                 mScanControl = createOrNull("ScanControl", () -> new ScanControl(mDtvContext));
                 mServiceControl = createOrNull("ServiceControl", () -> new ServiceControl(mDtvContext));
+                mDisplayControl = createOrNull("DisplayControl", () -> new DisplayControl(mDtvContext));
                 mListener.onMiddlewareAvailable();
             }
 
@@ -45,6 +49,7 @@ final class ComediaMiddlewareConnection {
                 mRouteManagerControl = null;
                 mScanControl = null;
                 mServiceControl = null;
+                mDisplayControl = null;
                 mListener.onMiddlewareUnavailable();
             }
         });
@@ -67,7 +72,8 @@ final class ComediaMiddlewareConnection {
     }
 
     boolean isAvailable() {
-        return mRouteManagerControl != null && mScanControl != null && mServiceControl != null;
+        return mRouteManagerControl != null && mScanControl != null && mServiceControl != null
+                && mDisplayControl != null;
     }
 
     @Nullable
@@ -83,5 +89,10 @@ final class ComediaMiddlewareConnection {
     @Nullable
     ServiceControl getServiceControl() {
         return mServiceControl;
+    }
+
+    @Nullable
+    DisplayControl getDisplayControl() {
+        return mDisplayControl;
     }
 }

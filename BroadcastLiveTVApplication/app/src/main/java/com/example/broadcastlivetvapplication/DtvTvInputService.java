@@ -32,6 +32,9 @@ public class DtvTvInputService extends TvInputService {
     private String mCurrentInputId;
     private ChannelScanner mChannelScanner;
 
+    @Nullable
+    private DtvTvInputSession mActiveSession;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -42,6 +45,9 @@ public class DtvTvInputService extends TvInputService {
             @Override
             public void onMiddlewareAvailable() {
                 Log.d(TAG, "Comedia middleware available");
+                if (mActiveSession != null) {
+                    mActiveSession.onMiddlewareReady();
+                }
             }
 
             @Override
@@ -49,6 +55,12 @@ public class DtvTvInputService extends TvInputService {
                 Log.d(TAG, "Comedia middleware unavailable");
             }
         });
+    }
+
+    void onSessionReleased(DtvTvInputSession session) {
+        if (mActiveSession == session) {
+            mActiveSession = null;
+        }
     }
 
     public void setScanResultListener(@Nullable ScanResultListener listener) {
@@ -109,6 +121,7 @@ public class DtvTvInputService extends TvInputService {
     @Nullable
     @Override
     public Session onCreateSession(@NonNull String inputId) {
-        return null;
+        mActiveSession = new DtvTvInputSession(this, this, mMiddlewareConnection);
+        return mActiveSession;
     }
 }
