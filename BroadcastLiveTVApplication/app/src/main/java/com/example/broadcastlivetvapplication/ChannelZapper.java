@@ -30,6 +30,7 @@ final class ChannelZapper {
     private final ResultListener mResultListener;
 
     private int mLiveRoute = 0;
+    private Surface mAppliedSurface;
 
     ChannelZapper(ComediaRouteManagerControl routeManagerControl, DisplayControl displayControl,
             ServiceControl serviceControl, ResultListener resultListener) {
@@ -49,10 +50,16 @@ final class ChannelZapper {
         }
         mLiveRoute = liveRoute;
 
-        A4TVStatus surfaceStatus = mDisplayControl.setVideoSurface(0, new SurfaceBundle(surface));
-        if (surfaceStatus != A4TVStatus.SUCCESS) {
-            mResultListener.onZapError("setVideoSurface failed: " + surfaceStatus);
-            return;
+        // Postavi surface samo kad se stvarno promenio; ponovno postavljanje istog surface-a
+        // na vec aktivan video plane zamrzava sliku pri promeni kanala.
+        if (surface != mAppliedSurface) {
+            A4TVStatus surfaceStatus = mDisplayControl.setVideoSurface(0, new SurfaceBundle(surface));
+            Log.d(TAG, "startZap setVideoSurface -> " + surfaceStatus);
+            if (surfaceStatus != A4TVStatus.SUCCESS) {
+                mResultListener.onZapError("setVideoSurface failed: " + surfaceStatus);
+                return;
+            }
+            mAppliedSurface = surface;
         }
 
         A4TVStatus registerStatus = mServiceControl.registerListener(mServiceListener);
