@@ -78,10 +78,52 @@ final class DtvTvInputSession extends TvInputService.Session {
         ChannelLookup.Result result = ChannelLookup.findServiceIndex(
                 mContext.getContentResolver(), mMiddlewareConnection.getServiceControl(), channelUri);
         if (result == null) {
+            // Servis nije u trenutnoj middleware listi — njegov multipleks je verovatno obrisan
+            // jer je neki drugi izvor skeniran posle njega. Re-skeniraj bas njegov .ts i probaj opet.
+            rescanAndRetryTune(channelUri);
+            return;
+        }
+
+        startZapWithResult(result);
+    }
+
+    private void rescanAndRetryTune(Uri channelUri) {
+        String sourceUrl = ChannelLookup.readSourceUrl(mContext.getContentResolver(), channelUri);
+        ChannelScanner scanner = mService.getChannelScanner();
+        Log.d(TAG, "rescanAndRetryTune: sourceUrl=" + sourceUrl + " scanner=" + scanner);
+        if (sourceUrl == null || scanner == null) {
+            Log.e(TAG, "rescanAndRetryTune: nema sourceUrl ili scanner za " + channelUri);
             notifyVideoUnavailable(TvInputManager.VIDEO_UNAVAILABLE_REASON_UNKNOWN);
             return;
         }
 
+        Log.d(TAG, "rescanAndRetryTune: re-skeniram " + sourceUrl + " za " + channelUri);
+        scanner.rescanSingleSource(sourceUrl, new ChannelScanner.RescanCallback() {
+            @Override
+            public void onRescanFinished(String rescannedUrl) {
+                Log.d(TAG, "rescanAndRetryTune: rescan zavrsen za " + rescannedUrl);
+                mMainHandler.post(() -> {
+                    ChannelLookup.Result result = ChannelLookup.findServiceIndex(
+                            mContext.getContentResolver(), mMiddlewareConnection.getServiceControl(), channelUri);
+                    if (result == null) {
+                        Log.e(TAG, "rescanAndRetryTune: servis i dalje nije nadjen nakon rescan-a");
+                        notifyVideoUnavailable(TvInputManager.VIDEO_UNAVAILABLE_REASON_UNKNOWN);
+                        return;
+                    }
+                    startZapWithResult(result);
+                });
+            }
+
+            @Override
+            public void onRescanError(String rescannedUrl, String reason) {
+                Log.e(TAG, "rescanAndRetryTune: rescan failed za " + rescannedUrl + ": " + reason);
+                mMainHandler.post(() ->
+                        notifyVideoUnavailable(TvInputManager.VIDEO_UNAVAILABLE_REASON_UNKNOWN));
+            }
+        });
+    }
+
+    private void startZapWithResult(ChannelLookup.Result result) {
         if (mZapper == null) {
             mZapper = new ChannelZapper(
                     mMiddlewareConnection.getRouteManagerControl(),

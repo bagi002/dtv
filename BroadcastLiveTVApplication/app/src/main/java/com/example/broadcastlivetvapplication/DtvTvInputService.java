@@ -45,6 +45,10 @@ public class DtvTvInputService extends TvInputService {
             @Override
             public void onMiddlewareAvailable() {
                 Log.d(TAG, "Comedia middleware available");
+                // ChannelScanner se pravi cim je middleware dostupan (ne tek na klik "Scan" u Setup UI-u),
+                // jer ga sesija koristi za rescanSingleSource pri tune-u nezavisno od toga da li je
+                // OVAJ proces ikad pokrenuo inicijalni scan (npr. nakon restarta TIS procesa).
+                ensureChannelScanner();
                 if (mActiveSession != null) {
                     mActiveSession.onMiddlewareReady();
                 }
@@ -57,23 +61,12 @@ public class DtvTvInputService extends TvInputService {
         });
     }
 
-    void onSessionReleased(DtvTvInputSession session) {
-        if (mActiveSession == session) {
-            mActiveSession = null;
-        }
-    }
-
-    public void setScanResultListener(@Nullable ScanResultListener listener) {
-        mScanResultListener = listener;
-    }
-
-    public void startScan(@NonNull String inputId) {
-        if (!mMiddlewareConnection.isAvailable()) {
-            notifyError("Comedia middleware not connected");
+    /** Pravi ChannelScanner instancu ako jos ne postoji; isti se koristi za inicijalni scan i za rescan pri tune-u. */
+    private void ensureChannelScanner() {
+        if (mChannelScanner != null) {
             return;
         }
-
-        mCurrentInputId = inputId;
+        final ChannelPublisher publisher = new ChannelPublisher(getContentResolver(), mMiddlewareConnection.getServiceControl());
         mChannelScanner = new ChannelScanner(
                 mMiddlewareConnection.getRouteManagerControl(),
                 mMiddlewareConnection.getScanControl(),
@@ -86,9 +79,13 @@ public class DtvTvInputService extends TvInputService {
                     }
 
                     @Override
+                    public void onSourceScanned(String sourceUrl) {
+                        publisher.collectScannedServices(sourceUrl);
+                    }
+
+                    @Override
                     public void onScanFinished() {
-                        ChannelPublisher publisher = new ChannelPublisher(getContentResolver(), mMiddlewareConnection.getServiceControl());
-                        int count = publisher.publishInstalledServices(mCurrentInputId);
+                        int count = publisher.publishAll(mCurrentInputId);
                         if (mScanResultListener != null) {
                             mScanResultListener.onScanFinished(count);
                         }
@@ -99,6 +96,32 @@ public class DtvTvInputService extends TvInputService {
                         notifyError(reason);
                     }
                 });
+    }
+
+    void onSessionReleased(DtvTvInputSession session) {
+        if (mActiveSession == session) {
+            mActiveSession = null;
+        }
+    }
+
+    public void setScanResultListener(@Nullable ScanResultListener listener) {
+        mScanResultListener = listener;
+    }
+
+    /** ChannelScanner deljen izmedju inicijalnog scan-a i rescan-a pri tune-u (vidi ensureChannelScanner). */
+    @Nullable
+    ChannelScanner getChannelScanner() {
+        return mChannelScanner;
+    }
+
+    public void startScan(@NonNull String inputId) {
+        if (!mMiddlewareConnection.isAvailable()) {
+            notifyError("Comedia middleware not connected");
+            return;
+        }
+
+        mCurrentInputId = inputId;
+        ensureChannelScanner();
         mChannelScanner.startScan(mScanSourceUrls);
     }
 
