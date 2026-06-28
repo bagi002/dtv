@@ -8,19 +8,4 @@
         <id>3</id>
         <input>file:///data/ch0.ts</input>
     </channel>
-
-    <channel>
-        <id>4</id>
-        <input>file:///data/ch1.ts</input>
-    </channel>
-
-    <channel>
-        <id>2</id>
-        <input>file:///data/346_2.ts</input>
-    </channel>
-
-    <channel>
-        <id>1</id>
-        <input>file:///data/clear_0002.ts</input>
-    </channel>
 </channels>
