@@ -12,7 +12,9 @@ import androidx.annotation.Nullable;
 import com.iwedia.dtv.service.ServiceDescriptor;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import iwedia.dtv.service.ServiceControl;
 
@@ -124,6 +126,29 @@ final class ChannelPublisher {
         } else {
             mContentResolver.insert(TvContract.Channels.CONTENT_URI, values);
         }
+    }
+
+    /** Cita sourceUrl (COLUMN_INTERNAL_PROVIDER_DATA) svih kanala vec upisanih za inputId — koristi se da se izvori koji vec imaju upisan kanal ne skeniraju ponovo. */
+    Set<String> readScannedSourceUrls(String inputId) {
+        Set<String> sourceUrls = new HashSet<>();
+        if (inputId == null) {
+            return sourceUrls;
+        }
+        Uri uri = TvContract.buildChannelsUriForInput(inputId);
+        String[] projection = { TvContract.Channels.COLUMN_INTERNAL_PROVIDER_DATA };
+        try (Cursor cursor = mContentResolver.query(uri, projection, null, null, null)) {
+            if (cursor == null) {
+                return sourceUrls;
+            }
+            int dataIndex = cursor.getColumnIndexOrThrow(TvContract.Channels.COLUMN_INTERNAL_PROVIDER_DATA);
+            while (cursor.moveToNext()) {
+                byte[] sourceUrlBytes = cursor.getBlob(dataIndex);
+                if (sourceUrlBytes != null) {
+                    sourceUrls.add(new String(sourceUrlBytes));
+                }
+            }
+        }
+        return sourceUrls;
     }
 
     @Nullable

@@ -6,6 +6,10 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
 /** TIS koordinator: povezuje ComediaMiddlewareConnection, ChannelScanner i ChannelPublisher (vidi brodcast/Service_installation/). */
 public class DtvTvInputService extends TvInputService {
 
@@ -14,6 +18,8 @@ public class DtvTvInputService extends TvInputService {
     public interface ScanResultListener {
         void onScanProgress(int sourceIndex, int sourceCount, String sourceUrl);
         void onScanFinished(int channelCount);
+        /** Pozvano umesto onScanFinished kad su svi izvori iz streams.xml vec skenirani (nista nije preskoceno/dirano na middleware-u). */
+        void onAllSourcesAlreadyScanned();
         void onScanError(String reason);
     }
 
@@ -31,6 +37,7 @@ public class DtvTvInputService extends TvInputService {
     private ScanResultListener mScanResultListener;
     private String mCurrentInputId;
     private ChannelScanner mChannelScanner;
+    private ChannelPublisher mChannelPublisher;
 
     @Nullable
     private DtvTvInputSession mActiveSession;
@@ -66,7 +73,7 @@ public class DtvTvInputService extends TvInputService {
         if (mChannelScanner != null) {
             return;
         }
-        final ChannelPublisher publisher = new ChannelPublisher(getContentResolver(), mMiddlewareConnection.getServiceControl());
+        mChannelPublisher = new ChannelPublisher(getContentResolver(), mMiddlewareConnection.getServiceControl());
         mChannelScanner = new ChannelScanner(
                 mMiddlewareConnection.getRouteManagerControl(),
                 mMiddlewareConnection.getScanControl(),
@@ -80,12 +87,12 @@ public class DtvTvInputService extends TvInputService {
 
                     @Override
                     public void onSourceScanned(String sourceUrl) {
-                        publisher.collectScannedServices(sourceUrl);
+                        mChannelPublisher.collectScannedServices(sourceUrl);
                     }
 
                     @Override
                     public void onScanFinished() {
-                        int count = publisher.publishAll(mCurrentInputId);
+                        int count = mChannelPublisher.publishAll(mCurrentInputId);
                         if (mScanResultListener != null) {
                             mScanResultListener.onScanFinished(count);
                         }
@@ -137,7 +144,26 @@ public class DtvTvInputService extends TvInputService {
 
         mCurrentInputId = inputId;
         ensureChannelScanner();
-        mChannelScanner.startScan(sourceUrls);
+
+        // Izvori cija su kanali vec upisani za ovaj inputId se ne skeniraju ponovo.
+        Set<String> alreadyScanned = mChannelPublisher.readScannedSourceUrls(inputId);
+        List<String> newSourceUrls = new ArrayList<>();
+        for (String sourceUrl : sourceUrls) {
+            if (!alreadyScanned.contains(sourceUrl)) {
+                newSourceUrls.add(sourceUrl);
+            }
+        }
+        Log.d(TAG, "startScan: " + (sourceUrls.length - newSourceUrls.size()) + " izvora vec skenirano, "
+                + newSourceUrls.size() + " novih za skeniranje");
+
+        if (newSourceUrls.isEmpty()) {
+            if (mScanResultListener != null) {
+                mScanResultListener.onAllSourcesAlreadyScanned();
+            }
+            return;
+        }
+
+        mChannelScanner.startScan(newSourceUrls.toArray(new String[0]));
     }
 
     private void notifyError(String reason) {

@@ -46,6 +46,16 @@ public class SetupActivity extends Activity {
         }
 
         @Override
+        public void onAllSourcesAlreadyScanned() {
+            runOnUiThread(() -> {
+                mStatusText.setText(R.string.setup_scan_already_done);
+                mScanProgressBar.setProgress(100);
+                mScanProgressBar.getProgressDrawable().setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
+                setResult(RESULT_OK);
+            });
+        }
+
+        @Override
         public void onScanError(String reason) {
             runOnUiThread(() -> mStatusText.setText(getString(R.string.setup_scan_error, reason)));
         }

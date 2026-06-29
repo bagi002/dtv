@@ -5,6 +5,7 @@
     <string name="setup_scanning">Scanning…</string>
     <string name="setup_scan_progress">Scanning %1$d/%2$d: %3$s</string>
     <string name="setup_scan_complete">Scan complete: %1$d channel(s) installed</string>
+    <string name="setup_scan_already_done">All channels from this entered stream are already scanned</string>
     <string name="setup_scan_error">Scan failed: %1$s</string>
     <string name="setup_streams_xml_hint">Path to streams.xml on device</string>
     <string name="setup_streams_xml_default">/data/streams.xml</string>
