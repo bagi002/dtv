@@ -10,8 +10,10 @@ import android.graphics.PorterDuff;
 import android.media.tv.TvInputInfo;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -20,6 +22,7 @@ public class SetupActivity extends Activity {
     private String mInputId;
     private DtvTvInputService mService;
     private TextView mStatusText;
+    private EditText mStreamsXmlPathInput;
     private ProgressBar mScanProgressBar;
 
     private final DtvTvInputService.ScanResultListener mScanResultListener =
@@ -70,6 +73,7 @@ public class SetupActivity extends Activity {
 
         mInputId = getIntent().getStringExtra(TvInputInfo.EXTRA_INPUT_ID);
         mStatusText = findViewById(R.id.status_text);
+        mStreamsXmlPathInput = findViewById(R.id.streams_xml_path);
         mScanProgressBar = findViewById(R.id.scan_progress_bar);
 
         Button scanButton = findViewById(R.id.scan_button);
@@ -86,7 +90,13 @@ public class SetupActivity extends Activity {
         mScanProgressBar.setVisibility(View.VISIBLE);
         mScanProgressBar.setProgress(0);
         mScanProgressBar.getProgressDrawable().clearColorFilter();
-        mService.startScan(mInputId);
+
+        String streamsXmlPath = mStreamsXmlPathInput.getText().toString().trim();
+        if (TextUtils.isEmpty(streamsXmlPath)) {
+            mService.startScan(mInputId);
+        } else {
+            mService.startScan(mInputId, streamsXmlPath);
+        }
     }
 
     @Override

@@ -114,7 +114,22 @@ public class DtvTvInputService extends TvInputService {
         return mChannelScanner;
     }
 
+    /** Skenira izvore iz bundlovanog res/xml/streams.xml (fallback ako korisnik ne unese putanju). */
     public void startScan(@NonNull String inputId) {
+        startScan(inputId, mScanSourceUrls);
+    }
+
+    /** Skenira izvore procitane sa filesystem putanje na uredjaju (vidi SetupActivity EditText za putanju). */
+    public void startScan(@NonNull String inputId, @NonNull String streamsXmlPath) {
+        String[] sourceUrls = StreamsXmlReader.readScanSourceUrlsFromFile(streamsXmlPath);
+        if (sourceUrls.length == 0) {
+            notifyError("streams.xml at " + streamsXmlPath + " has no <input> entries or could not be read");
+            return;
+        }
+        startScan(inputId, sourceUrls);
+    }
+
+    private void startScan(@NonNull String inputId, @NonNull String[] sourceUrls) {
         if (!mMiddlewareConnection.isAvailable()) {
             notifyError("Comedia middleware not connected");
             return;
@@ -122,7 +137,7 @@ public class DtvTvInputService extends TvInputService {
 
         mCurrentInputId = inputId;
         ensureChannelScanner();
-        mChannelScanner.startScan(mScanSourceUrls);
+        mChannelScanner.startScan(sourceUrls);
     }
 
     private void notifyError(String reason) {
