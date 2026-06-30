@@ -4,10 +4,14 @@ import android.util.Log;
 import android.view.Surface;
 
 import com.iwedia.dtv.A4TVStatus;
+import com.iwedia.dtv.audio.AudioTrack;
 import com.iwedia.dtv.display.SurfaceBundle;
 import com.iwedia.dtv.service.ServiceStateChangeError;
 import com.iwedia.dtv.service.ServiceListUpdateData;
+import com.iwedia.dtv.types.AudioDigitalType;
 
+import iwedia.dtv.audio.AudioControl;
+import iwedia.dtv.audio.AudioListener;
 import iwedia.dtv.comediaroutemanager.ComediaRouteManagerControl;
 import iwedia.dtv.display.DisplayControl;
 import iwedia.dtv.service.ServiceControl;
@@ -22,21 +26,26 @@ final class ChannelZapper {
         void onChannelChanged(int liveRoute);
         void onSafeToUnblank(int liveRoute);
         void onZapError(String reason);
+        /** Audio se promenio na ruti (npr. lista traka spremna/izmenjena) — pozivac treba da osvezi listu traka. */
+        void onAudioTracksChanged();
     }
 
     private final ComediaRouteManagerControl mRouteManagerControl;
     private final DisplayControl mDisplayControl;
     private final ServiceControl mServiceControl;
+    private final AudioControl mAudioControl;
     private final ResultListener mResultListener;
 
     private int mLiveRoute = 0;
     private Surface mAppliedSurface;
+    private boolean mAudioListenerRegistered;
 
     ChannelZapper(ComediaRouteManagerControl routeManagerControl, DisplayControl displayControl,
-            ServiceControl serviceControl, ResultListener resultListener) {
+            ServiceControl serviceControl, AudioControl audioControl, ResultListener resultListener) {
         mRouteManagerControl = routeManagerControl;
         mDisplayControl = displayControl;
         mServiceControl = serviceControl;
+        mAudioControl = audioControl;
         mResultListener = resultListener;
     }
 
@@ -79,12 +88,45 @@ final class ChannelZapper {
         // Pozicioniraj/aktiviraj video prozor na ruti preko punog ekrana; bez ovoga video moze biti nepozicioniran.
         A4TVStatus scaleStatus = mDisplayControl.scaleWindow(liveRoute, 0, 0, 1920, 1080);
         Log.d(TAG, "startZap scaleWindow -> " + scaleStatus);
+
+        // Prati promene audija na ruti da bi sesija mogla da osvezi listu traka kad postanu spremne.
+        if (!mAudioListenerRegistered) {
+            A4TVStatus audioStatus = mAudioControl.registerListener(mAudioListener);
+            Log.d(TAG, "startZap registerListener(audio) -> " + audioStatus);
+            mAudioListenerRegistered = audioStatus == A4TVStatus.SUCCESS;
+        }
     }
 
-    /** Zaustavlja trenutni servis na ruti i odjavljuje listener; sigurno za pozivanje i ako startZap nije uspeo. */
+    /** Zaustavlja trenutni servis na ruti i odjavljuje listenere; sigurno za pozivanje i ako startZap nije uspeo. */
     void stopZap() {
         mServiceControl.stopService(mLiveRoute);
         mServiceControl.unregisterListener(mServiceListener);
+        if (mAudioListenerRegistered) {
+            mAudioControl.unregisterListener(mAudioListener);
+            mAudioListenerRegistered = false;
+        }
+    }
+
+    /** Broj audio traka trenutnog kanala na ovoj ruti (vidi audioTapes.md). */
+    int getAudioTrackCount() {
+        return mAudioControl.getAudioTrackCount(mLiveRoute);
+    }
+
+    /** Opis audio trake po indeksu; null ako ruta jos nije aktivna ili index nije validan. */
+    AudioTrack getAudioTrack(int trackIndex) {
+        return mAudioControl.getAudioTrack(mLiveRoute, trackIndex);
+    }
+
+    /** Indeks trenutno aktivne audio trake na ovoj ruti. */
+    int getCurrentAudioTrackIndex() {
+        return mAudioControl.getCurrentAudioTrackIndex(mLiveRoute);
+    }
+
+    /** Prebacuje audio traku na istoj ruti — video se ne prekida. Vraca true ako je MW prihvatio. */
+    boolean selectAudioTrack(int trackIndex) {
+        A4TVStatus status = mAudioControl.setCurrentAudioTrack(mLiveRoute, trackIndex);
+        Log.d(TAG, "selectAudioTrack(" + trackIndex + ") -> " + status);
+        return status == A4TVStatus.SUCCESS;
     }
 
     private final ServiceListener mServiceListener = new ServiceListener() {
@@ -123,5 +165,21 @@ final class ChannelZapper {
         public void onCaAlternativePresent(int caReplacementTsid, int caReplacementOnid, int caReplacementServiceId) {}
         @Override
         public void specialServiceEnded() {}
+    };
+
+    private final AudioListener mAudioListener = new AudioListener() {
+        @Override
+        public void typeChanged(int liveRoute, AudioDigitalType audioType) {
+            Log.d(TAG, "audio typeChanged liveRoute=" + liveRoute + " type=" + audioType);
+            if (liveRoute == mLiveRoute) {
+                mResultListener.onAudioTracksChanged();
+            }
+        }
+
+        @Override
+        public void sampleRateChanged(int liveRoute, int sampleRate) {}
+
+        @Override
+        public void audioChannelChanged(int liveRoute, int audioChannel) {}
     };
 }

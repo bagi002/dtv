@@ -5,6 +5,7 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
+import iwedia.dtv.audio.AudioControl;
 import iwedia.dtv.comediaroutemanager.ComediaRouteManagerControl;
 import iwedia.dtv.display.DisplayControl;
 import iwedia.dtv.scan.ScanControl;
@@ -31,6 +32,8 @@ final class ComediaMiddlewareConnection {
     private ServiceControl mServiceControl;
     @Nullable
     private DisplayControl mDisplayControl;
+    @Nullable
+    private AudioControl mAudioControl;
 
     ComediaMiddlewareConnection(Context context, Listener listener) {
         mListener = listener;
@@ -41,6 +44,7 @@ final class ComediaMiddlewareConnection {
                 mScanControl = createOrNull("ScanControl", () -> new ScanControl(mDtvContext));
                 mServiceControl = createOrNull("ServiceControl", () -> new ServiceControl(mDtvContext));
                 mDisplayControl = createOrNull("DisplayControl", () -> new DisplayControl(mDtvContext));
+                mAudioControl = createOrNull("AudioControl", () -> new AudioControl(mDtvContext));
                 mListener.onMiddlewareAvailable();
             }
 
@@ -50,6 +54,7 @@ final class ComediaMiddlewareConnection {
                 mScanControl = null;
                 mServiceControl = null;
                 mDisplayControl = null;
+                mAudioControl = null;
                 mListener.onMiddlewareUnavailable();
             }
         });
@@ -73,7 +78,7 @@ final class ComediaMiddlewareConnection {
 
     boolean isAvailable() {
         return mRouteManagerControl != null && mScanControl != null && mServiceControl != null
-                && mDisplayControl != null;
+                && mDisplayControl != null && mAudioControl != null;
     }
 
     @Nullable
@@ -94,5 +99,10 @@ final class ComediaMiddlewareConnection {
     @Nullable
     DisplayControl getDisplayControl() {
         return mDisplayControl;
+    }
+
+    @Nullable
+    AudioControl getAudioControl() {
+        return mAudioControl;
     }
 }

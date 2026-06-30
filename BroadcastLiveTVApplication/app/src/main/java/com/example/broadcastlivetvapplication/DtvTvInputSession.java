@@ -3,11 +3,19 @@ package com.example.broadcastlivetvapplication;
 import android.content.Context;
 import android.media.tv.TvInputManager;
 import android.media.tv.TvInputService;
+import android.media.tv.TvTrackInfo;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Surface;
+
+import com.iwedia.dtv.audio.AudioTrack;
+import com.iwedia.dtv.types.AudioChannelConfiguration;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /** Session-strana zappinga: drzi Surface/volume i delegira na ChannelLookup + ChannelZapper (vidi brodcast/Zapping/zapping_broadcast.puml). */
 final class DtvTvInputSession extends TvInputService.Session {
@@ -129,6 +137,7 @@ final class DtvTvInputSession extends TvInputService.Session {
                     mMiddlewareConnection.getRouteManagerControl(),
                     mMiddlewareConnection.getDisplayControl(),
                     mMiddlewareConnection.getServiceControl(),
+                    mMiddlewareConnection.getAudioControl(),
                     new ChannelZapper.ResultListener() {
                         @Override
                         public void onChannelChanged(int liveRoute) {
@@ -149,6 +158,11 @@ final class DtvTvInputSession extends TvInputService.Session {
                             mMainHandler.post(() ->
                                     notifyVideoUnavailable(TvInputManager.VIDEO_UNAVAILABLE_REASON_UNKNOWN));
                         }
+
+                        @Override
+                        public void onAudioTracksChanged() {
+                            mMainHandler.post(DtvTvInputSession.this::publishAudioTracks);
+                        }
                     });
         } else {
             // Promena kanala na vec aktivnoj sesiji: oslobodi prethodni servis/listener pre novog zapa.
@@ -168,6 +182,79 @@ final class DtvTvInputSession extends TvInputService.Session {
         }
         mVideoRevealed = true;
         notifyVideoAvailable();
+        // Audio komponente su spremne tek nakon potvrde promene kanala — tek sad gradi listu traka.
+        publishAudioTracks();
+    }
+
+    /** Cita audio trake aktivne rute iz MW-a i objavljuje ih kroz TIF (sistemski Audio meni). Mora na main thread-u. */
+    private void publishAudioTracks() {
+        if (mZapper == null || !mVideoRevealed) {
+            return;
+        }
+        int count = mZapper.getAudioTrackCount();
+        List<TvTrackInfo> tracks = new ArrayList<>(Math.max(count, 0));
+        for (int i = 0; i < count; i++) {
+            AudioTrack track = mZapper.getAudioTrack(i);
+            if (track == null) {
+                continue;
+            }
+            TvTrackInfo.Builder builder =
+                    new TvTrackInfo.Builder(TvTrackInfo.TYPE_AUDIO, String.valueOf(track.getIndex()));
+            String language = track.getLanguage();
+            if (!TextUtils.isEmpty(language)) {
+                builder.setLanguage(language);
+            }
+            int channelCount = channelCount(track.getAudioChannleCfg());
+            if (channelCount > 0) {
+                builder.setAudioChannelCount(channelCount);
+            }
+            tracks.add(builder.build());
+        }
+        Log.d(TAG, "publishAudioTracks: " + tracks.size() + " audio traka");
+        notifyTracksChanged(tracks);
+        if (!tracks.isEmpty()) {
+            notifyTrackSelected(TvTrackInfo.TYPE_AUDIO, String.valueOf(mZapper.getCurrentAudioTrackIndex()));
+        }
+    }
+
+    @Override
+    public boolean onSelectTrack(int type, String trackId) {
+        if (type != TvTrackInfo.TYPE_AUDIO || trackId == null || mZapper == null) {
+            return false;
+        }
+        int trackIndex;
+        try {
+            trackIndex = Integer.parseInt(trackId);
+        } catch (NumberFormatException e) {
+            Log.e(TAG, "onSelectTrack: nevalidan trackId " + trackId);
+            return false;
+        }
+        // Prebacivanje trake ne dira video ni rutu — menja se samo aktivna audio traka (vidi audioTapes.md).
+        if (mZapper.selectAudioTrack(trackIndex)) {
+            notifyTrackSelected(TvTrackInfo.TYPE_AUDIO, trackId);
+            return true;
+        }
+        return false;
+    }
+
+    /** Mapira A4TV konfiguraciju kanala u broj kanala za TvTrackInfo (0 = nepoznato, ne postavlja se). */
+    private static int channelCount(AudioChannelConfiguration cfg) {
+        if (cfg == null) {
+            return 0;
+        }
+        switch (cfg) {
+            case MONO:
+            case DUAL_MONO:
+                return 1;
+            case STEREO:
+            case SURROUND_STEREO:
+                return 2;
+            case MULTICHANNEL_2_PLUS:
+            case MULTICHANNEL_5_PLUS:
+                return 6;
+            default:
+                return 0;
+        }
     }
 
     @Override
