@@ -20,7 +20,7 @@ import iwedia.dtv.service.ServiceControl;
 
 /**
  * Akumulira servise svakog skeniranog izvora (native file/IP install drzi samo poslednji multipleks),
- * pa ih sve upisuje u TvContract.Channels sa URL-om izvora — koji zapping koristi za re-scan pri tune-u.
+ * pa ih sve upisuje u TvContract.Channels sa URL-om izvora koji zapping koristi za re-scan pri tune-u.
  */
 final class ChannelPublisher {
 
@@ -35,6 +35,13 @@ final class ChannelPublisher {
         final String name;
         final String sourceUrl;
 
+        /**
+         * @param onid      Original Network ID
+         * @param tsid      Transport Stream ID
+         * @param serviceId Service ID
+         * @param name      naziv servisa
+         * @param sourceUrl URL .ts fajla iz kog je servis skeniran
+         */
         ScannedService(int onid, int tsid, int serviceId, String name, String sourceUrl) {
             this.onid = onid;
             this.tsid = tsid;
@@ -43,7 +50,12 @@ final class ChannelPublisher {
             this.sourceUrl = sourceUrl;
         }
 
-        /** Jedinstven kljuc kanala: triplet + izvor (isti triplet iz razlicitih fajlova = razliciti kanali, npr. ch0 vs clear). */
+        /**
+         * Gradi jedinstven kljuc kanala kombinovanjem tripleta i hash-a izvora.
+         * Isti triplet iz razlicitih fajlova daje razlicite kljuceve (npr. ch0 vs clear).
+         *
+         * @return string kljuc oblika "onid_tsid_serviceId_hexHash"
+         */
         String providerId() {
             return onid + "_" + tsid + "_" + serviceId + "_" + Integer.toHexString(sourceUrl.hashCode());
         }
@@ -53,12 +65,22 @@ final class ChannelPublisher {
     private final ServiceControl mServiceControl;
     private final List<ScannedService> mAccumulated = new ArrayList<>();
 
+    /**
+     * @param contentResolver resolver za upis u TvContract.Channels
+     * @param serviceControl  MW kontroler za citanje liste servisa nakon skena
+     */
     ChannelPublisher(ContentResolver contentResolver, ServiceControl serviceControl) {
         mContentResolver = contentResolver;
         mServiceControl = serviceControl;
     }
 
-    /** Procita trenutnu middleware listu (servisi upravo skeniranog izvora) i akumulira ih sa njihovim sourceUrl. */
+    /**
+     * Cita trenutnu MW listu servisa (rezultat upravo zavrsenog autoScan-a) i akumulira ih
+     * vezane za dati sourceUrl. Mora se pozvati ODMAH nakon skena, pre nego sledeci autoScan
+     * obrise multipleks iz MW liste.
+     *
+     * @param sourceUrl URL .ts izvora koji je upravo skeniran
+     */
     void collectScannedServices(String sourceUrl) {
         // DIJAGNOSTIKA: koliko lista middleware drzi i sta je u svakoj (proba hipoteze da su multipleksi u zasebnim listama).
         int numLists = mServiceControl.getNumberOfServiceLists();
@@ -92,7 +114,12 @@ final class ChannelPublisher {
         }
     }
 
-    /** Upisuje sve akumulirane servise za dati inputId; vraca broj upisanih kanala. */
+    /**
+     * Upisuje sve akumulirane servise u TvContract.Channels za dati inputId (insert ili update).
+     *
+     * @param inputId TIF input ID za koji se kanali upisuju; ako je {@code null}, ne radi nista
+     * @return broj upisanih kanala
+     */
     int publishAll(String inputId) {
         if (inputId == null) {
             return 0;
@@ -104,6 +131,12 @@ final class ChannelPublisher {
         return mAccumulated.size();
     }
 
+    /**
+     * Insert ili update jednog kanala u TvContract.Channels na osnovu providerId-a.
+     *
+     * @param inputId    TIF input ID
+     * @param s          servis koji se upisuje
+     */
     private void upsertChannel(String inputId, ScannedService s) {
         String providerId = s.providerId();
 
@@ -128,7 +161,13 @@ final class ChannelPublisher {
         }
     }
 
-    /** Cita sourceUrl (COLUMN_INTERNAL_PROVIDER_DATA) svih kanala vec upisanih za inputId — koristi se da se izvori koji vec imaju upisan kanal ne skeniraju ponovo. */
+    /**
+     * Cita skup sourceUrl-ova svih kanala vec upisanih za dati inputId.
+     * Koristi se da se izvori koji vec imaju upisan kanal ne skeniraju ponovo.
+     *
+     * @param inputId TIF input ID; ako je {@code null}, vraca prazan skup
+     * @return skup URL-ova .ts izvora koji su vec upisani u TvContract.Channels
+     */
     Set<String> readScannedSourceUrls(String inputId) {
         Set<String> sourceUrls = new HashSet<>();
         if (inputId == null) {
@@ -151,6 +190,13 @@ final class ChannelPublisher {
         return sourceUrls;
     }
 
+    /**
+     * Trazi ID reda u TvContract.Channels za dati providerId.
+     *
+     * @param inputId    TIF input ID
+     * @param providerId jedinstven kljuc kanala (vidi {@link ScannedService#providerId()})
+     * @return ID reda, ili {@code null} ako kanal jos nije upisan
+     */
     @Nullable
     private Long findChannelId(String inputId, String providerId) {
         Uri uri = TvContract.buildChannelsUriForInput(inputId);

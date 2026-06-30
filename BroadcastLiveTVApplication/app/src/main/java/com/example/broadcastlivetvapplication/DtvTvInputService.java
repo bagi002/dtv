@@ -10,22 +10,56 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-/** TIS koordinator: povezuje ComediaMiddlewareConnection, ChannelScanner i ChannelPublisher (vidi brodcast/Service_installation/). */
+/**
+ * Glavna TvInputService implementacija (TIS koordinator).
+ * Povezuje {@link ComediaMiddlewareConnection}, {@link ChannelScanner} i {@link ChannelPublisher}.
+ * Odgovorna za inicijalni scan kanala i kreiranje sesija za zapping.
+ * Vidi: brodcast/Service_installation/
+ */
 public class DtvTvInputService extends TvInputService {
 
     private static final String TAG = "DtvTvInputService";
 
+    /** Callback za pracenje toka i rezultata skeniranja kanala (tipicno koristi SetupActivity). */
     public interface ScanResultListener {
+        /**
+         * Pozvano pre pocetka skena jednog izvora.
+         *
+         * @param sourceIndex redni broj trenutnog izvora (od 1)
+         * @param sourceCount ukupan broj izvora
+         * @param sourceUrl   URL izvora koji se skenira
+         */
         void onScanProgress(int sourceIndex, int sourceCount, String sourceUrl);
+
+        /**
+         * Pozvano kada su svi novi izvori uspesno skenirani i kanali upisani.
+         *
+         * @param channelCount ukupan broj upisanih kanala
+         */
         void onScanFinished(int channelCount);
-        /** Pozvano umesto onScanFinished kad su svi izvori iz streams.xml vec skenirani (nista nije preskoceno/dirano na middleware-u). */
+
+        /**
+         * Pozvano umesto {@link #onScanFinished} kada su svi izvori iz streams.xml
+         * vec bili skenirani — MW nije ni dirnut.
+         */
         void onAllSourcesAlreadyScanned();
+
+        /**
+         * Pozvano ako scan nije mogao da se pokrene ili je prekinut.
+         *
+         * @param reason opis greske za prikaz korisniku
+         */
         void onScanError(String reason);
     }
 
     @Nullable
     private static DtvTvInputService sInstance;
 
+    /**
+     * Vraca trenutnu instancu servisa (singleton po procesu).
+     *
+     * @return instanca servisa, ili {@code null} ako servis jos nije kreiran
+     */
     @Nullable
     public static DtvTvInputService getInstance() {
         return sInstance;
@@ -68,7 +102,10 @@ public class DtvTvInputService extends TvInputService {
         });
     }
 
-    /** Pravi ChannelScanner instancu ako jos ne postoji; isti se koristi za inicijalni scan i za rescan pri tune-u. */
+    /**
+     * Pravi {@link ChannelScanner} i {@link ChannelPublisher} ako jos ne postoje.
+     * Isti scanner se koristi i za inicijalni scan i za rescan pri tune-u.
+     */
     private void ensureChannelScanner() {
         if (mChannelScanner != null) {
             return;
@@ -105,28 +142,53 @@ public class DtvTvInputService extends TvInputService {
                 });
     }
 
+    /**
+     * Pozvano iz {@link DtvTvInputSession#onRelease()} kada sesija bude oslobodjena.
+     *
+     * @param session sesija koja je oslobodjena
+     */
     void onSessionReleased(DtvTvInputSession session) {
         if (mActiveSession == session) {
             mActiveSession = null;
         }
     }
 
+    /**
+     * Registruje ili uklanja listener za pracenje toka skeniranja.
+     *
+     * @param listener listener koji prima callback-ove, ili {@code null} za odjavu
+     */
     public void setScanResultListener(@Nullable ScanResultListener listener) {
         mScanResultListener = listener;
     }
 
-    /** ChannelScanner deljen izmedju inicijalnog scan-a i rescan-a pri tune-u (vidi ensureChannelScanner). */
+    /**
+     * Vraca deljenu instancu {@link ChannelScanner}-a.
+     * Koriste je i inicijalni scan i rescan pri tune-u.
+     *
+     * @return scanner, ili {@code null} ako MW jos nije bio dostupan
+     */
     @Nullable
     ChannelScanner getChannelScanner() {
         return mChannelScanner;
     }
 
-    /** Skenira izvore iz bundlovanog res/xml/streams.xml (fallback ako korisnik ne unese putanju). */
+    /**
+     * Pokrece scan koristeci izvore iz bundlovanog {@code res/xml/streams.xml}.
+     * Fallback kada korisnik ne unese putanju u SetupActivity.
+     *
+     * @param inputId TIF input ID za koji se kanali upisuju
+     */
     public void startScan(@NonNull String inputId) {
         startScan(inputId, mScanSourceUrls);
     }
 
-    /** Skenira izvore procitane sa filesystem putanje na uredjaju (vidi SetupActivity EditText za putanju). */
+    /**
+     * Pokrece scan koristeci izvore iz streams.xml fajla na filesystem putanji uredjaja.
+     *
+     * @param inputId        TIF input ID za koji se kanali upisuju
+     * @param streamsXmlPath apsolutna putanja do streams.xml na uredjaju (npr. /data/streams.xml)
+     */
     public void startScan(@NonNull String inputId, @NonNull String streamsXmlPath) {
         String[] sourceUrls = StreamsXmlReader.readScanSourceUrlsFromFile(streamsXmlPath);
         if (sourceUrls.length == 0) {
@@ -136,6 +198,12 @@ public class DtvTvInputService extends TvInputService {
         startScan(inputId, sourceUrls);
     }
 
+    /**
+     * Interna implementacija: filtrira vec skenirane izvore i pokrece scanner samo za nove.
+     *
+     * @param inputId    TIF input ID
+     * @param sourceUrls svi URL-ovi kandidati za skeniranje
+     */
     private void startScan(@NonNull String inputId, @NonNull String[] sourceUrls) {
         if (!mMiddlewareConnection.isAvailable()) {
             notifyError("Comedia middleware not connected");
@@ -166,6 +234,11 @@ public class DtvTvInputService extends TvInputService {
         mChannelScanner.startScan(newSourceUrls.toArray(new String[0]));
     }
 
+    /**
+     * Loguje gresku i prosledjuje je listeneru ako postoji.
+     *
+     * @param reason opis greske
+     */
     private void notifyError(String reason) {
         Log.e(TAG, reason);
         if (mScanResultListener != null) {
@@ -182,6 +255,12 @@ public class DtvTvInputService extends TvInputService {
         super.onDestroy();
     }
 
+    /**
+     * Kreira novu TIF sesiju za dati inputId.
+     *
+     * @param inputId TIF input ID
+     * @return nova {@link DtvTvInputSession} instanca
+     */
     @Nullable
     @Override
     public Session onCreateSession(@NonNull String inputId) {

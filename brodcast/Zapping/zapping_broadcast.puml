@@ -1,17 +1,22 @@
-@startuml sequence_zapping_liba4tv_v4
+@startuml sequence_zapping_liba4tv_v5
 title Zapping - broadcast (liba4tv)
 
 actor User
 box "Android app" #EBF5FF
   participant "Live TV App" as App
-  participant "Broadcast TvInputService" as TIS
+  participant "DtvTvInputService" as TIS
+  participant "DtvTvInputSession" as SES
+  participant "DtvTune" as TUNE
+  participant "ChannelLookup" as CLKP
+  participant "ChannelScanner" as CHSC
+  participant "ChannelZapper" as ZAP
 end box
 
 box "liba4tv Java API (Android-facing wrapper)" #E8F5E9
   participant "ComediaRouteManagerControl" as ROUTE
   participant "DisplayControl" as DISP
   participant "ServiceControl" as SVC
-  participant "ServiceListener\n(callback na TIS)" as SVCL
+  participant "ServiceListener\n(callback na ChannelZapper)" as SVCL
 end box
 
 box "Comedia native middleware" #FFF8E1
@@ -25,20 +30,59 @@ box "Platform / HAL - demonstration" #FFF3E0
   participant "MediaCodec / AudioTrack" as AVDEC
 end box
 
-User -> App : Play channel 1
-App -> TIS : onSetSurface(surface)
-App -> TIS : onSetStreamVolume(0.0)
-App -> TIS : onTune(channelUri)
+participant "Android TV Provider\n(TvContract.Channels)" as TVP
 
-TIS -> ROUTE : getLiveRoute(listIndex, serviceIndex, prevRouteId)
-ROUTE --> TIS : liveRoute
+== TIF kreira sesiju ==
 
-TIS -> DISP : setVideoSurface(layer, SurfaceBundle)
-DISP --> TIS : A4TVStatus
+App -> TIS : onCreateSession(inputId)
+TIS -> SES ** : new DtvTvInputSession(context, service, middlewareConnection)
 
-TIS -> SVC : registerListener(serviceListener)
-TIS -> SVC : startServiceByTriplet(liveRoute, listIndex, serviceIndex, onid, tsid, sid)
-SVC --> TIS : A4TVStatus
+== Korisnik bira kanal ==
+
+User -> App : Play channel X
+App -> SES : onSetSurface(surface)
+App -> SES : onSetStreamVolume(volume)
+App -> SES : onTune(channelUri)
+
+SES -> SES : notifyVideoUnavailable(TUNING)
+SES ->> TUNE : post(doTune)
+
+== ChannelLookup: pronadji servis u MW listi ==
+
+TUNE -> CLKP : findServiceIndex(contentResolver, serviceControl, channelUri)
+CLKP -> TVP : query channelUri\n(ONID, TSID, ServiceId, INTERNAL_PROVIDER_DATA)
+TVP --> CLKP : ChannelInfo (triplet + sourceUrl)
+CLKP -> SVC : getServiceListCount(0) + getServiceDescriptor(0, i)
+SVC -> SDB : upit nad Service & Mux DB
+SDB --> SVC : ServiceDescriptor
+CLKP -> CLKP : poredi ONID/TSID/SID
+
+alt Servis NIJE u MW listi\n(multipleks obrisan jer je drugi izvor skeniran posle)
+  CLKP --> TUNE : null
+  TUNE -> CHSC : rescanSingleSource(sourceUrl, rescanCallback)
+  CHSC --> TUNE : onRescanFinished(sourceUrl)
+  TUNE -> CLKP : findServiceIndex(...) [ponovi pretragu]
+  CLKP --> TUNE : Result (listIndex, serviceIndex, onid, tsid, serviceId)
+else Servis JESTE u MW listi
+  CLKP --> TUNE : Result (listIndex, serviceIndex, onid, tsid, serviceId)
+end
+
+== ChannelZapper: pokreni zapping ==
+
+TUNE -> ZAP : startZap(listIndex, serviceIndex, onid, tsid, serviceId, surface)
+
+ZAP -> ROUTE : getLiveRoute(listIndex, serviceIndex, prevRouteId)
+ROUTE --> ZAP : liveRoute
+
+ZAP -> DISP : setVideoSurface(0, SurfaceBundle(surface))
+note over ZAP : surface se ne postavlja ponovo ako se nije promenio
+DISP --> ZAP : A4TVStatus
+
+ZAP -> SVC : registerListener(serviceListener)
+ZAP -> SVC : startServiceByTriplet(liveRoute, listIndex, serviceIndex, onid, tsid, serviceId)
+SVC --> ZAP : A4TVStatus
+
+ZAP -> DISP : scaleWindow(liveRoute, 0, 0, 1920, 1080)
 
 == Comedia native middleware ==
 
@@ -64,24 +108,20 @@ note over AVDEC : demonstration: video+audio dekoder + display\nkomunicira sa HA
 AVDEC --> CHAL : A/V tece, sinhronizovano
 CHAL --> CORE : komponente spremne (PCR PID, A/V kanali aktivni)
 
-CORE -> CHAL : TDAL_DISP - poveži dekodovani izlaz sa video surface-om (DisplayControl.setVideoSurface)
+CORE -> CHAL : TDAL_DISP - povezi dekodovani izlaz sa video surface-om
 CHAL --> CORE : graphics/video plane spreman
 
-== ServiceListener obavestava TIS da je zapping zavrsen ==
+== ServiceListener obavestava ChannelZapper da je zapping zavrsen ==
+
 CORE --> SVC : servis pokrenut (interno)
 SVC --> SVCL : channelChangeStatus(liveRoute, true, ServiceStateChangeError.OK)
-SVCL --> TIS : channelChangeStatus(liveRoute, true, ServiceStateChangeError.OK)
+SVCL --> ZAP : channelChangeStatus(liveRoute, true, OK)
+ZAP --> TUNE : onChannelChanged(liveRoute) [via ResultListener]
+
 SVC --> SVCL : safeToUnblank(liveRoute)
-SVCL --> TIS : safeToUnblank(liveRoute)
+SVCL --> ZAP : safeToUnblank(liveRoute)
+ZAP --> TUNE : onSafeToUnblank(liveRoute)
 
-TIS -> App : unmute (restore volume) + video vidljiv
-
-== TIS cita osnovne info o servisu preko ServiceControl ==
-TIS -> SVC : getServiceDescriptor(listIndex, serviceIndex)
-SVC -> SDB : upit nad Service & Mux DB
-SDB --> SVC : ServiceDescriptor podaci
-SVC --> TIS : ServiceDescriptor (getName, getONID, getTSID, getServiceId)
-
-TIS --> App : Service started -> Playback active
+TUNE -> SES : notifyVideoAvailable()
 
 @enduml

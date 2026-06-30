@@ -17,7 +17,13 @@ import com.iwedia.dtv.types.AudioChannelConfiguration;
 import java.util.ArrayList;
 import java.util.List;
 
-/** Session-strana zappinga: drzi Surface/volume i delegira na ChannelLookup + ChannelZapper (vidi brodcast/Zapping/zapping_broadcast.puml). */
+/**
+ * TIF sesija — session-strana zappinga.
+ * Drzi Surface i volumen, a sve tezke operacije (lookup, rescan, zap, audio)
+ * delegira na {@link ChannelLookup} i {@link ChannelZapper} asinhrono na tune threadu
+ * kako se ne bi probio TIF limit od 2s za onTune.
+ * Vidi: brodcast/Zapping/zapping_broadcast.puml
+ */
 final class DtvTvInputSession extends TvInputService.Session {
 
     private static final String TAG = "DtvTvInputSession";
@@ -38,6 +44,11 @@ final class DtvTvInputSession extends TvInputService.Session {
     private boolean mVideoRevealed;
     private Uri mPendingChannelUri;
 
+    /**
+     * @param context               Android context
+     * @param service               roditeljski servis; koristi se za getChannelScanner i onSessionReleased
+     * @param middlewareConnection  konekcija ka MW; mora biti dostupna pre prvog tune-a
+     */
     DtvTvInputSession(Context context, DtvTvInputService service, ComediaMiddlewareConnection middlewareConnection) {
         super(context);
         mContext = context;
@@ -48,7 +59,10 @@ final class DtvTvInputSession extends TvInputService.Session {
         mTuneHandler = new Handler(mTuneThread.getLooper());
     }
 
-    /** Poziva DtvTvInputService kad Comedia postane dostupna; ponavlja tune ako je cekao na middleware. */
+    /**
+     * Poziva {@link DtvTvInputService} kada Comedia postane dostupna.
+     * Ako je tune bio na cekanju (MW nije bio spreman), ponavlja ga.
+     */
     void onMiddlewareReady() {
         if (mPendingChannelUri != null) {
             Log.d(TAG, "onMiddlewareReady: ponavljam pending tune " + mPendingChannelUri);
@@ -58,6 +72,12 @@ final class DtvTvInputSession extends TvInputService.Session {
         }
     }
 
+    /**
+     * Prima Surface od TIF-a i cuva ga za sledeci zap.
+     *
+     * @param surface novi Surface za renderovanje videa, ili {@code null} za uklanjanje
+     * @return uvek {@code true}
+     */
     @Override
     public boolean onSetSurface(Surface surface) {
         Log.d(TAG, "onSetSurface: " + surface);
@@ -65,6 +85,11 @@ final class DtvTvInputSession extends TvInputService.Session {
         return true;
     }
 
+    /**
+     * Prima zahtev za jacinu zvuka od TIF-a.
+     *
+     * @param volume vrednost izmedju 0.0 i 1.0
+     */
     @Override
     public void onSetStreamVolume(float volume) {
         Log.d(TAG, "onSetStreamVolume: " + volume);
@@ -75,6 +100,14 @@ final class DtvTvInputSession extends TvInputService.Session {
     public void onSetCaptionEnabled(boolean enabled) {
     }
 
+    /**
+     * Prima zahtev za promenu kanala od TIF-a.
+     * Odmah se vraca; tezak posao (lookup + eventualni rescan + zap) ide na tune thread
+     * da se ne probije TIF limit od 2s.
+     *
+     * @param channelUri URI kanala iz TvContract.Channels
+     * @return uvek {@code true}
+     */
     @Override
     public boolean onTune(Uri channelUri) {
         Log.d(TAG, "onTune: " + channelUri);
@@ -91,6 +124,12 @@ final class DtvTvInputSession extends TvInputService.Session {
         return true;
     }
 
+    /**
+     * Trazi servis u MW listi; ako nije nadjen, pokree rescan pa ponovo proba.
+     * Izvrsava se na tune threadu.
+     *
+     * @param channelUri URI kanala koji treba otvoriti
+     */
     private void doTune(Uri channelUri) {
         ChannelLookup.Result result = ChannelLookup.findServiceIndex(
                 mContext.getContentResolver(), mMiddlewareConnection.getServiceControl(), channelUri);
@@ -104,6 +143,12 @@ final class DtvTvInputSession extends TvInputService.Session {
         startZapWithResult(result);
     }
 
+    /**
+     * Re-skenira .ts izvor kanala, pa ponovo pokusava da nadje servis i zapuje.
+     * Koristi se kada {@link ChannelLookup#findServiceIndex} vrati {@code null}.
+     *
+     * @param channelUri URI kanala koji ceka na tune
+     */
     private void rescanAndRetryTune(Uri channelUri) {
         String sourceUrl = ChannelLookup.readSourceUrl(mContext.getContentResolver(), channelUri);
         ChannelScanner scanner = mService.getChannelScanner();
@@ -139,6 +184,12 @@ final class DtvTvInputSession extends TvInputService.Session {
         });
     }
 
+    /**
+     * Kreira {@link ChannelZapper} ako jos ne postoji (ili zaustavlja prethodni zap),
+     * pa pokrece zap za pronadjeni servis.
+     *
+     * @param result rezultat pretrage iz {@link ChannelLookup#findServiceIndex}
+     */
     private void startZapWithResult(ChannelLookup.Result result) {
         if (mZapper == null) {
             mZapper = new ChannelZapper(
@@ -182,7 +233,10 @@ final class DtvTvInputSession extends TvInputService.Session {
         mZapper.startZap(result.listIndex, result.serviceIndex, result.onid, result.tsid, result.serviceId, mSurface);
     }
 
-    /** Otkriva video kad MW potvrdi uspesnu promenu kanala; idempotentno (poziva se i iz channelChangeStatus i iz safeToUnblank). */
+    /**
+     * Otkriva video kad MW potvrdi uspesnu promenu kanala i gradi listu audio traka.
+     * Idempotentno — poziva se i iz channelChangeStatus i iz safeToUnblank.
+     */
     private void revealVideo() {
         if (mVideoRevealed) {
             return;
@@ -193,7 +247,10 @@ final class DtvTvInputSession extends TvInputService.Session {
         publishAudioTracks();
     }
 
-    /** Cita audio trake aktivne rute iz MW-a i objavljuje ih kroz TIF (sistemski Audio meni). Mora na main thread-u. */
+    /**
+     * Cita audio trake aktivne rute iz MW-a i objavljuje ih TIF-u (sistemski meni za audio).
+     * Poziva se tek nakon sto je video otkriven (trake nisu dostupne pre toga).
+     */
     private void publishAudioTracks() {
         if (mZapper == null || !mVideoRevealed) {
             return;
@@ -224,6 +281,14 @@ final class DtvTvInputSession extends TvInputService.Session {
         }
     }
 
+    /**
+     * Prima zahtev korisnika za promenu audio trake.
+     * Prebacivanje se izvrsava asinhrono na tune threadu; TIF se obavestava tek kad MW prihvati.
+     *
+     * @param type    tip trake; samo {@link TvTrackInfo#TYPE_AUDIO} je podrzan
+     * @param trackId string indeks trake (konvertuje se u int)
+     * @return {@code true} ako je zahtev prihvacen i asinhrono prosledjen
+     */
     @Override
     public boolean onSelectTrack(int type, String trackId) {
         if (type != TvTrackInfo.TYPE_AUDIO || trackId == null) {
@@ -245,7 +310,12 @@ final class DtvTvInputSession extends TvInputService.Session {
         return true;
     }
 
-    /** Mapira A4TV konfiguraciju kanala u broj kanala za TvTrackInfo (0 = nepoznato, ne postavlja se). */
+    /**
+     * Mapira A4TV konfiguraciju audio kanala u broj kanala za {@link TvTrackInfo}.
+     *
+     * @param cfg konfiguracija audio kanala iz MW-a
+     * @return broj kanala (1, 2 ili 6), ili 0 ako je nepoznato (polje se tada ne postavlja)
+     */
     private static int channelCount(AudioChannelConfiguration cfg) {
         if (cfg == null) {
             return 0;
@@ -265,6 +335,10 @@ final class DtvTvInputSession extends TvInputService.Session {
         }
     }
 
+    /**
+     * Oslobadja MW rutu i gasi tune thread.
+     * Ruta se oslobadja na tune threadu da ne ostane zaglavljena u MW-u.
+     */
     @Override
     public void onRelease() {
         // Oslobodi rutu na tune threadu (da ne ostane zaglavljena u middleware-u), pa ugasi thread.

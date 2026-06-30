@@ -17,6 +17,12 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+/**
+ * Ekran za podesavanje TIF ulaza.
+ * Korisnik moze da unese putanju do streams.xml fajla na uredjaju i pokrene skeniranje kanala.
+ * Ako putanja nije unesena, koristi se bundlovani {@code res/xml/streams.xml}.
+ * Rezultati skena prikazuju se kroz status tekst i progress bar.
+ */
 public class SetupActivity extends Activity {
 
     private String mInputId;
@@ -27,6 +33,11 @@ public class SetupActivity extends Activity {
 
     private final DtvTvInputService.ScanResultListener mScanResultListener =
             new DtvTvInputService.ScanResultListener() {
+        /**
+         * @param sourceIndex redni broj izvora koji se trenutno skenira (od 1)
+         * @param sourceCount ukupan broj izvora
+         * @param sourceUrl   URL izvora koji se skenira
+         */
         @Override
         public void onScanProgress(int sourceIndex, int sourceCount, String sourceUrl) {
             runOnUiThread(() -> {
@@ -35,6 +46,9 @@ public class SetupActivity extends Activity {
             });
         }
 
+        /**
+         * @param channelCount ukupan broj upisanih kanala
+         */
         @Override
         public void onScanFinished(int channelCount) {
             runOnUiThread(() -> {
@@ -55,6 +69,9 @@ public class SetupActivity extends Activity {
             });
         }
 
+        /**
+         * @param reason opis greske koji se prikazuje korisniku
+         */
         @Override
         public void onScanError(String reason) {
             runOnUiThread(() -> mStatusText.setText(getString(R.string.setup_scan_error, reason)));
@@ -76,6 +93,11 @@ public class SetupActivity extends Activity {
         }
     };
 
+    /**
+     * Inicijalizuje UI, cita inputId iz Intent-a i vezuje se za {@link DtvTvInputService}.
+     *
+     * @param savedInstanceState sacuvano stanje (nije korisceno)
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,6 +114,10 @@ public class SetupActivity extends Activity {
         bindService(new Intent(this, DtvTvInputService.class), mServiceConnection, Context.BIND_AUTO_CREATE);
     }
 
+    /**
+     * Pokrece skeniranje kanala kada korisnik pritisne dugme.
+     * Koristi putanju iz EditText-a ako je unesena; inace fallback na bundlovani streams.xml.
+     */
     private void startScan() {
         if (mService == null || mInputId == null) {
             return;
@@ -109,6 +135,9 @@ public class SetupActivity extends Activity {
         }
     }
 
+    /**
+     * Odjavljuje scan listener i razvezuje servis kako ne bi ostao memory leak.
+     */
     @Override
     protected void onDestroy() {
         if (mService != null) {

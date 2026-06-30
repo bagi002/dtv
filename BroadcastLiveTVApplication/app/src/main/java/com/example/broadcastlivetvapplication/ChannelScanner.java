@@ -12,22 +12,61 @@ import iwedia.dtv.comediaroutemanager.ComediaRouteManagerControl;
 import iwedia.dtv.scan.ScanControl;
 import iwedia.dtv.scan.ScanListener;
 
-/** Orkestrira autoScan kroz niz izvora (vidi brodcast/Service_installation/service_installation_broadcast.puml). */
+/**
+ * Orkestrira autoScan kroz niz .ts izvora sekvencijalno.
+ * Nakon svakog zavrsenog izvora obavestavlja ResultListener pre nego sto pocne sledeci
+ * (MW drzi samo jedan multipleks — stari se brise kada sledeci autoScan pocne).
+ * Vidi: brodcast/Service_installation/service_installation_broadcast.puml
+ */
 final class ChannelScanner {
 
     private static final String TAG = "ChannelScanner";
 
+    /** Callback za pracenje napretka i rezultata sekvencijalnog skena svih izvora. */
     interface ResultListener {
+        /**
+         * Pozvano pre pocetka skena jednog izvora.
+         *
+         * @param sourceIndex  redni broj trenutnog izvora (od 1)
+         * @param sourceCount  ukupan broj izvora
+         * @param sourceUrl    URL izvora koji se skenira
+         */
         void onScanProgress(int sourceIndex, int sourceCount, String sourceUrl);
-        /** Pozvano cim je jedan izvor skeniran — pre nego sledeci autoScan obrise njegov multipleks iz middleware liste. */
+
+        /**
+         * Pozvano cim je jedan izvor skeniran — pre nego sledeci autoScan obrise njegov multipleks.
+         * Pozivac treba da odmah procita MW listu servisa.
+         *
+         * @param sourceUrl URL izvora koji je upravo skeniran
+         */
         void onSourceScanned(String sourceUrl);
+
+        /** Pozvano kada su svi izvori uspesno skenirani. */
         void onScanFinished();
+
+        /**
+         * Pozvano ako scan nije mogao da se pokrene ili je prekinut.
+         *
+         * @param reason opis greske za logovanje/prikaz
+         */
         void onScanError(String reason);
     }
 
-    /** Rezultat jednokratnog re-scan-a jednog izvora (vidi rescanSingleSource). */
+    /** Callback za jednokratan re-scan jednog izvora (vidi {@link #rescanSingleSource}). */
     interface RescanCallback {
+        /**
+         * Pozvano kada je re-scan uspesno zavrsen.
+         *
+         * @param sourceUrl URL izvora koji je re-skeniran
+         */
         void onRescanFinished(String sourceUrl);
+
+        /**
+         * Pozvano ako re-scan nije uspeo.
+         *
+         * @param sourceUrl URL izvora koji je trebalo re-skenirati
+         * @param reason    opis greske
+         */
         void onRescanError(String sourceUrl, String reason);
     }
 
@@ -39,12 +78,22 @@ final class ChannelScanner {
     private int mInstallRouteId = -1;
     private int mNextSourceIndex = 0;
 
+    /**
+     * @param routeManagerControl MW kontroler za dobijanje install rute
+     * @param scanControl         MW kontroler za pokretanje autoScan-a
+     * @param resultListener      prima obavesti o toku i rezultatu skena
+     */
     ChannelScanner(ComediaRouteManagerControl routeManagerControl, ScanControl scanControl, ResultListener resultListener) {
         mRouteManagerControl = routeManagerControl;
         mScanControl = scanControl;
         mResultListener = resultListener;
     }
 
+    /**
+     * Pokrece sekvencijalni autoScan za svaki URL iz niza; rezultati stizu kroz {@link ResultListener}.
+     *
+     * @param sourceUrls niz URL-ova .ts izvora koje treba skenirati redom
+     */
     void startScan(@NonNull String[] sourceUrls) {
         mSourceUrls = sourceUrls;
         if (!ensureInstallRouteId()) {
@@ -62,7 +111,11 @@ final class ChannelScanner {
         scanNextSource();
     }
 
-    /** Obezbedjuje da mInstallRouteId postoji; isti route se ponovo koristi i za startScan i za rescanSingleSource. */
+    /**
+     * Obezbedjuje da mInstallRouteId postoji; isti route se ponovo koristi i za startScan i za rescanSingleSource.
+     *
+     * @return {@code true} ako je install route uspesno dobijen ili vec postoji
+     */
     private boolean ensureInstallRouteId() {
         if (mInstallRouteId != 0 && mInstallRouteId != -1) {
             return true;
@@ -72,7 +125,10 @@ final class ChannelScanner {
         return mInstallRouteId != 0;
     }
 
-    /** Pokrece autoScan za sledeci izvor iz mSourceUrls; append=false samo za prvi (brise staru listu). */
+    /**
+     * Pokrece autoScan za sledeci izvor iz mSourceUrls.
+     * appendList=false samo za prvi izvor (brise staru MW listu); za ostale append=true.
+     */
     private void scanNextSource() {
         boolean isFirstSource = mNextSourceIndex == 0;
         String sourceUrl = mSourceUrls[mNextSourceIndex];
@@ -89,16 +145,22 @@ final class ChannelScanner {
         }
     }
 
+    /**
+     * Odjavljuje glavni ScanListener.
+     * Poziva se pri gasenju servisa da ne ostane viseci callback.
+     */
     void unregisterListener() {
         mScanControl.unregisterListener(mScanListener);
     }
 
     /**
-     * Jednokratan re-scan TACNO jednog izvora, van glavne instalacione petlje (vidi startScan/scanNextSource).
-     * Koristi se pri tune-u kad ChannelLookup ne nadje servis u trenutnoj middleware listi — znak da je
-     * njen multipleks u medjuvremenu obrisan jer je neki drugi izvor skeniran posle njega.
-     * Radi i ako startScan nikad nije pozvan u ovom procesu (npr. nakon restarta TIS procesa) —
-     * ensureInstallRouteId tada sam zatrazi install route.
+     * Jednokratan re-scan tacno jednog izvora, van glavne instalacione petlje.
+     * Koristi se pri tune-u kad ChannelLookup ne nadje servis u trenutnoj MW listi —
+     * znak da je njen multipleks u medjuvremenu obrisan jer je neki drugi izvor skeniran posle njega.
+     * Radi i ako startScan nikad nije pozvan u ovom procesu (npr. nakon restarta TIS procesa).
+     *
+     * @param sourceUrl URL .ts izvora koji treba ponovo skenirati
+     * @param callback  prima obavest kada re-scan zavrsi ili ne uspe
      */
     void rescanSingleSource(@NonNull String sourceUrl, @NonNull RescanCallback callback) {
         if (!ensureInstallRouteId()) {
@@ -225,7 +287,7 @@ final class ChannelScanner {
         public void tunerLocked(int id, boolean locked) {
             Log.d(TAG, "tunerLocked id=" + id + " locked=" + locked);
         }
-        
+
         @Override
         public void installServiceRADIOName(int routeId, String name) {}
         @Override

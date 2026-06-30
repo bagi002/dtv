@@ -15,9 +15,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Parsira streams.xml (<channel><input>url</input></channel> elementi) i vraca <input> vrednosti.
- * Izvor moze biti bundlovan Android resurs (res/xml/streams.xml, fallback) ili fajl na uredjaju
- * cija putanju korisnik unese u SetupActivity — tako lista kanala za skeniranje nije hard-kodovana.
+ * Parser za streams.xml format ({@code <channel><input>url</input></channel>}).
+ * Podrzava dva izvora: bundlovani Android resurs ({@code res/xml/streams.xml})
+ * koji sluzi kao fallback, i fajl na filesystem putanji koji korisnik unese u
+ * SetupActivity — tako lista kanala za skeniranje nije hard-kodovana u APK-u.
  */
 final class StreamsXmlReader {
 
@@ -26,7 +27,13 @@ final class StreamsXmlReader {
     private StreamsXmlReader() {
     }
 
-    /** Cita streams.xml iz aplikacionog resursa (res/xml/streams.xml) — koristi se kao fallback. */
+    /**
+     * Cita listu URL-ova iz bundlovanog {@code res/xml/streams.xml} resursa.
+     * Koristi se kao fallback kada korisnik ne unese putanju u SetupActivity.
+     *
+     * @param context Android context za pristup resursima
+     * @return niz URL-ova {@code <input>} elemenata; prazan niz ako parsiranje ne uspe
+     */
     static String[] readScanSourceUrls(Context context) {
         List<String> urls = new ArrayList<>();
         try (XmlResourceParser parser = context.getResources().getXml(R.xml.streams)) {
@@ -37,7 +44,12 @@ final class StreamsXmlReader {
         return urls.toArray(new String[0]);
     }
 
-    /** Cita streams.xml sa filesystem putanje na uredjaju (npr. /data/streams.xml). */
+    /**
+     * Cita listu URL-ova iz streams.xml fajla na zadatoj filesystem putanji.
+     *
+     * @param filePath apsolutna putanja do fajla na uredjaju (npr. {@code /data/streams.xml})
+     * @return niz URL-ova {@code <input>} elemenata; prazan niz ako fajl ne postoji ili parsiranje ne uspe
+     */
     static String[] readScanSourceUrlsFromFile(String filePath) {
         List<String> urls = new ArrayList<>();
         try (Reader reader = new FileReader(filePath)) {
@@ -50,6 +62,14 @@ final class StreamsXmlReader {
         return urls.toArray(new String[0]);
     }
 
+    /**
+     * Prolazi kroz XML dogadjaje i skuplja tekstualni sadrzaj svih {@code <input>} elemenata.
+     *
+     * @param parser inicijalizovan XmlPullParser pozicioniran na pocetak dokumenta
+     * @param urls   lista u koju se dodaju pronadjeni URL-ovi
+     * @throws XmlPullParserException ako XML nije ispravan
+     * @throws IOException            ako citanje fajla ne uspe
+     */
     private static void parseInputTags(XmlPullParser parser, List<String> urls)
             throws XmlPullParserException, IOException {
         int eventType = parser.getEventType();

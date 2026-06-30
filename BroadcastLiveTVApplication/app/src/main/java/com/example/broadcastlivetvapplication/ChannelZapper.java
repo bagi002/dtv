@@ -17,16 +17,43 @@ import iwedia.dtv.display.DisplayControl;
 import iwedia.dtv.service.ServiceControl;
 import iwedia.dtv.service.ServiceListener;
 
-/** Orkestrira zapping na jedan servis (vidi brodcast/Zapping/zapping_broadcast.puml). */
+/**
+ * Orkestrira zapping na jedan servis: dobija live rutu, postavlja Surface,
+ * registruje ServiceListener i poziva startServiceByTriplet.
+ * Takodje prati audio promene i izlaze ih kroz ResultListener.
+ * Vidi: brodcast/Zapping/zapping_broadcast.puml
+ */
 final class ChannelZapper {
 
     private static final String TAG = "ChannelZapper";
 
+    /** Callback za pracenje rezultata zappinga i promena audio traka. */
     interface ResultListener {
+        /**
+         * Pozvano kada MW potvrdi uspesnu promenu kanala (channelChangeStatus OK).
+         *
+         * @param liveRoute ID live rute na kojoj je kanal aktivan
+         */
         void onChannelChanged(int liveRoute);
+
+        /**
+         * Pozvano kada je video spreman za prikaz (MW signal safeToUnblank).
+         *
+         * @param liveRoute ID live rute
+         */
         void onSafeToUnblank(int liveRoute);
+
+        /**
+         * Pozvano ako bilo koji korak zappinga ne uspe.
+         *
+         * @param reason opis greske za logovanje/prikaz
+         */
         void onZapError(String reason);
-        /** Audio se promenio na ruti (npr. lista traka spremna/izmenjena) — pozivac treba da osvezi listu traka. */
+
+        /**
+         * Audio se promenio na ruti (lista traka postala dostupna ili izmenjena).
+         * Pozivac treba da osvezi listu audio traka.
+         */
         void onAudioTracksChanged();
     }
 
@@ -40,6 +67,13 @@ final class ChannelZapper {
     private Surface mAppliedSurface;
     private boolean mAudioListenerRegistered;
 
+    /**
+     * @param routeManagerControl MW kontroler za dobijanje live rute
+     * @param displayControl      MW kontroler za postavljanje Surface-a i skaliranje prozora
+     * @param serviceControl      MW kontroler za start/stop servisa i ServiceListener
+     * @param audioControl        MW kontroler za audio trake i AudioListener
+     * @param resultListener      prima obavesti o toku i rezultatu zappinga
+     */
     ChannelZapper(ComediaRouteManagerControl routeManagerControl, DisplayControl displayControl,
             ServiceControl serviceControl, AudioControl audioControl, ResultListener resultListener) {
         mRouteManagerControl = routeManagerControl;
@@ -49,7 +83,17 @@ final class ChannelZapper {
         mResultListener = resultListener;
     }
 
-    /** Sprovodi getLiveRoute -> setVideoSurface -> registerListener -> startServiceByTriplet redom iz dijagrama. */
+    /**
+     * Sprovodi kompletnu sekvencu zappinga: getLiveRoute → setVideoSurface →
+     * registerListener → startServiceByTriplet → scaleWindow.
+     *
+     * @param listIndex    indeks MW liste servisa (uvek 0)
+     * @param serviceIndex indeks servisa u MW listi
+     * @param onid         Original Network ID
+     * @param tsid         Transport Stream ID
+     * @param serviceId    Service ID
+     * @param surface      Surface na koji se renderuje video
+     */
     void startZap(int listIndex, int serviceIndex, int onid, int tsid, int serviceId, Surface surface) {
         int liveRoute = mRouteManagerControl.getLiveRoute(listIndex, serviceIndex, mLiveRoute);
         Log.d(TAG, "startZap getLiveRoute -> " + liveRoute);
@@ -97,7 +141,10 @@ final class ChannelZapper {
         }
     }
 
-    /** Zaustavlja trenutni servis na ruti i odjavljuje listenere; sigurno za pozivanje i ako startZap nije uspeo. */
+    /**
+     * Zaustavlja trenutni servis na ruti i odjavljuje ServiceListener i AudioListener.
+     * Sigurno za pozivanje i ako startZap nije uspeo.
+     */
     void stopZap() {
         mServiceControl.stopService(mLiveRoute);
         mServiceControl.unregisterListener(mServiceListener);
@@ -107,22 +154,40 @@ final class ChannelZapper {
         }
     }
 
-    /** Broj audio traka trenutnog kanala na ovoj ruti (vidi audioTapes.md). */
+    /**
+     * Vraca broj audio traka trenutnog kanala na aktivnoj ruti.
+     *
+     * @return broj audio traka; 0 ako ruta jos nije aktivna
+     */
     int getAudioTrackCount() {
         return mAudioControl.getAudioTrackCount(mLiveRoute);
     }
 
-    /** Opis audio trake po indeksu; null ako ruta jos nije aktivna ili index nije validan. */
+    /**
+     * Vraca opis audio trake po indeksu.
+     *
+     * @param trackIndex indeks trake (0-based)
+     * @return {@link AudioTrack} objekat, ili {@code null} ako ruta jos nije aktivna ili indeks nije validan
+     */
     AudioTrack getAudioTrack(int trackIndex) {
         return mAudioControl.getAudioTrack(mLiveRoute, trackIndex);
     }
 
-    /** Indeks trenutno aktivne audio trake na ovoj ruti. */
+    /**
+     * Vraca indeks trenutno aktivne audio trake na ovoj ruti.
+     *
+     * @return indeks aktivne trake
+     */
     int getCurrentAudioTrackIndex() {
         return mAudioControl.getCurrentAudioTrackIndex(mLiveRoute);
     }
 
-    /** Prebacuje audio traku na istoj ruti — video se ne prekida. Vraca true ako je MW prihvatio. */
+    /**
+     * Prebacuje audio traku na istoj ruti bez prekidanja videa.
+     *
+     * @param trackIndex indeks trake na koji treba prebaciti
+     * @return {@code true} ako je MW prihvatio promenu, {@code false} ako nije uspelo
+     */
     boolean selectAudioTrack(int trackIndex) {
         A4TVStatus status = mAudioControl.setCurrentAudioTrack(mLiveRoute, trackIndex);
         Log.d(TAG, "selectAudioTrack(" + trackIndex + ") -> " + status);
