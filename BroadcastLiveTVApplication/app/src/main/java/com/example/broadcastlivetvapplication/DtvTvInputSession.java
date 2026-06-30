@@ -6,7 +6,7 @@ import android.media.tv.TvInputService;
 import android.media.tv.TvTrackInfo;
 import android.net.Uri;
 import android.os.Handler;
-import android.os.Looper;
+import android.os.HandlerThread;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Surface;
@@ -25,10 +25,15 @@ final class DtvTvInputSession extends TvInputService.Session {
     private final Context mContext;
     private final DtvTvInputService mService;
     private final ComediaMiddlewareConnection mMiddlewareConnection;
-    private final Handler mMainHandler = new Handler(Looper.getMainLooper());
+    // Sav tune/zap/audio rad (sinhroni middleware IPC + autoScan) ide na ovaj thread; TIF ubija proces
+    // ako onTune blokira glavni thread > 2s ("Too much time to handle tune request").
+    private final HandlerThread mTuneThread;
+    private final Handler mTuneHandler;
 
-    private Surface mSurface;
+    // Pise se na glavnom threadu (onSetSurface), cita na tune threadu (startZapWithResult).
+    private volatile Surface mSurface;
     private float mStreamVolume = 1.0f;
+    // mZapper, mVideoRevealed: dodirivani ISKLJUCIVO sa mTuneHandler threada (bez sinhronizacije).
     private ChannelZapper mZapper;
     private boolean mVideoRevealed;
     private Uri mPendingChannelUri;
@@ -38,6 +43,9 @@ final class DtvTvInputSession extends TvInputService.Session {
         mContext = context;
         mService = service;
         mMiddlewareConnection = middlewareConnection;
+        mTuneThread = new HandlerThread("DtvTune");
+        mTuneThread.start();
+        mTuneHandler = new Handler(mTuneThread.getLooper());
     }
 
     /** Poziva DtvTvInputService kad Comedia postane dostupna; ponavlja tune ako je cekao na middleware. */
@@ -46,7 +54,7 @@ final class DtvTvInputSession extends TvInputService.Session {
             Log.d(TAG, "onMiddlewareReady: ponavljam pending tune " + mPendingChannelUri);
             Uri uri = mPendingChannelUri;
             mPendingChannelUri = null;
-            doTune(uri);
+            mTuneHandler.post(() -> doTune(uri));
         }
     }
 
@@ -78,7 +86,8 @@ final class DtvTvInputSession extends TvInputService.Session {
             mPendingChannelUri = channelUri;
             return true;
         }
-        doTune(channelUri);
+        // Vrati se odmah; tezak posao (lookup + rescan + zap) ide na mTuneHandler da se ne probije 2s limit.
+        mTuneHandler.post(() -> doTune(channelUri));
         return true;
     }
 
@@ -110,7 +119,7 @@ final class DtvTvInputSession extends TvInputService.Session {
             @Override
             public void onRescanFinished(String rescannedUrl) {
                 Log.d(TAG, "rescanAndRetryTune: rescan zavrsen za " + rescannedUrl);
-                mMainHandler.post(() -> {
+                mTuneHandler.post(() -> {
                     ChannelLookup.Result result = ChannelLookup.findServiceIndex(
                             mContext.getContentResolver(), mMiddlewareConnection.getServiceControl(), channelUri);
                     if (result == null) {
@@ -125,8 +134,7 @@ final class DtvTvInputSession extends TvInputService.Session {
             @Override
             public void onRescanError(String rescannedUrl, String reason) {
                 Log.e(TAG, "rescanAndRetryTune: rescan failed za " + rescannedUrl + ": " + reason);
-                mMainHandler.post(() ->
-                        notifyVideoUnavailable(TvInputManager.VIDEO_UNAVAILABLE_REASON_UNKNOWN));
+                notifyVideoUnavailable(TvInputManager.VIDEO_UNAVAILABLE_REASON_UNKNOWN);
             }
         });
     }
@@ -143,25 +151,24 @@ final class DtvTvInputSession extends TvInputService.Session {
                         public void onChannelChanged(int liveRoute) {
                             Log.d(TAG, "onChannelChanged liveRoute=" + liveRoute);
                             // Neke verzije MW-a ne emituju safeToUnblank; otkrivamo video i ovde (idempotentno).
-                            mMainHandler.post(DtvTvInputSession.this::revealVideo);
+                            mTuneHandler.post(DtvTvInputSession.this::revealVideo);
                         }
 
                         @Override
                         public void onSafeToUnblank(int liveRoute) {
                             Log.d(TAG, "onSafeToUnblank liveRoute=" + liveRoute);
-                            mMainHandler.post(DtvTvInputSession.this::revealVideo);
+                            mTuneHandler.post(DtvTvInputSession.this::revealVideo);
                         }
 
                         @Override
                         public void onZapError(String reason) {
                             Log.e(TAG, "onZapError: " + reason);
-                            mMainHandler.post(() ->
-                                    notifyVideoUnavailable(TvInputManager.VIDEO_UNAVAILABLE_REASON_UNKNOWN));
+                            notifyVideoUnavailable(TvInputManager.VIDEO_UNAVAILABLE_REASON_UNKNOWN);
                         }
 
                         @Override
                         public void onAudioTracksChanged() {
-                            mMainHandler.post(DtvTvInputSession.this::publishAudioTracks);
+                            mTuneHandler.post(DtvTvInputSession.this::publishAudioTracks);
                         }
                     });
         } else {
@@ -219,22 +226,23 @@ final class DtvTvInputSession extends TvInputService.Session {
 
     @Override
     public boolean onSelectTrack(int type, String trackId) {
-        if (type != TvTrackInfo.TYPE_AUDIO || trackId == null || mZapper == null) {
+        if (type != TvTrackInfo.TYPE_AUDIO || trackId == null) {
             return false;
         }
-        int trackIndex;
+        final int trackIndex;
         try {
             trackIndex = Integer.parseInt(trackId);
         } catch (NumberFormatException e) {
             Log.e(TAG, "onSelectTrack: nevalidan trackId " + trackId);
             return false;
         }
-        // Prebacivanje trake ne dira video ni rutu — menja se samo aktivna audio traka (vidi audioTapes.md).
-        if (mZapper.selectAudioTrack(trackIndex)) {
-            notifyTrackSelected(TvTrackInfo.TYPE_AUDIO, trackId);
-            return true;
-        }
-        return false;
+        // Prebacivanje trake (middleware IPC) na tune thread; potvrdi tek kad MW prihvati. Video/ruta se ne diraju.
+        mTuneHandler.post(() -> {
+            if (mZapper != null && mZapper.selectAudioTrack(trackIndex)) {
+                notifyTrackSelected(TvTrackInfo.TYPE_AUDIO, trackId);
+            }
+        });
+        return true;
     }
 
     /** Mapira A4TV konfiguraciju kanala u broj kanala za TvTrackInfo (0 = nepoznato, ne postavlja se). */
@@ -259,9 +267,13 @@ final class DtvTvInputSession extends TvInputService.Session {
 
     @Override
     public void onRelease() {
-        if (mZapper != null) {
-            mZapper.stopZap();
-        }
+        // Oslobodi rutu na tune threadu (da ne ostane zaglavljena u middleware-u), pa ugasi thread.
+        mTuneHandler.post(() -> {
+            if (mZapper != null) {
+                mZapper.stopZap();
+            }
+        });
+        mTuneThread.quitSafely();
         mService.onSessionReleased(this);
     }
 }
