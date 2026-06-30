@@ -1,0 +1,95 @@
+@startuml sequence_audio_tracks_liba4tv
+title Vise audio traka (Multi audio) - broadcast (liba4tv)
+
+actor User
+box "Android app" #EBF5FF
+  participant "Live TV App\n(sistemski UI / Audio meni)" as App
+  participant "DtvTvInputSession\n(TvInputService.Session)" as SES
+  participant "DtvTune\n(pozadinski HandlerThread)" as TUNE
+  participant "ChannelZapper" as ZAP
+end box
+
+box "liba4tv Java API (Android-facing wrapper)" #E8F5E9
+  participant "ComediaMiddlewareConnection" as CONN
+  participant "AudioControl" as AUDIO
+  participant "AudioListener\n(callback na ChannelZapper)" as AL
+end box
+
+box "Comedia native middleware" #FFF8E1
+  participant "Comedia Core (MW)\nplayback po liveRoute" as CORE
+end box
+
+== Inicijalizacija: AudioControl se pravi kad middleware postane dostupan ==
+
+CONN -> CONN : onDtvAvailable()
+CONN -> AUDIO : new AudioControl(dtvContext)
+note over CONN : isto kao ostale kontrole\n(ServiceControl, DisplayControl, RouteManagerControl)
+
+== Zapping na kanal (vidi zapping_broadcast.puml) + registracija audio listenera ==
+
+User -> App : Izbor kanala
+App -> SES : onTune(channelUri)
+note over SES : onTune se VRACA ODMAH; ceo tune/zap radi se na DtvTune threadu\n(TIF ubija proces ako onTune blokira glavni thread > 2s)
+SES ->> TUNE : post(doTune)
+TUNE -> ZAP : startZap(listIndex, serviceIndex, onid, tsid, serviceId, surface)
+ZAP -> CORE : startServiceByTriplet(...)  (A/V krece na ruti)
+ZAP -> AUDIO : registerListener(audioListener)
+AUDIO --> ZAP : A4TVStatus.SUCCESS
+
+== Kanal spreman -> enumeracija i objava audio traka ==
+
+CORE --> ZAP : channelChangeStatus(liveRoute, true, OK)\n/ safeToUnblank(liveRoute)
+ZAP ->> TUNE : onChannelChanged -> post(revealVideo)
+TUNE -> SES : revealVideo()
+SES -> SES : notifyVideoAvailable()
+
+SES -> SES : publishAudioTracks()
+SES -> ZAP : getAudioTrackCount()
+ZAP -> AUDIO : getAudioTrackCount(liveRoute)
+AUDIO --> ZAP : count
+ZAP --> SES : count
+
+loop za i = 0 .. count-1
+  SES -> ZAP : getAudioTrack(i)
+  ZAP -> AUDIO : getAudioTrack(liveRoute, i)
+  AUDIO --> ZAP : AudioTrack (getIndex, getLanguage, getAudioChannleCfg)
+  ZAP --> SES : AudioTrack
+  SES -> SES : TvTrackInfo.Builder(TYPE_AUDIO, index)\n.setLanguage(lang).setAudioChannelCount(n)
+end
+
+SES -> ZAP : getCurrentAudioTrackIndex()
+ZAP -> AUDIO : getCurrentAudioTrackIndex(liveRoute)
+AUDIO --> ZAP : currentIndex
+ZAP --> SES : currentIndex
+
+SES -> App : notifyTracksChanged(List<TvTrackInfo>)
+SES -> App : notifyTrackSelected(TYPE_AUDIO, currentIndex)
+note over App : "Multi audio" postaje aktivan kad ima >= 2 audio trake
+
+== Korisnik bira drugu audio traku (video se NE prekida) ==
+
+User -> App : Izbor audio trake iz menija
+App -> SES : onSelectTrack(TYPE_AUDIO, trackId)
+note over SES : vrati true odmah; sam izbor (middleware IPC) ide na DtvTune thread
+SES ->> TUNE : post(selectAudioTrack)
+TUNE -> ZAP : selectAudioTrack(trackIndex)
+ZAP -> AUDIO : setCurrentAudioTrack(liveRoute, trackIndex)
+AUDIO -> CORE : prebaci aktivnu audio traku na istoj ruti
+AUDIO --> ZAP : A4TVStatus.SUCCESS
+ZAP --> TUNE : true
+TUNE -> App : notifyTrackSelected(TYPE_AUDIO, trackId)
+
+== MW javlja promenu audija -> osvezi listu traka ==
+
+CORE --> AL : typeChanged(liveRoute, AudioDigitalType)
+AL -> ZAP : onAudioTracksChanged (ako liveRoute == aktivna ruta)
+ZAP ->> TUNE : post(publishAudioTracks)
+TUNE -> SES : publishAudioTracks()  (ponovi enumeraciju + notifyTracksChanged)
+
+== Oslobadjanje (promena kanala / onRelease) ==
+
+SES ->> TUNE : post(stopZap)
+TUNE -> ZAP : stopZap()
+ZAP -> AUDIO : unregisterListener(audioListener)
+
+@enduml
