@@ -142,7 +142,7 @@ final class ChannelPublisher {
 
         ContentValues values = new ContentValues();
         values.put(TvContract.Channels.COLUMN_INPUT_ID, inputId);
-        values.put(TvContract.Channels.COLUMN_DISPLAY_NAME, s.name);
+        values.put(TvContract.Channels.COLUMN_DISPLAY_NAME, AribDecoder.decode(s.name));
         values.put(TvContract.Channels.COLUMN_DISPLAY_NUMBER, String.valueOf(s.serviceId));
         values.put(TvContract.Channels.COLUMN_TYPE, TvContract.Channels.TYPE_DVB_T);
         values.put(TvContract.Channels.COLUMN_SERVICE_TYPE, TvContract.Channels.SERVICE_TYPE_AUDIO_VIDEO);

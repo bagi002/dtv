@@ -51,8 +51,8 @@ final class EpgProgramWriter {
 
         ContentValues values = new ContentValues();
         values.put(TvContract.Programs.COLUMN_CHANNEL_ID, channelId);
-        values.put(TvContract.Programs.COLUMN_TITLE, event.getName());
-        values.put(TvContract.Programs.COLUMN_SHORT_DESCRIPTION, event.getDescription());
+        values.put(TvContract.Programs.COLUMN_TITLE, AribDecoder.decode(event.getName()));
+        values.put(TvContract.Programs.COLUMN_SHORT_DESCRIPTION, AribDecoder.decode(event.getDescription()));
         values.put(TvContract.Programs.COLUMN_START_TIME_UTC_MILLIS, startMs);
         values.put(TvContract.Programs.COLUMN_END_TIME_UTC_MILLIS, endMs);
 
