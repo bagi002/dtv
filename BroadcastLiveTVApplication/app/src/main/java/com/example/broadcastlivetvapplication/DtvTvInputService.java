@@ -6,6 +6,8 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import android.util.SparseArray;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -72,6 +74,7 @@ public class DtvTvInputService extends TvInputService {
     private String mCurrentInputId;
     private ChannelScanner mChannelScanner;
     private ChannelPublisher mChannelPublisher;
+    private EpgPublisher mEpgPublisher;
 
     @Nullable
     private DtvTvInputSession mActiveSession;
@@ -111,6 +114,8 @@ public class DtvTvInputService extends TvInputService {
             return;
         }
         mChannelPublisher = new ChannelPublisher(getContentResolver(), mMiddlewareConnection.getServiceControl());
+        EpgProgramWriter epgWriter = new EpgProgramWriter(getContentResolver());
+        mEpgPublisher = new EpgPublisher(mMiddlewareConnection.getEpgControl(), epgWriter);
         mChannelScanner = new ChannelScanner(
                 mMiddlewareConnection.getRouteManagerControl(),
                 mMiddlewareConnection.getScanControl(),
@@ -133,6 +138,10 @@ public class DtvTvInputService extends TvInputService {
                         if (mScanResultListener != null) {
                             mScanResultListener.onScanFinished(count);
                         }
+                        EpgChannelMapper mapper = new EpgChannelMapper(
+                                getContentResolver(), mMiddlewareConnection.getServiceControl());
+                        SparseArray<Long> channelMap = mapper.buildServiceIndexToChannelId(mCurrentInputId);
+                        mEpgPublisher.publishAll(channelMap);
                     }
 
                     @Override

@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import iwedia.dtv.audio.AudioControl;
 import iwedia.dtv.comediaroutemanager.ComediaRouteManagerControl;
 import iwedia.dtv.display.DisplayControl;
+import iwedia.dtv.epg.EpgControl;
 import iwedia.dtv.scan.ScanControl;
 import iwedia.dtv.service.ServiceControl;
 
@@ -42,6 +43,8 @@ final class ComediaMiddlewareConnection {
     private DisplayControl mDisplayControl;
     @Nullable
     private AudioControl mAudioControl;
+    @Nullable
+    private EpgControl mEpgControl;
 
     /**
      * Kreira konekciju i pokrece {@link ComediaDtvContext}; Control instance se prave
@@ -60,6 +63,7 @@ final class ComediaMiddlewareConnection {
                 mServiceControl = createOrNull("ServiceControl", () -> new ServiceControl(mDtvContext));
                 mDisplayControl = createOrNull("DisplayControl", () -> new DisplayControl(mDtvContext));
                 mAudioControl = createOrNull("AudioControl", () -> new AudioControl(mDtvContext));
+                mEpgControl = createOrNull("EpgControl", () -> new EpgControl(mDtvContext));
                 mListener.onMiddlewareAvailable();
             }
 
@@ -70,6 +74,7 @@ final class ComediaMiddlewareConnection {
                 mServiceControl = null;
                 mDisplayControl = null;
                 mAudioControl = null;
+                mEpgControl = null;
                 mListener.onMiddlewareUnavailable();
             }
         });
@@ -156,5 +161,15 @@ final class ComediaMiddlewareConnection {
     @Nullable
     AudioControl getAudioControl() {
         return mAudioControl;
+    }
+
+    /**
+     * Vraca kontroler za citanje EPG podataka (Present/Following i Schedule).
+     *
+     * @return {@link EpgControl}, ili {@code null} dok MW nije dostupan
+     */
+    @Nullable
+    EpgControl getEpgControl() {
+        return mEpgControl;
     }
 }
